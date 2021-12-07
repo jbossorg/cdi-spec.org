@@ -1,0 +1,574 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Latest news about CDI"><title>Latest news about CDI | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><div class="posts"><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/12/09/EG-meeting/">CDI EG meeting 12/09/2013 notes on CDI 1.2 MR</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Dec 09, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/12/09/EG-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>The following people assisted this meeting :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pete Muir (pm)</p>
+</li>
+<li>
+<p>Jozef Hartinger (jh)</p>
+</li>
+<li>
+<p>Martin Kouba (mk)</p>
+</li>
+<li>
+<p>JJ Snyder (jj)</p>
+</li>
+<li>
+<p>Antoine Sabot-Durand (asd)</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="proposed-agenda"><a class="anchor" href="#proposed-agenda"></a>Proposed Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following agenda was proposed</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Issues discussion : 6 issues where proposed</p>
+</li>
+<li>
+<p>Back on CDI-377 (automatic JSR-330 annotation processing problematic)</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="issues-discussion"><a class="anchor" href="#issues-discussion"></a>Issues discussion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The discussion around the proposed ticket was quite straight forward. The result is in the table below</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 50%;">
+<col style="width: 8.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jira</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Decision</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-380" target="_blank">CDI-380</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify SessionScoped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We should be less descriptive and like for CDI-381 add a general statement telling that other spec/extensions can change the behavior of built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-372" target="_blank">CDI-372</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clarify behavior of implicit bean archive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The notion of Bean Archive is introduce in Chapter 12, we should do an introduction before</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-320" target="_blank">CDI-320</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify whether ProcessAnnotatedType should be fired for annotations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">According to pm it shouldn&#8217;t and we should clarify this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-318" target="_blank">CDI-318</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@WithAnnotations types can appear on any supertype</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mainly Javadoc correction on @WithAnnotation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-280" target="_blank">CDI-280</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">behavior of CDI bean @Specializes session bean is undefined</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">could benefit some clarification</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-220" target="_blank">CDI-220</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify interceptors are not associated with the result of a producer method/field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="back-on-cdi-377-automatic-jsr-330-annotation-processing-problematic"><a class="anchor" href="#back-on-cdi-377-automatic-jsr-330-annotation-processing-problematic"></a>Back on CDI-377 (automatic JSR-330 annotation processing problematic)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This issue will be fixed in implementation and the sepc will mention something about recommendation to provide default exclusion list for most framework.
+We still have to discuss if we introduce a jar exclusion mechanism in the spec or this will be based on existing package exclusion.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We finished to deal with the list of Jira tickets we planned to introduce or not in MR. As we have a little more time it was decided to re-open the list for some more on next meeting</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2013/12/09/EG-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/12/09/EG-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/12/02/EG-meeting/">CDI EG meeting 12/02/2013 notes on CDI 1.2 MR</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Dec 02, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/12/02/EG-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>The following people assisted this meeting :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pete Muir (pm)</p>
+</li>
+<li>
+<p>Mark Struberg (ms)</p>
+</li>
+<li>
+<p>Jozef Hartinger (jh)</p>
+</li>
+<li>
+<p>Joseph Bergmark (jb)</p>
+</li>
+<li>
+<p>Phil Zampino (pz) (Java EE EG member)</p>
+</li>
+<li>
+<p>JJ Snyder (jj)</p>
+</li>
+<li>
+<p>Antoine Sabot-Durand (asd)</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="proposed-agenda"><a class="anchor" href="#proposed-agenda"></a>Proposed Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following agenda was proposed</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Feed back on Java EE EG conf call we had on tuesday</p>
+</li>
+<li>
+<p>Issues discussion : 9 issues where proposed</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="feedback-on-java-ee-eg-meeting"><a class="anchor" href="#feedback-on-java-ee-eg-meeting"></a>Feedback on Java EE EG meeting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To sum up :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java EE EG is ok with our MR roadmap :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>16th Dec - list of issues complete</p>
+</li>
+<li>
+<p>6th Jan - Maintenance review starts</p>
+</li>
+<li>
+<p>7th March - Maintenance review ends</p>
+</li>
+<li>
+<p>21st March - Maintenance ballot ends</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>According to JCP rules on update, we are going for CDI 1.2 (not 1.1.1)</p>
+</li>
+<li>
+<p>Regarding ticket <a href="https://issues.jboss.org/browse/CDI-370" target="_blank">CDI-370</a> (Expand @RequestScoped and @SessionScoped to account for WebSocket) we agree that job should be done in Websocket Spec. So <strong>asd</strong> will work with <strong>Stuart Douglas</strong> to bring this point to the Websocket EG. The direct consequence for our MR is that CDI-370 is not in and should be closed after we check that Websocket EG got the point on their side.</p>
+</li>
+<li>
+<p>We also talk about classloader issue that were raised during <a href="https://issues.jboss.org/browse/CDI-377" target="_blank">CDI-377</a> (automatic JSR-330 annotation processing problematic). EG members agreed that it&#8217;s a good point but very difficult to resolve. It could only be solve in a major EE release.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="issues-discussion"><a class="anchor" href="#issues-discussion"></a>Issues discussion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The discussion around the proposed ticket was quite straight forward. The result is in the table below</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 50%;">
+<col style="width: 8.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jira</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Decision</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-405" target="_blank">CDI-405</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reword the description of @RequestScoped and @ApplicationScoped in section 2.4.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-401" target="_blank">CDI-401</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify the meaning of "bean class local view"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-398" target="_blank">CDI-398</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify that an array with a variable component type or parameterized component type containing wildcards is not a valid bean type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-392" target="_blank">CDI-392</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify when the operations of BeanManager can be called</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-386" target="_blank">CDI-386</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two examples in section 5.2.4 contradict the rules of the same section</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-382" target="_blank">CDI-382</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify interceptors are not associated with the result of a producer method/field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-381" target="_blank">CDI-381</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional implementations of Request Context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we should add general statement telling that extension can change the behavior of built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-379" target="_blank">CDI-379</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify life cycle of RequestScoped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">each spec should detail how they stick to built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-377" target="_blank">CDI-77</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify what happens when the user creates a unbound recursive injection with Dependent scoped beans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container doesn&#8217;t have to support this : the ticket should be closed</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>EG has still 8 issues to discuss (inluding <a href="https://issues.jboss.org/browse/CDI-377" target="_blank">CDI-377</a>). We should close the list as planned on mid-december.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2013/12/02/EG-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/12/02/EG-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/11/25/EG-meeting/">CDI EG meeting 11/25/2013 notes on CDI 1.1.1 MR</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Nov 25, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/11/25/EG-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>In this meeting we came back on CDI-370 : Expand @RequestScoped and @SessionScoped to account for WebSocket and added some other issues.
+The following people assisted this meeting :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pete Muir (pm)</p>
+</li>
+<li>
+<p>Mark Struberg (ms)</p>
+</li>
+<li>
+<p>Jozef Hartinger (jh)</p>
+</li>
+<li>
+<p>Joseph Bergmark (jb)</p>
+</li>
+<li>
+<p>Arne Limburg (al)</p>
+</li>
+<li>
+<p>Stuart Douglas (sd) (Websocket expert)</p>
+</li>
+<li>
+<p>Phil Zampino (pz) (Java EE EG member)</p>
+</li>
+<li>
+<p>Martin Kouba (mk)</p>
+</li>
+<li>
+<p>JJ Snyder (jj)</p>
+</li>
+<li>
+<p>Antoine Sabot-Durand (asd)</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="proposed-agenda"><a class="anchor" href="#proposed-agenda"></a>Proposed Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following agenda was proposed by <strong>asd</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Back on Websocket + RequestScoped issue : CDI-370 : Expand @RequestScoped and @SessionScoped to account for WebSocket
+Stuart Douglas will be our Guest Star to help us sort out if we can fix this issue on CDI side and if yes, if it’s doable in the MR timeframe</p>
+</li>
+<li>
+<p>If there’s time left let’s discuss the following point :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CDI-406 Make stereotypes bean defining annotations.</p>
+</li>
+<li>
+<p>CDI-404 adding bean-defining annotations for Interceptor while setting bean-discovery-mode=« annotated »</p>
+</li>
+<li>
+<p>CDI-389 Revert CDI-85</p>
+</li>
+<li>
+<p>CDI-397 Clarify Section 6.6.3 regarding singletons</p>
+</li>
+<li>
+<p>CDI-395 Public fields in extensions should not be allowed (also easy to decide)</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="websocket-case-a-href-https-issues-jboss-org-browse-cdi-370-cdi-370-expand-requestscoped-and-sessionscoped-to-account-for-websocket-a"><a class="anchor" href="#websocket-case-a-href-https-issues-jboss-org-browse-cdi-370-cdi-370-expand-requestscoped-and-sessionscoped-to-account-for-websocket-a"></a>Websocket case (<a href="https://issues.jboss.org/browse/CDI-370">CDI-370 : Expand @RequestScoped and @SessionScoped to account for WebSocket</a>)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>sd</strong> and <strong>pz</strong> gave their insight on the meaning of Requestscope and Sessionscope in Websocket perspective. It was roughly a synthesis of our <a href="http://lists.jboss.org/pipermail/cdi-dev/2013-November/004434.html:">discussion</a> on the ML about the subject
+<strong>ms</strong> stressed the fact that implementing one of these solution on CDI impl side could bring performance issue.
+<strong>pm</strong> concluded by saying that we should check with Java EE EG if a websocket MR was planned. According to this answer we would statute on this issue</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="other-issues"><a class="anchor" href="#other-issues"></a>Other issues</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-406-cdi-406-make-stereotypes-bean-defining-annotations-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-406-cdi-406-make-stereotypes-bean-defining-annotations-a"></a><a href="https://issues.jboss.org/browse/CDI-406:">CDI-406 Make stereotypes bean defining annotations</a></h3>
+<div class="paragraph">
+<p><strong>pm</strong> told there was no technical issue to fix this (no double scan). No one objected so the issue <strong>is added to the MR</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-404-cdi-404-adding-bean-defining-annotations-for-interceptor-while-setting-bean-discovery-mode-annotated-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-404-cdi-404-adding-bean-defining-annotations-for-interceptor-while-setting-bean-discovery-mode-annotated-a"></a><a href="https://issues.jboss.org/browse/CDI-404:">CDI-404 adding bean-defining annotations for Interceptor while setting bean-discovery-mode=« annotated »</a></h3>
+<div class="paragraph">
+<p>Same as previous. The issue is also <strong>added to the MR</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-389-cdi-389-revert-cdi-85-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-389-cdi-389-revert-cdi-85-a"></a><a href="https://issues.jboss.org/browse/CDI-389">CDI-389 Revert CDI-85</a></h3>
+<div class="paragraph">
+<p>All agreed we can do the revert to CDI 1.0 regarding generic type. But <strong>pm</strong> stressed that we should have a big rework on this for CDI 2.0</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-397-cdi-397-clarify-section-6-6-3-regarding-singletons-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-397-cdi-397-clarify-section-6-6-3-regarding-singletons-a"></a><a href="https://issues.jboss.org/browse/CDI-397">CDI-397 Clarify Section 6.6.3 regarding singletons</a></h3>
+<div class="paragraph">
+<p><strong>asd</strong> told that we should go a little beyond and check all occurrences of "singleton" in the spec to clarify if it&#8217;s an singleton session bean or a singleton scope. As nobody objected the issue was <strong>added to the MR</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-395-cdi-395-public-fields-in-extensions-should-not-be-allowed-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-395-cdi-395-public-fields-in-extensions-should-not-be-allowed-a"></a><a href="https://issues.jboss.org/browse/CDI-395">CDI-395 Public fields in extensions should not be allowed</a></h3>
+<div class="paragraph">
+<p>There was a long discussion on the subject mainly between <strong>pm</strong>, <strong>ms</strong>, <strong>al</strong> and <strong>jh</strong>. Conclusion is that it can bring more problem to correct this issue. <strong>pm</strong> suggested that we defer it. <strong>al</strong> pointed the fact that test on implementation can show that it&#8217;s not supported already. If it&#8217;s the case it could be safely added to the MR. So further investigation are needed</p>
+</div>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2013/11/25/EG-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/11/25/EG-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/11/18/EG-meeting/">CDI EG meeting 11/18/2013 notes on CDI 1.1.1 MR</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Nov 18, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/11/18/EG-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>The goal of this 1st meeting was to organize the MR launching, and start discussing its content
+The following people assisted this meeting :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pete Muir (pm)</p>
+</li>
+<li>
+<p>Mark Struberg (ms)</p>
+</li>
+<li>
+<p>Jozef Hartinger (jh)</p>
+</li>
+<li>
+<p>Joseph Bergmark (jb)</p>
+</li>
+<li>
+<p>Arne Limburg (al)</p>
+</li>
+<li>
+<p>Antoine Sabot-Durand (asd)</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="proposed-agenda"><a class="anchor" href="#proposed-agenda"></a>Proposed Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following agenda was proposed by <strong>asd</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>MR proposed roadmap</p>
+</li>
+<li>
+<p>Content of the proposed list</p>
+</li>
+<li>
+<p>Try to have a 1st decision on big tickets (tickets with great impact on implementation or spec)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CDI-377 : automatic JSR-330 annotation processing problematic</p>
+</li>
+<li>
+<p>CDI-370 : Expand @RequestScoped and @SessionScoped to account for WebSocket</p>
+</li>
+<li>
+<p>others</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proposed-roadmap"><a class="anchor" href="#proposed-roadmap"></a>Proposed Roadmap</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As we should run the MR in 60 days and that we cannot change its content after its start we proposed the following roadmap</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>16th Dec - list of issues complete</p>
+</li>
+<li>
+<p>6th Jan - Maintenance review starts</p>
+</li>
+<li>
+<p>7th March - Maintenance review ends</p>
+</li>
+<li>
+<p>21st March - Maintenance ballot ends</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This roadmap integrates the holidays constraints as well. It&#8217;ll be confirmed after the meeting <strong>pm</strong> and <strong>asd</strong> will have with the Java EE spec leads/Oracle on 11/26</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="content-of-the-proposed-list"><a class="anchor" href="#content-of-the-proposed-list"></a>Content of the proposed list</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>asd</strong> stressed on the fact that the long proposed list won&#8217;t probably fit in the MR but that would be nice to provide them a status.
+We decided to deal the most important ticket first.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="list-of-tickets"><a class="anchor" href="#list-of-tickets"></a>list of tickets</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-377-cdi-377-automatic-jsr-330-annotation-processing-problematic-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-377-cdi-377-automatic-jsr-330-annotation-processing-problematic-a"></a><a href="https://issues.jboss.org/browse/CDI-377">CDI-377 : automatic JSR-330 annotation processing problematic</a></h3>
+<div class="paragraph">
+<p>All the participant agreed that this ticket could be quite tricky. 2 scenario for solving it</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Having an umbrella scanning mechanism : beyond CDI and off course the MR.<strong>pm</strong> took note of escalate this need to the JCP</p>
+</li>
+<li>
+<p>in the meantime could investigate an exclusion in beans.xml. this solution is to be explored and if we have an agreement we could provide a fix in MR scope</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-370-cdi-370-expand-requestscoped-and-sessionscoped-to-account-for-websocket-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-370-cdi-370-expand-requestscoped-and-sessionscoped-to-account-for-websocket-a"></a><a href="https://issues.jboss.org/browse/CDI-370">CDI-370 : Expand @RequestScoped and @SessionScoped to account for WebSocket</a></h3>
+<div class="paragraph">
+<p>A tricky issue as well. No one in the EG has a sufficient knowloedge of websocket sepc to statute ont in so <strong>pm</strong> propose to ask help to <strong>Matthias Wessendorf</strong></p>
+</div>
+<div class="paragraph">
+<p>Other tickets related to <code>@RequestScoped</code> clarification</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-379">CDI-379 Clarify life cycle of RequestScoped</a></p>
+</li>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-381">CDI-381 and other request scope related ticket</a></p>
+</li>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-406">CDI-406 Make stereotypes bean defining annotations</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2013/11/18/EG-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/11/18/EG-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/04/10/1/">CDI 1.1 Final Draft submitted to JCP</a></h1><div class="meta"><strong>Posted by  <span class="authors">Pete Muir</span> on  <span class="date">Apr 10, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/04/10/1/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>CDI 1.1 has been submitted to the JCP! Now, we just have to wait for the ballot. You can <a href="http://docs.jboss.org/cdi/spec/1.1/cdi-spec.html">download</a> the spec or <a href="http://docs.jboss.org/cdi/api/1.1/">browse the javadoc</a>.</p>
+</div></div><div class="footer"><a href="/news/2013/04/10/1/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/04/10/1/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/release/">release</a></span></div></div></div></article></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="visible-xs"><ul class="pager"><li class="previous"><a href="/news/page/4/"> Previous</a></li><li class="disabled"><a href="#">5 of 5 </a></li><li class="next disabled"><a href="#"> Next</a></li></ul></div><div class="hidden-xs"><ul class="pager"><li><a href="http://www.cdi-spec.org/news/"> First</a></li><li><a href="/news/page/4/"> Previous</a></li><li class="disabled"><a href="#"> ...</a></li><li><a href="http://www.cdi-spec.org/news/page/3/">3 </a></li><li><a href="http://www.cdi-spec.org/news/page/4/">4 </a></li><li class="active"><a href="#">5 of 5 </a></li><li class="disabled"><a href="#"> Next</a></li><li class="disabled"><a href="#"> Last</a></li></ul></div></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

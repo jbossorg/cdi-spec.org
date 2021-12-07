@@ -1,0 +1,403 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Build Compatible Extensions Proposal"><title>Build Compatible Extensions Proposal | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2020/03/09/CDI_for_the_future/">Previous: CDI for the future </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2020/03/09/CDI_for_the_future/"> Previous</a></li></ul><h1><a href="/news/2020/09/15/CDI_Lite_extension/">Build Compatible Extensions Proposal</a></h1><div class="meta"><strong>Posted by  <span class="authors">Ladislav Thon</span> on  <span class="date">Sep 15, 2020</span> |   <a href="http://www.cdi-spec.org/news/2020/09/15/CDI_Lite_extension/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>A few months back we shared our vision for CDI lite.
+In short, the goal with CDI lite is to make the spec lighter, cloud-friendlier and allow for build-time implementations which are now on the rise.</p>
+</div>
+<div class="paragraph">
+<p>When we started thinking about a “lite” variant of CDI, amenable to build-time processing, we understood that an alternative to Portable Extensions is necessary. Subsequent discussion on the MicroProfile mailing list confirmed that.</p>
+</div>
+<div class="paragraph">
+<p>We explored several variants of how the API might look like. This blog post shows one that, we believe, has the most potential. We call it <em>Build Compatible Extensions</em>, but the name, as everything else described here, is up for debate.</p>
+</div>
+<div class="paragraph">
+<p>For our explorations of the API design space, we mostly constrained ourselves to one particularly common use case: annotation transformations. Many things that Portable Extensions allow can be achieved simply by adding an annotation here or removing an annotation there. We know that other transformations are necessary, but the API for annotation transformation is the most developed proposal we have. The other ones are significantly more rough, so bear with us please and submit feedback!
+You can do that in form of a GitHub issue against the <a href="https://github.com/eclipse-ee4j/cdi/issues">CDI repository</a> and add the <code>lite-extension-api</code> label to your issue.</p>
+</div>
+<div class="paragraph">
+<p>Before we start, we’d also like to note that in this text, we assume the reader (that is, you!) is familiar with CDI and preferably also Portable Extensions, as we expect some knowledge and don’t explain everything. We also make references to Portable Extensions on several occasions.</p>
+</div>
+<div class="sect1">
+<h2 id="extensions"><a class="anchor" href="#extensions"></a>Extensions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In our proposal, Build Compatible Extensions are simply methods annotated with an <em>extension annotation</em>. Extension annotations correspond to phases in which extensions are processed. There are 4 phases:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>@Discovery</strong>: adding classes to application, registering custom contexts</p>
+</li>
+<li>
+<p><strong>@Enhancement</strong>: transforming annotations</p>
+</li>
+<li>
+<p><strong>@Synthesis</strong>: registering synthetic beans and observers</p>
+</li>
+<li>
+<p><strong>@Validation</strong>: performing custom validation</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>There are some constraints we put on these methods (such as: they must be <code>public</code>), but they should be pretty obvious and shouldn’t be limiting anyone. The container automatically finds extensions and invokes them when time is right.
+When exactly are the extensions invoked can’t be defined in too much detail, because we want implementations to be able to invoke them at build time (e.g. during application compilation) or runtime (e.g. during application deployment). It certainly happens before the application starts. Extensions in earlier phases are guaranteed to run before extensions in later phases.</p>
+</div>
+<div class="paragraph">
+<p>Extensions can declare an arbitrary number of parameters, all of which are supplied by the container. There’s a set of predefined types of parameters for each phase, and all implementations would have to support that. We’re also thinking of designing an SPI that would allow anyone to contribute support for other types of parameters.
+A class can declare multiple extension methods, in which case they are all invoked on a single instance of the class. If you need to control order of extension invocations, there’s an annotation <strong><code>@ExtensionPriority</code></strong> just for that.
+This is a lot of text already, so let’s take a look at an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public class MyExtension {
+    @Enhancement
+    public void doSomething() {
+        System.out.println("This is an extension, yay!");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This doesn’t really do anything, just prints a message whenever the extension is executed. Let’s create something more interesting. Say, moving a qualifier annotation from one class to another. Let’s assume that we have these classes in our application.</p>
+</div>
+<div class="sect2">
+<h3 id="a-qualifier-annotation"><a class="anchor" href="#a-qualifier-annotation"></a>A qualifier annotation:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Qualifier
+@Retention(RUNTIME)
+@interface MyQualifier {
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-service-interface"><a class="anchor" href="#a-service-interface"></a>A service interface:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">interface MyService {
+    String hello();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="two-implementations-one-with-qualifier-and-the-other-unqualified"><a class="anchor" href="#two-implementations-one-with-qualifier-and-the-other-unqualified"></a>Two implementations, one with qualifier and the other unqualified:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Singleton
+@MyQualifier
+class MyFooService implements MyService {
+	    @Override
+	    public String hello() {
+	    	    return "foo";
+	    }
+}
+
+@Singleton
+class MyBarService implements MyService {
+    @Override
+	    public String hello() {
+	    	    return "bar";
+	    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-class-that-uses-the-service"><a class="anchor" href="#a-class-that-uses-the-service"></a>A class that uses the service</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Singleton
+class MyServiceUser {
+	    @Inject
+	    @MyQualifier
+	    MyService myService;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, it’s pretty clear that when the CDI container instantiates the <code>MyServiceUser</code> class, it will inject a <code>MyFooService</code> into the <code>myService</code> field.
+With a simple Build Compatible Extension, we can “transfer” the qualifier annotation from <code>MyFooService</code> to <code>MyBarService</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">class MyExtension {
+    @Enhancement
+    public void configure(ClassConfig&lt;MyFooService&gt; foo,
+                          ClassConfig&lt;MyBarService&gt; bar) {
+        foo.removeAnnotation(it -&gt; it.name()
+            .equals(MyQualifier.class.getName()));
+        bar.addAnnotation(MyQualifier.class);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I’m sure you understand the extension pretty well already: with this extension present in the application, the CDI container will consider the <code>MyFooService</code> <em>not</em> annotated <code>@MyQualifier</code>, and at the same time, it will consider the <code>MyBarService</code> annotated <code>@MyQualifier</code>. In the end, <code>MyServiceUser.myService</code> will no longer hold a <code>MyFooService</code>; it will hold a <code>MyBarService</code> instead.  We have successfully “moved” an annotation from one class to another, thereby altering how the CDI container behaves.</p>
+</div>
+<div class="paragraph">
+<p>This is a very simple example, but using the exact same API, one can achieve many things. For example, if the CDI container doesn&#8217;t treat all classes as beans (in CDI Lite, this isn’t required), all it takes to create a bean out of a class is just adding a bean defining annotation:
+<code>myClass.addAnnotation(Singleton.class);</code>
+To “veto” a class, again, just add an annotation:
+<code>myClass.addAnnotation(Vetoed.class);</code>
+Etc. etc. etc.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="extension-parameters"><a class="anchor" href="#extension-parameters"></a>Extension parameters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By now, you should have a general idea of how extensions look like. If you want to know the gory details, read on – but be warned, this is going to be long. You might want to skip directly to the conclusion at the end.
+Still here? Good! As we said above, an extension can declare an arbitrary number of parameters. The parameters are where extensions become interesting, so let’s describe in detail which parameters can extensions declare.</p>
+</div>
+<div class="sect2">
+<h3 id="code-discovery-code"><a class="anchor" href="#code-discovery-code"></a><code>@Discovery</code></h3>
+<div class="paragraph">
+<p>Just two parameters are possible: <code>AppArchiveBuilder</code> to register custom classes so that the CDI container treats them as part of the application, and <code>Contexts</code> to register custom contexts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-enhancement-code"><a class="anchor" href="#code-enhancement-code"></a><code>@Enhancement</code></h3>
+<div class="paragraph">
+<p>As mentioned above, we have focused mostly on this phase. Therefore, we have a pretty elaborate API which allows inspecting and modifying the application’s annotations.</p>
+</div>
+<div class="sect3">
+<h4 id="inspecting-code"><a class="anchor" href="#inspecting-code"></a>Inspecting code</h4>
+<div class="paragraph">
+<p>You can look at all the classes, methods and fields in an application, and make decisions based on your findings. For that, an extension can declare parameters of these types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ClassInfo&lt;MyService&gt;</code>: to look at one particular class</p>
+</li>
+<li>
+<p><code>Collection&lt;ClassInfo&lt;? extends MyService&gt;&gt;</code>: to look at all subclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;ClassInfo&lt;? super MyService&gt;&gt;</code>: to look at all superclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;ClassInfo&lt;?&gt;&gt;</code>: to look at all classes</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;MyService&gt;&gt;</code>: to look at all methods declared on one class</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;? extends MyService&gt;&gt;</code>: to look at all methods declared on all subclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;? super MyService&gt;&gt;</code>: to look at all methods declared on all superclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;?&gt;&gt;</code>: to look at all methods declared on all classes</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;MyService&gt;&gt;</code>: to look at all fields declared on one class</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;? extends MyService&gt;&gt;</code>: to look at all fields declared on all subclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;? super MyService&gt;&gt;</code>: to look at all fields declared on all superclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;?&gt;&gt;</code>: to look at all fields declared on all classes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Such parameters can also be annotated <code>@WithAnnotations</code>, in which case, only those classes/methods/fields annotated with given annotations will be provided.
+The <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code> types give you visibility into all interesting details about given declarations. You can drill down to method parameters, their types, annotations, and so on.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-new-metamodel"><a class="anchor" href="#the-new-metamodel"></a>The new metamodel</h4>
+<div class="paragraph">
+<p>Actually, let’s take a small detour to explain these <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code> types, because they totally deserve it.
+You will note that they are actually very similar to the Java Reflection API. However, they do not rely on the Reflection API in any way, unlike the types in Portable Extensions. This is an important goal of the entire CDI Lite effort: make it possible to implement CDI completely at build time. To that end, we designed a completely new metamodel for Java classes, which can be implemented solely on top of Java bytecode.
+The type hierarchy looks like this: at the top, there’s an <code>AnnotationTarget</code>. That’s basically anything that can be annotated. In Java, this means <em>declarations</em>, such as classes or methods, and <em>types</em>, such as a type of a method parameter. The <code>AnnotationTarget</code> lets you look at its annotations using these 4 methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">boolean hasAnnotation(Class&lt;? extends Annotation&gt; annotationType);
+AnnotationInfo annotation(Class&lt;? extends Annotation&gt; annotationType);
+Collection&lt;AnnotationInfo&gt; repeatableAnnotation(
+        Class&lt;? extends Annotation&gt; annotationType);
+Collection&lt;AnnotationInfo&gt; annotations();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method <code>hasAnnotation(...)</code> returns whether a given annotation target (such as a class) has an annotation of given type. The <code>annotation(...)</code> method returns information about an annotation of a given type present on a given target (we’ll see more about <code>AnnotationInfo</code> soon). The <code>repeatableAnnotation(...)</code> method returns all annotations of a given repeatable annotation type, and finally the <code>annotations()</code> method returns all annotations present on a given target.
+Let’s stop for a short example. Let’s say we have a <code>ClassInfo</code> for the <code>MyServiceUser</code> class, which we’ve seen in the previous example. We can do all kinds of interesting things with it, but here, let’s just check if the class has a <code>@Singleton</code> annotation, and if so, print all annotations on all fields annotated <code>@Inject</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">ClassInfo&lt;MyServiceUser&gt; clazz = ...;
+if (clazz.hasAnnotation(Singleton.class)) { // we know this is true
+    for (FieldInfo&lt;MyServiceUser&gt; field : clazz.fields()) {
+        if (field.hasAnnotation(Inject.class)) {
+            field.annotations().forEach(System.out::println);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You might have noticed that the <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code> types have a type parameter. This is only useful when declaring an extension parameter – there, it expresses a query (such as: give me all fields declared on all subclasses of <code>MyService</code>). In all other cases, it can be pretty much ignored.
+Short tour through the <code>AnnotationInfo</code> type: you can access the <code>target()</code> of the annotation, as well as the annotation <code>declaration()</code>, and you can see the annotation attributes using the <code>hasAttribute(String)</code> and <code>attribute(String)</code> methods. Given that an attribute named <code>value</code> is particularly common, there’s also <code>hasValue()</code> and <code>value()</code>. And finally, there’s <code>attributes()</code> to access all annotation attributes at once. Annotation attributes are represented by the <code>AnnotationAttribute</code> interface, which has a <code>name()</code> and a <code>value()</code>. The attribute value is represented by <code>AnnotationAttributeValue</code>, which allows figuring out the actual type of the value, as well as obtaining its representation as an ordinary Java type.
+As mentioned above, there are two kinds of <code>AnnotationTarget`s: declarations and types. Therefore, we have `DeclarationInfo</code> as the top-level type for representing Java declarations, and <code>Type</code> as the top-level type for representing Java types. To distinguish between them, the <code>AnnotationTarget</code> interface has 4 methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">boolean isDeclaration();
+boolean isType();
+DeclarationInfo asDeclaration();
+Type asType();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>boolean</code>-returning methods return whether a given annotation target is a declaration or a type, and the remaining two methods cast to the corresponding type (or throw an exception). You can find similar methods on <code>DeclarationInfo</code> and <code>Type</code>, for various kinds of declarations and types (for example, <code>DeclarationInfo</code> has <code>isClass()</code>, <code>asClass()</code> and others).
+We represent 4 kinds of Java declarations in the new metamodel: classes, methods (including constructors), method parameters, and fields. We’re thinking about if it’s worth adding a representation for packages, given that they can also be annotated (using <code>package-info.java</code>). Any opinion here is welcome!
+Classes are represented by <code>ClassInfo</code>, which gives access to the <code>name()</code>, <code>superClass()</code>, all implemented <code>superInterfaces()</code>, all <code>typeParameters()</code>, and most importantly, all <code>constructors()</code>, <code>methods()</code> and <code>fields()</code>.
+Constructors and methods are represented by <code>MethodInfo</code>, which gives access to the <code>name()</code>, <code>parameters()</code>, <code>returnType()</code> and also <code>typeParameters()</code>.
+Method parameters are represented by <code>ParameterInfo</code>, which gives access to the <code>name()</code>, if it’s present (remember that parameter names don’t have to be present in bytecode!), and the <code>type()</code>.
+Finally, fields are represented by <code>FieldInfo</code>, which gives access to <code>name()</code> and <code>type()</code>.
+As you’ve surely noticed, we can often get hold of a type of something (method return type, field type, etc.). That’s a second kind of <code>AnnotationTarget</code>. As we’ve mentioned, the top-level representation of types is the <code>Type</code> interface, and there are 7 kinds of types: <code>VoidType</code>, <code>PrimitiveType</code>, <code>ClassType</code>, <code>ArrayType</code>, <code>ParameterizedType</code>, <code>TypeVariable</code> and <code>WildcardType</code>. We won’t go into details about these, as the text is already getting rather long.
+Instead, let’s get back to extension parameters!</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="modifying-code"><a class="anchor" href="#modifying-code"></a>Modifying code</h4>
+<div class="paragraph">
+<p>Not only can you look at classes, methods and fields in your extension, you can also modify them. These modifications include adding and removing annotations, and are only considered by the CDI container. That is, the rest of the application will <em>not</em> see these modifications!
+For each parameter type mentioned above, such as <code>ClassInfo&lt;MyService&gt;</code> or <code>Collection&lt;MethodInfo&lt;? extends MyService&gt;&gt;</code>, you can also declare a parameter of the corresponding <code>*Config</code> type: <code>ClassConfig&lt;MyService&gt;</code>, <code>Collection&lt;MethodConfig&lt;? extends MyService&gt;&gt;</code> etc.
+Again you can use <code>@WithAnnotations</code> to narrow down the set of provided objects. Also, <code>ClassConfig</code> is actually a subtype of <code>ClassInfo</code>, so if you need to check a class before you configure it, having a <code>ClassConfig</code> is enough. <code>MethodConfig</code> and <code>FieldConfig</code> are similar.
+The annotation configuration methods provided by these types are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">void addAnnotation(Class&lt;? extends Annotation&gt; clazz,
+                   AnnotationAttribute... attributes);
+void addAnnotation(ClassInfo&lt;?&gt; clazz,
+                   AnnotationAttribute... attributes);
+void addAnnotation(AnnotationInfo annotation);
+void addAnnotation(Annotation annotation);
+void removeAnnotation(Predicate&lt;AnnotationInfo&gt; predicate);
+void removeAllAnnotations();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While technically, we could do with just 2 methods, one for adding and one for removing annotations, we decided to have 6 of them to give extension implementations more flexibility. For example, you can use `AnnotationLiteral`s when adding an annotation, similarly to Portable Extensions, but you don’t have to.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="other-types"><a class="anchor" href="#other-types"></a>Other types</h4>
+<div class="paragraph">
+<p>While it’s possible to declare a parameter of type <code>Collection&lt;ClassInfo&lt;?&gt;&gt;</code>, it’s very likely that you don’t want to do this. It’s a sign that you need to do a more elaborate processing, for which the simple declarative API is not powerful enough. Luckily, we have an imperative entrypoint as well: <code>AppArchive</code>. With this, you can programmatically construct queries to find classes, methods and fields. If you also want to configure the classes, methods or fields, you can use <code>AppArchiveConfig</code>, which extends <code>AppArchive</code>. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public class MyExtension {
+    @Enhancement
+    public void configure(AppArchiveConfig app) {
+        app.classes()
+            .subtypeOf(MyService.class)
+            .configure()
+            .stream()
+            .filter(it -&gt; !it.hasAnnotation(MyAnnotation.class))
+            .forEach(it -&gt; it.addAnnotation(MyAnnotation.class));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, you can search for classes, methods and fields, based on where they are declared or what annotations they have. For classes, <code>AppArchive</code> gives you access to a collection of <code>ClassInfo</code> and <code>AppArchiveConfig</code> gives you access to a collection of <code>ClassConfig</code>. Similarly for methods and fields.
+Above, we have seen a simple way of adding annotations. There are more elaborate ways for advanced use cases, for which you need to create instances of <code>AnnotationAttribute</code> or <code>AnnotationAttributeValue</code>. In such a case, an extension can declare a parameter of type <code>Annotations</code>, which is essentially a factory for these types.
+Similarly, you can declare a parameter of type <code>Types</code>, which serves as a factory for instances of <code>Type</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="synthesis"><a class="anchor" href="#synthesis"></a>@Synthesis</h3>
+<div class="paragraph">
+<p>The most important parameter type you can declare for extensions in this phase is <code>SyntheticComponents</code>. It allows you to register synthetic beans and observers. Note that this API has one significant unsolved problem: how to define the construction and destruction function for synthetic beans, or the observer function for synthetic observers. This needs to work at build time, so we’re entering the realm of bytecode generation and similar fun topics. We have some ideas here, and we’ll work on adding them to the API proposal.
+You can also declare all the parameters that give you access to <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code>, as described above, including <code>AppArchive</code>. What’s more interesting, you can also inspect existing beans and observers in the application. This is very similar to inspecting classes, methods and fields, so let’s take it quickly.
+You can declare a parameter of type <code>Collection&lt;BeanInfo&lt;? super MyService&gt;&gt;</code> to obtain information about all beans in the application that have <code>MyService</code> or any of its supertypes as one of the bean types. (Note that this example is not very useful, as <code>Object</code> is one of the supertypes of <code>MyService</code>, and all beans typically have <code>Object</code> as one of their types.) Similarly, you can declare a parameter of type <code>Collection&lt;ObserverInfo&lt;? extends MyEvent&gt;&gt;</code> to obtain information about all observers in the application that observe <code>MyEvent</code> or any of its subtypes. All the other combinations are of course also possible, and if that is not enough, there’s <code>AppDeployment</code>, which gives you more powerful querying features, similarly to <code>AppArchive</code>. You can find beans based on their scope, types, qualifiers, or the declaring class. Similarly with observers, you can filter on the observed type, qualifiers, or the declaring class.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="validation"><a class="anchor" href="#validation"></a>@Validation</h3>
+<div class="paragraph">
+<p>The most important parameter type you can declare for extensions in this phase is <code>Errors</code>. It allows you to add custom validation errors.
+What can you validate? Pretty much anything. You can get access to classes, methods and fields, just like in the <code>@Enhancement</code> phase, and you can also get access to beans and observers, just like in the <code>@Synthesis</code> phase. This includes both the <code>Collection&lt;SomethingInfo&lt;...&gt;&gt;</code> approach, and <code>AppArchive</code> / <code>AppDeployment</code> way.
+Error messages can be simple <code>String`s, optionally accompanied by a `DeclarationInfo</code>, <code>BeanInfo</code> or <code>ObserverInfo</code>, or arbitrary `Exception`s.
+In case a validation error is added, the container will prevent the application from successfully deploying (or even building, in case of build time implementations).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have just finished a deep dive into our current Build Compatible Extensions API proposal.</p>
+</div>
+<div class="paragraph">
+<p>Together with the API proposal, we also developed a proof-of-concept implementation in Quarkus, so that we know this API can be implemented, and that it is indeed build-time compatible. This proof of concept focuses solely on the <code>@Enhancement</code> phase, but that should be enough for now.  It&#8217;s also worth noting that there is nothing Quarkus specific about the API. We believe (and our goal) is that any CDI-Lite implementation could adopt it using a variety of implementation strategies.</p>
+</div>
+<div class="paragraph">
+<p>We’re publishing the Quarkus fork in the form of a GitHub repository so that you can also experiment with it. Please bear in mind that the POC implementation is very rough and definitely is not production ready. It should be enough to evaluate the API proposal, though. Here’s how you can get your hands on it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-console" data-lang="console">git clone https://github.com/Ladicek/quarkus-fork.git
+cd quarkus-fork
+git checkout experiment-cdi-lite-ext
+./mvnw -Dquickly</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wait a few minutes or more, depending on how many Quarkus dependencies you already have in your local Maven repository. When the build finishes, you can add a dependency on <code>io.quarkus.arc:cdi-lite-ext-api:999-SNAPSHOT</code> to your project and play. Don’t forget to also bump other Quarkus dependencies, as well as the Quarkus Maven plugin, to <code>999-SNAPSHOT</code>!
+As mentioned before, we are very keen on hearing your feedback. Please file issues in the <a href="https://github.com/eclipse-ee4j/cdi/issues">CDI GitHub repository</a> with label <code>lite-extension-api</code>. Let’s work together on making these new Build Compatible Extensions a reality!</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2020/09/15/CDI_Lite_extension/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2020/09/15/CDI_Lite_extension/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Proposal/">Proposal</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2020/03/09/CDI_for_the_future/">Previous: CDI for the future </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2020/03/09/CDI_for_the_future/"> Previous</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2020/09/15/CDI_Lite_extension/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

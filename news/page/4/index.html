@@ -1,0 +1,483 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Latest news about CDI"><title>Latest news about CDI | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><div class="posts"><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2014/04/14/CDI-1_2-released/">CDI 1.2 released</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Apr 14, 2014</span> |   <a href="http://www.cdi-spec.org/news/2014/04/14/CDI-1_2-released/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>After one year of existence, the CDI 1.1 specification is updated by a maintenance release. This maintenance review known as CDI 1.2 was adopted by the <a href="https://jcp.org/en/jsr/results?id=5623" target="_blank">JCP</a> with 24 yes and one Expert Member forgetting to vote. The minor increment (from 1.1 to 1.2) instead of a 1.1-SP1 is due to the the fact that we changed the javadoc and the TCK but beyond that there are far less changes from 1.1 to 1.2 than from 1.0 to 1.1.
+That&#8217;s being said, CDI 1.2 brings a lot of clarifications and small behavior changes. Let&#8217;s check what&#8217;s on the menu.</p>
+</div>
+<div class="sect1">
+<h2 id="major-changes"><a class="anchor" href="#major-changes"></a>Major changes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some of these changes are only big clarifications but some other have an impact on the implementations (these last ones have an asterisk in their title below). In order to use them you&#8217;ll have to grab a CDI 1.2 implementation (more info at the end of this post).</p>
+</div>
+<div class="sect2">
+<h3 id="rethinking-the-default-bean-discovery-mode"><a class="anchor" href="#rethinking-the-default-bean-discovery-mode"></a>Rethinking the default bean discovery mode *</h3>
+<div class="paragraph">
+<p>The default bean discovery mode (<code>annotated</code>) that allows CDI to be activated by default in Java EE 7 without <code>beans.xml</code>, file was the root of a lot of issues with other frameworks implementing the AtInject specification (JSR-330) or with libraries thought to be used with such frameworks.
+To solve these issues we changed the set of <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#bean_defining_annotations" target="_blank">Bean defining annotations</a> (class annotations that make a class an implicit bean candidate) :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>all pseudo scopes annotations except <code>@Dependent</code> were removed,</p>
+</li>
+<li>
+<p><code>@Interceptor</code> and <code>@Decorator</code> were added,</p>
+</li>
+<li>
+<p>all stereotype annotations (annotations annotated with <code>@Stereotype</code>) were added.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clarification-of-conversation-resolution"><a class="anchor" href="#clarification-of-conversation-resolution"></a>Clarification of conversation resolution</h3>
+<div class="paragraph">
+<p>Conversation resolution mechanism could bring conflicts with servlet spec as stated in <a href="https://issues.jboss.org/browse/CDI-411" target="_blank">CDI-411</a>.</p>
+</div>
+<div class="paragraph">
+<p>We clarified the fact that implementation should prevent these conflict during conversation resolution in <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-diff.html#conversation_context" target="_blank">conversation context lifecycle</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rework-on-event-chapter"><a class="anchor" href="#rework-on-event-chapter"></a>Rework on event chapter</h3>
+<div class="paragraph">
+<p>You think you know how event resolution works in CDI? If you gained this knowledge by a careful reading of chapter 10 of the specification, think again. This chapter had a lot of approximations and confusing mentions. It was reviewed and partly rewritten (and yes, <code>@Any</code> is totally useless for <code>Event&lt;&gt;</code> injection, event firing and observers resolution).</p>
+</div>
+<div class="paragraph">
+<p>This chapter is worth the <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#events" target="_blank">re-reading</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can also check the <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-diff.html#events" target="_blank">diff</a>, if you prefer.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="beanmanager-more-permissive-during-initialization"><a class="anchor" href="#beanmanager-more-permissive-during-initialization"></a>BeanManager more permissive during initialization *</h3>
+<div class="paragraph">
+<p>In CDI 1.1, some BeanManager methods couldn&#8217;t be called before the <code>AfterDeploymentValidation</code> was fired. A non portable behavior was tolerated to allow use of these in <code>AfterBeanDiscovery</code> observers. These brought confusing mention in specification and javadoc. We decided to standardized the non portable behavior (not a big deal since all implementations adopted it). So in CDI 1.2 the following <code>BeanManager</code> method can be called (with restrictions) in an <code>AfterBeanDiscovery</code> observer method:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>getBeans(String)</code>,</p>
+</li>
+<li>
+<p><code>getBeans(Type, Annotation&#8230;&#8203;)</code>,</p>
+</li>
+<li>
+<p><code>getPassivationCapableBean(String)</code></p>
+</li>
+<li>
+<p><code>resolve(Set)</code>,</p>
+</li>
+<li>
+<p><code>resolveDecorators(Set, Annotation&#8230;&#8203;)</code>,</p>
+</li>
+<li>
+<p><code>resolveInterceptors(InterceptionType, Annotation&#8230;&#8203;)</code>,</p>
+</li>
+<li>
+<p><code>resolveObserverMethods(Object, Annotation&#8230;&#8203;)</code>,</p>
+</li>
+<li>
+<p><code>validate(InjectionPoint)</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>more details on the <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-diff.html#beanmanager" target="_blank">diff</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="clarification-on-container-lifecycle-event-use"><a class="anchor" href="#clarification-on-container-lifecycle-event-use"></a>Clarification on container lifecycle event use</h3>
+<div class="paragraph">
+<p>We clarified the fact these event should only be used during invocation of their observer methods.
+Check the <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-diff.html#init_events" target="_blank">diff</a> of the whole 11.5 paragraph</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rework-on-the-initialization-phase-parts"><a class="anchor" href="#rework-on-the-initialization-phase-parts"></a>Rework on the initialization phase parts</h3>
+<div class="paragraph">
+<p>Description of initialization phase in chapter 11 &amp; 12 was very messing. No chronological ordering of event fired by the container, missing events. For instance we forgot to speak with <code>ProcessInjectionPoint</code> and <code>ProcessBeanAttributes</code> and <code>ProcessProducer</code> was wrongly placed before <code>ProcessBean</code> in chapter 12.
+So if you&#8217;re planning to write portable extensions you should perhaps re-read  <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#http://docs.jboss.org/cdi/spec/1.2/cdi-spec-diff.html#packaging_deployment" target="_blank">chapter 12</a>. Not yet a page turner but far more accurate than it use to be.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cdi-api-now-officially-supporting-osgi"><a class="anchor" href="#cdi-api-now-officially-supporting-osgi"></a>CDI API now officially supporting OSGi</h3>
+<div class="paragraph">
+<p>We integrated all OSGi bundle information in CDI 1.2 api jar. So now it&#8217;ll be easier to use CDI in OSGi environment. Before that you had to grab a special OSGi release of CDI 1.1 to have the good bundle info in our <code>META-INF/MANIFEST.MF</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="more-minor-changes"><a class="anchor" href="#more-minor-changes"></a>More minor changes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can check the <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html#_major_changes" target="_blank">change section</a> of the spec to check the more minor changes we introduces in the spec.
+We also work on Javadoc to synchronize it with the specification by updating it or correcting the spec when api description were wrong.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="concrete-stuff"><a class="anchor" href="#concrete-stuff"></a>Concrete stuff</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ll find concrete raw and final data in the links below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You&#8217;re interested by the release notes? it&#8217;s <a href="https://issues.jboss.org/secure/ReleaseNote.jspa?version=12323655&amp;styleName=Html&amp;projectId=12311062" target="_blank">here</a>.</p>
+</li>
+<li>
+<p>You want to check the diff between CDI 1.1 spec and CDI 1.2 spec? You&#8217;ll find it <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-diff.html" target="_blank">there</a></p>
+</li>
+<li>
+<p>You can&#8217;t wait to read this new spec, the Javadoc or use with the API or TCK? Go to our <a href="/download" target="_blank">download page</a></p>
+</li>
+<li>
+<p>You want to start coding in CDI 1.2? Good news reference implementation (Weld 2.2.0) is available and provide all that&#8217;s needed to be integrated to a Java EE 7 server. More information on <a href="http://weld.cdi-spec.org/news/2014/04/15/weld-220-final/" target="_blank">Weld 2.2.0 announcement</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2014/04/14/CDI-1_2-released/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2014/04/14/CDI-1_2-released/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/release/">release</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2014/02/13/TCK-1_1_3-release/">CDI TCK 1.1.3.Final released</a></h1><div class="meta"><strong>Posted by  <span class="authors">Martin Kouba</span> on  <span class="date">Feb 13, 2014</span> |   <a href="http://www.cdi-spec.org/news/2014/02/13/TCK-1_1_3-release/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>We&#8217;ve just released CDI TCK 1.1.3.Final - the third bugfix version for CDI 1.1. The artifacts are available in the Maven central repository and the distribution zip file on <a href="https://sourceforge.net/projects/jboss/files/CDI-TCK/1.1.3.Final/" target="_blank">sourceforge.net</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the exclude list in the canonical <a href="https://github.com/cdi-spec/cdi-tck/blob/1.1/impl/src/main/resources/tck-tests.xml">TestNG config file</a> is clean now.</p>
+</div>
+<div class="paragraph">
+<p>See also the list of resolved issues:
+<a href="https://issues.jboss.org/issues/?jql=fixVersion%20%3D%20%221.1.3.Final%22%20AND%20project%20%3D%20CDITCK" target="_blank">Here</a></p>
+</div></div><div class="footer"><a href="/news/2014/02/13/TCK-1_1_3-release/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2014/02/13/TCK-1_1_3-release/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/release/">release</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/12/17/Make-3-CDI-2_0-wishes/">Make 3 CDI 2.0 Wishes</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Dec 17, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/12/17/Make-3-CDI-2_0-wishes/#disqus_thread">Comments</a> </strong></div><div class="content"><iframe src="https://docs.google.com/forms/d/1AEQthlREvqd1fHMM5Ea8lyHfKiPlgiJS9omfnM8DLeQ/viewform?embedded=true" width="760" height="350" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></div><div class="footer"><a href="/news/2013/12/17/Make-3-CDI-2_0-wishes/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/12/17/Make-3-CDI-2_0-wishes/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/survey/">survey</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/12/16/EG-meeting/">CDI EG meeting 12/16/2013 notes on CDI 1.2</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Dec 16, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/12/16/EG-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>The following people assisted this meeting :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Mark Struberg (ms)</p>
+</li>
+<li>
+<p>Joseph Bergmark(jb)</p>
+</li>
+<li>
+<p>Jozef Hartinger (jh)</p>
+</li>
+<li>
+<p>Martin Kouba (mk)</p>
+</li>
+<li>
+<p>JJ Snyder (jj)</p>
+</li>
+<li>
+<p>Phil Zampino (pz)</p>
+</li>
+<li>
+<p>Antoine Sabot-Durand (asd)</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="proposed-agenda"><a class="anchor" href="#proposed-agenda"></a>Proposed Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following agenda was proposed</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Discussion on the last ticket pending : CDI-395 Public fields in extensions should not be allowed</p>
+</li>
+<li>
+<p>Last second ticket</p>
+</li>
+<li>
+<p>Next step for the MR.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="discussion-on-cdi-395"><a class="anchor" href="#discussion-on-cdi-395"></a>Discussion on CDI-395</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We were waiting on implementation feedback on this point. <strong>jh</strong> told us that there was too much risk to create retro-compatibility issues. So it was decided to remove CDI-395 from MR.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="last-minute-issues"><a class="anchor" href="#last-minute-issues"></a>Last minute issues</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 50%;">
+<col style="width: 8.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jira</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Decision</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-408" target="_blank">CDI-408</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bean-discovery-mode="annotated" and Producers/Observers in @Dependent beans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-410" target="_blank">CDI-410</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@RequestScoped Javadoc outdated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-388" target="_blank">CDI-388</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session bean specialization example is not valid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-376" target="_blank">CDI-376</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BeanManager#getProducerFactory return type differs between API and spec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-411" target="_blank">CDI-411</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CDI conversation activation conflicts with the Servlet spec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pending</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">needs some test before decicing if we can include it in MR. Test leaded by <strong>jh</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="next-step"><a class="anchor" href="#next-step"></a>Next Step</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The list is now closed (except for 411) It&#8217;s accessible <a href="../CDI-1-2-issues-list">here</a> and in <a href="http://s.shr.lc/1dL7BrF">Jira</a>.
+The Maintenance Release will be officially launch on the 6th january week. By then, work and discussion can start on the ticket chosen for this MR.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2013/12/16/EG-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/12/16/EG-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/12/16/CDI-1-2-issues-list/">Conclusion of EG preparation on CDI 1.2</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Dec 16, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/12/16/CDI-1-2-issues-list/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p><em>Updated on 01/07/2014</em></p>
+</div>
+<div class="paragraph">
+<p>We finished to deal with the list of 28 Jira we planned to introduce or not in MR. So 24 of them will be in MR and 4 won&#8217;t. The list is also accessible on <a href="http://s.shr.lc/1dL7BrF">Jira</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 50%;">
+<col style="width: 8.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jira</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Decision</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-413" target="_blank">CDI-413</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update outdated license</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-408" target="_blank">CDI-408</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bean-discovery-mode="annotated" and Producers/Observers in @Dependent beans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-410" target="_blank">CDI-410</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@RequestScoped Javadoc outdated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-388" target="_blank">CDI-388</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session bean specialization example is not valid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-376" target="_blank">CDI-376</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BeanManager#getProducerFactory return type differs between API and spec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-377" target="_blank">CDI-377</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">automatic JSR-330 annotation processing problematic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mention needed and perhaps a new feature</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-380" target="_blank">CDI-380</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify SessionScoped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We should be less descriptive and like for CDI-381 add a general statement telling that other spec/extensions can change the behavior of built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-372" target="_blank">CDI-372</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clarify behavior of implicit bean archive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The notion of Bean Archive is introduce in Chapter 12, we should do an introduction before</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-320" target="_blank">CDI-320</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify whether ProcessAnnotatedType should be fired for annotations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">According to pm it shouldn&#8217;t and we should clarify this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-318" target="_blank">CDI-318</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@WithAnnotations types can appear on any supertype</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mainly Javadoc correction on @WithAnnotation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-280" target="_blank">CDI-280</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">behavior of CDI bean @Specializes session bean is undefined</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">could benefit some clarification</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-220" target="_blank">CDI-220</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify interceptors are not associated with the result of a producer method/field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-405" target="_blank">CDI-405</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reword the description of @RequestScoped and @ApplicationScoped in section 2.4.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-401" target="_blank">CDI-401</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify the meaning of "bean class local view"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-398" target="_blank">CDI-398</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify that an array with a variable component type or parameterized component type containing wildcards is not a valid bean type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-392" target="_blank">CDI-392</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify when the operations of BeanManager can be called</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-386" target="_blank">CDI-386</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two examples in section 5.2.4 contradict the rules of the same section</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-382" target="_blank">CDI-382</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify interceptors are not associated with the result of a producer method/field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-381" target="_blank">CDI-381</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional implementations of Request Context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we should add general statement telling that extension can change the behavior of built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-406" target="_blank">CDI-406</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make stereotypes bean defining annotations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-404" target="_blank">CDI-404</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adding bean-defining annotations for Interceptor while setting bean-discovery-mode="annotated"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-389" target="_blank">CDI-389</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Revert <a href="https://issues.jboss.org/browse/CDI-85" target="_blank">CDI-85</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we revert to CDI 1.0 behavior but we will have to propose something better in CDI 2.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-397" target="_blank">CDI-397</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify Section 6.6.3 regarding singletons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we should go a little beyond and check all occurrences of "singleton" in the spec to clarify if it&#8217;s an singleton session bean or a singleton scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-411" target="_blank">CDI-411</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CDI conversation activation conflicts with the Servlet spec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Solution exist at different level. We should at least put a mention in the spec and o something at impl level</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-379" target="_blank">CDI-379</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify life cycle of RequestScoped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">each spec should detail how they stick to built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-370" target="_blank">CDI-370</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expand @RequestScoped and @SessionScoped to account for WebSocket</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It&#8217;s the responsibility of Websocket spec. We should ensure they take the point before closing the ticket</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-377" target="_blank">CDI-77</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify what happens when the user creates a unbound recursive injection with Dependent scoped beans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container doesn&#8217;t have to support this : the ticket should be closed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-395" target="_blank">CDI-395</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public fields in extensions should not be allowed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">it can bring backwards compatibility problem to correct this issue. We should see if impls allows it today. If it&#8217;s not the case it could be safely added to the MR</p></td>
+</tr>
+</tbody>
+</table></div><div class="footer"><a href="/news/2013/12/16/CDI-1-2-issues-list/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/12/16/CDI-1-2-issues-list/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/EG/">EG</a><a class="tag" href="/news/tags/features/">features</a></span></div></div></div></article></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="visible-xs"><ul class="pager"><li class="previous"><a href="/news/page/3/"> Previous</a></li><li class="disabled"><a href="#">4 of 5 </a></li><li class="next"><a href="/news/page/5/"> Next</a></li></ul></div><div class="hidden-xs"><ul class="pager"><li><a href="http://www.cdi-spec.org/news/"> First</a></li><li><a href="/news/page/3/"> Previous</a></li><li class="disabled"><a href="#"> ...</a></li><li><a href="http://www.cdi-spec.org/news/page/2/">2 </a></li><li><a href="http://www.cdi-spec.org/news/page/3/">3 </a></li><li class="active"><a href="#">4 of 5 </a></li><li><a href="http://www.cdi-spec.org/news/page/5/">5 </a></li><li><a href="/news/page/5/"> Next</a></li><li><a href="http://www.cdi-spec.org/news/page/5/"> Last</a></li></ul></div></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

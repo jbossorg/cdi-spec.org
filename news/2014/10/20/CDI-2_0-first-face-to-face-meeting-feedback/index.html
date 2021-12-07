@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description"><title>CDI 2.0 first Face to face meeting feedback! | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2014/10/06/CDI-20_working_method/">Previous: Working method for CDI 2.0 </a></li><li class="next"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/">Next: CDI 2.0 - A glimpse at the future </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2014/10/06/CDI-20_working_method/"> Previous</a></li><li class="next"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/"> Next</a></li></ul><h1><a href="/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/">CDI 2.0 first Face to face meeting feedback!</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Oct 20, 2014</span> |   <a href="http://www.cdi-spec.org/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>Last week we had the first CDI 2.0 Face to Face meeting in Brno (Czech Republic). Check what was discussed and the first CDI 2.0 orientations</p>
+</div>
+<div class="sect1">
+<h2 id="meeting-agenda"><a class="anchor" href="#meeting-agenda"></a>Meeting Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you may know, CDI 2.0 project was launched only six weeks ago, so we are still in early discussion stage regarding CDI 2.0 design. Yet our <a href="/news/2014/10/06/CDI-20_working_method/" target="_blank">workshop</a> organisation was a good entry point to start going in more deep discussion. So we based our discussion on existing workshop documents. Here are the main decisions that came out from our discussion.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="parts-introduction"><a class="anchor" href="#parts-introduction"></a>Parts introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Parts concept is not the most visible change we would introduce in CDI 2.0 but since it&#8217;s probably the one with more impact on spec organisation, we started with this point to know if we should go in that direction. That answer was <strong>yes</strong>.
+We also decided that each part would be independent from the other (i.e a bigger part wouldn&#8217;t depend from a smaller one but would integrate it) to solve API splitting issues. Having this principles accepted we talked about the possible parts and their content:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CDI Light: a lightweight version of CDI without Normal Scopes, Interceptors and Decorators that would allow proxy-free implementations. We worked on the API present in this Part, you can have a look to what we proposed on this <a href="https://github.com/antoinesd/cdi-spec/tree/CDI_20_LIGHT" target="_blank">branch</a></p>
+</li>
+<li>
+<p>CDI Full: CDI as we know it today except for all the other spec integration (servlet, JSF, EJB, etc&#8230;&#8203;).</p>
+</li>
+<li>
+<p>CDI Java EE : CDI full including integration with other specs</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="events-enhancement"><a class="anchor" href="#events-enhancement"></a>Events enhancement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The 2 main topics here were ordering and asynchronous events.</p>
+</div>
+<div class="sect2">
+<h3 id="asynchronous-events"><a class="anchor" href="#asynchronous-events"></a>Asynchronous events.</h3>
+<div class="paragraph">
+<p>The main idea was to adopt a different approach than the one in EJB today. Instead of using a <code>@Asynchronous</code> annotation and manage a <code>Future&lt;T&gt;</code> to deal with he end of asynchronous treatment, we looked for a way to provide callback to the event trigering.</p>
+</div>
+<div class="paragraph">
+<p>The idea could be to add a <code>fireAsync()</code> method to the <code>Event&lt;T&gt;</code> and use Java 8 lambdas and add a functional interface like this :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@FunctionalInterface
+public interface EventCallBack&lt;T&gt; {
+
+    void doCallback(T callBack);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and use later like this</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Inject Event&lt;Payload&gt; evt; 
+
+public void fireAsyncWithCallBack() { 
+    evt.fireAsync(new Payload(), callBack -&gt; System.out.println("Job done”));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Off course this approach has to be more deeply investigate (we&#8217;ll do it on our coming event meeting) but it has a lot of advantages :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Introduce a more modern approach of async events processing like we have in other framework or technologies</p>
+</li>
+<li>
+<p>Complete the EJB approach instead of duplicating it</p>
+</li>
+<li>
+<p>Avoid asking Java EE EG to extract @Asynchronous form EJB to put it somewhere else (where?)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="events-priority"><a class="anchor" href="#events-priority"></a>Events priority</h3>
+<div class="paragraph">
+<p>Discussion on event priority was open some weeks ago. We tried to have a fresh look to the idea. The main point was about using <code>@Priority</code> annotation or not. The question is still not closed but we&#8217;re more in favor of the use of a value in <code>@Observes</code> annotation. This value would give the order of the observer (the lowest being the first).
+The main reason to choose this approach instead of @Priority is the fact that while being part of java common annotation (JSR 250) spec, @Priority is not present in Java SE. So using it would :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>force us to ask for JSR 250 Maintenance release to allow priority on paramaters</p>
+</li>
+<li>
+<p>add an extra dependency jar (for only one annotation) when using CDI Light in Java SE which seems against our "light" goal</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>@Observes</code> evolution evolution would give something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public void firstObserver(@Observes(1) Payload pl) {}
+
+public void secondObserver(@Observes(2) Payload pl) {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Priority value provided in <code>javax.interceptor.Interceptor.Priority</code> would be duplicated in CDI to avoid useless dependency on Interceptor spec while keeping the same approach / values.
+This ordering could be also used to order step in extensions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="event-range"><a class="anchor" href="#event-range"></a>Event Range</h3>
+<div class="paragraph">
+<p>The idea behind event range would to provide a "scope" to events (i.e package, war, ear). It would prepare CDI event to become a server wide eventing system.
+The discussion came to the conclusion that while it&#8217;s rather easy to implement, it&#8217;s usage could be quite cumbersome.
+The idea was not discarded but we thought it was a good idea to check with community if the need was real.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="interceptors-and-decorators-aop-enhancement"><a class="anchor" href="#interceptors-and-decorators-aop-enhancement"></a>Interceptors and Decorators (AOP) enhancement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There were a lot of discussions around enhancing interceptors and decorators. You&#8217;ll find the main topics below.</p>
+</div>
+<div class="sect2">
+<h3 id="aop-on-custom-beans-and-producers"><a class="anchor" href="#aop-on-custom-beans-and-producers"></a>AOP on custom beans and producers</h3>
+<div class="paragraph">
+<p>Conclusion was that it is doable but with certain limitations. Among them the fact that an interceptor on producer would be applied on all method of it (no obvious solution to target specifc methods).</p>
+</div>
+<div class="paragraph">
+<p>We also discussed the syntax for binding interceptor to a produced bean. if you consider this code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Produces
+ @Loggable
+ public  Foo produceMap() { 
+    return new Foo(); 
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>@Loggable</code> interceptor binding is bound to the method not the produced bean. We have to find an easy way to bind the interceptor to the produced bean.
+The only solution we found was to use a Stereotype with the interceptor binding and put it on the producer. Not a direct solution but rather elegant.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="aop-on-internal-call-vs-self-injection-pattern"><a class="anchor" href="#aop-on-internal-call-vs-self-injection-pattern"></a>AOP on internal call vs self injection pattern</h3>
+<div class="paragraph">
+<p>We already discussed about supporting AOP on call make in the same bean (calling intercepted B method from method A with interceptor triggering).
+After discussion, it seemed very difficult to introduce this new feature and AOP support on produced and custom beans at the same time. So the idea was to ease the use of self injection pattern, providing something like this.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public class MyBean {
+
+  @Inject
+  Self&lt;MyBean&gt; mySelf;
+
+  @Loggable
+  public methodB() {
+    ...
+  }
+
+  public methodA() {
+    mySelf.get().methodB();
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>less elegant than having it directly on internal call but still useful.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-aop-topics"><a class="anchor" href="#other-aop-topics"></a>Other AOP topics</h3>
+<div class="paragraph">
+<p>We also discussed about the following topics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>relaunching the idea of supporting decorator without interface</strong> like it was requested in <a href="https://issues.jboss.org/browse/CDI-403" target="_blank">CDI-403</a> and before that in <a href="https://issues.jboss.org/browse/CDI-224" target="_blank">CDI-224</a>.</p>
+</li>
+<li>
+<p><strong>standardise the <a href="https://deltaspike.apache.org/documentation/partial-bean.html">partial bean</a> feature from Deltaspike</strong>. For those who don&#8217;t know this feature an example can be found <a href="https://github.com/jboss-developer/jboss-wfk-quickstarts/tree/2.6.0.Final/deltaspike-partialbean-advanced" target="_blank">here</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="java-se-support"><a class="anchor" href="#java-se-support"></a>Java SE support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We had a long discussion on Java SE support in CDI 2.0. To decide that we should just provide a class like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public class ContainerBoot {
+
+    /**
+     * Simple boot
+     */
+    static BeanManager initialize() {
+      ...
+    }
+
+    /**
+     * Boot with parameters
+     */
+    static BeanManager intialize(Map&lt;?,?&gt;) {
+      ...
+    }
+    void shutdown() {}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Discussions are still going on on this topic.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="spi-enhancement"><a class="anchor" href="#spi-enhancement"></a>SPI enhancement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Last but not least we also discussed about SPI enhancement. The main topic were:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Give the possibility to modify/register beans at runtime</strong>. The majority of present people were against this new feature. The ones in favor obtained that the door wouldn&#8217;t be closed now and that the community would be consulted to see if this need was "real". So we&#8217;ll be back on this feature and if you want to see it, stay tune to give it your support when we&#8217;ll ask for it.</p>
+</li>
+<li>
+<p><strong>Add SPI to activate/deactivate contexts</strong>. Right now built-in context cannot be activated / deactivated by third parties, forcing them to create their own implementation of such contexts instead of using the one provided by their implementation. This small modification will greatly ease CDI advanced integration in other spec or frameworks.</p>
+</li>
+<li>
+<p><strong>Add helpers to create CDI meta-data</strong>. Today it&#8217;s not very convenient to create an <code>AnnotatedType</code> or a custom <code>Bean</code>. We decided to explore the introduction of helpers inspired by Deltaspike Builders. They would be provided by lifecycle event</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here are the main topics we discussed during these 2 days. Other small feature will came to JIRA later. At this point there was only orientation and no final decision on any subject. So the door is still open for these as well as new feature. So don&#8217;t hesitate to give your advice andv your contribution to our <a href="/">workshop</a> or <a href="https://issues.jboss.org/browse/CDI" target="_blank">Jira server</a>.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2014/10/06/CDI-20_working_method/">Previous: Working method for CDI 2.0 </a></li><li class="next"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/">Next: CDI 2.0 - A glimpse at the future </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2014/10/06/CDI-20_working_method/"> Previous</a></li><li class="next"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

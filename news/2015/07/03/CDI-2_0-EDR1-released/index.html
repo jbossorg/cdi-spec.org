@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="CDI 2.0.EDR1 released, Java SE support, CDI boot in Java SE"><title>CDI 2.0 Early Draft Review 1 released | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/">Previous: CDI 2.0 - A glimpse at the future </a></li><li class="next"><a href="/news/2015/09/29/Second-F2F-meeting/">Next: CDI 2.0 Second Face to face meeting feedback </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/"> Previous</a></li><li class="next"><a href="/news/2015/09/29/Second-F2F-meeting/"> Next</a></li></ul><h1><a href="/news/2015/07/03/CDI-2_0-EDR1-released/">CDI 2.0 Early Draft Review 1 released</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Jul 03, 2015</span> |   <a href="http://www.cdi-spec.org/news/2015/07/03/CDI-2_0-EDR1-released/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>After eight months of work, the CDI 2.0 expert group is pleased to release this first draft of <a href="https://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec.html" target="_blank">CDI 2.0 specification</a> for community review. This draft contains important and long awaited features that will change CDI as we know it.</p>
+</div>
+<div class="paragraph">
+<p>But these features are still proposals and we really need your feedback to know if the way we specified them fits your needs.
+  Let&#8217;s check what&#8217;s on the menu.</p>
+</div>
+<div class="sect1">
+<h2 id="cdi-runs-now-in-java-se"><a class="anchor" href="#cdi-runs-now-in-java-se"></a>CDI runs now in Java SE</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One of the oldest request was the support of Java SE in CDI. Since the beginning the two main implementations (JBoss Weld and Apache OpenWebBeans) proposed proprietary solutions to use CDI in Java SE.</p>
+</div>
+<div class="paragraph">
+<p>Then, Apache DeltaSpike came in and provided an absract solution to boot either implementations, but this wasn&#8217;t never standardized at spec level, until now&#8230;&#8203;</p>
+</div>
+<div class="sect2">
+<h3 id="why-this-important"><a class="anchor" href="#why-this-important"></a>Why this important?</h3>
+<div class="paragraph">
+<p>So, if implementation and a third party project already provide this Java SE support, what&#8217;s the big deal to have it at spec level? The answer is "increase adoption by other specifications".</p>
+</div>
+<div class="paragraph">
+<p>A lot of Java EE specification provide a Java SE support (like JPA or JAX-RS). Since CDI doesn&#8217;t provide this support as well, they can&#8217;t rely totally on it since it is not available in  Java SE.
+So, the side effect of this new Java SE support will be a better CDI integration in Java EE. If we add to this a broader adoption by third parties framework, we see that the benefits for CDI and its users goes far beyond the simple feature.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="preparing-java-se-support-api-split"><a class="anchor" href="#preparing-java-se-support-api-split"></a>Preparing Java SE support (API split)</h3>
+<div class="paragraph">
+<p>Adding such a straight forward feature to CDI seems quite easy on paper but, trust me, it wasn&#8217;t.</p>
+</div>
+<div class="paragraph">
+<p>If you check the <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec.html" target="_blank">current 1.2 specification</a>, you&#8217;ll see that EJB is everywhere in the spec. You also have reference to JSF, servlet or Expression Language all accross the document.</p>
+</div>
+<div class="paragraph">
+<p>So the first work was to split the spec to put he Java EE specific feature in a dedicated part to have all CDI core feature (no tie to other spec) in its own part. This specification has now 3 parts plus an introduction as explain in the <a href="https://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec.html#_foreword" target="_blank">foreword section</a>.</p>
+</div>
+<div class="paragraph">
+<p>This work was done as carefully as possible to avoid destroying, duplicating or modifying rules, yet, your double check here is most welcome to be sure that we didn&#8217;t forget something in the rewriting.</p>
+</div>
+<div class="paragraph">
+<p>Yes it&#8217;s rather long work to read (or re-read) the whole specification but it&#8217;s also the ocasion to see it with a fresh eye with this new organisation. You migh want grab the <a href="https://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec-2.0.pdf" target="_blank">pdf version</a> (whose look has been updated) of the spec to go through it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="booting-cdi-in-java-se"><a class="anchor" href="#booting-cdi-in-java-se"></a>Booting CDI in Java SE</h3>
+<div class="paragraph">
+<p>After all this work (invisible for end users), we introduced the Java SE support by adding a bootstrap API for Java SE. The solution make use of already existing <a href="http://docs.jboss.org/cdi/api/2.0.EDR1/javax/enterprise/inject/spi/CDIProvider.html" target="_blank"><code>CDIProvider</code></a> interface and <a href="http://docs.jboss.org/cdi/api/2.0.EDR1/javax/enterprise/inject/spi/CDI.html" target="_blank"><code>CDI</code></a> class.</p>
+</div>
+<div class="paragraph">
+<p>Code for booting CDI in Java SE looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public static void main(String... args) {
+    try(CDI&lt;Object&gt; cdi = CDI.getCDIProvider().initialize()) {
+        // start the container, retrieve a bean and do work with it
+        MyBean myBean = cdi.select(MyBean.class).get();
+        myBean.doWork();
+    }
+    // shuts down automatically after the try with resources block.
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Go check the <a href="https://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec.html#bootstrap-se" target="_blank">Bootstrapping a CDI container in Java SE</a> chapter in the specification and tell us what do you think.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="still-work-to-do"><a class="anchor" href="#still-work-to-do"></a>Still work to do</h3>
+<div class="paragraph">
+<p>Java SE support needs more work and we are still working on the feature. The two main aspect are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-529" target="_blank">work on bean discovery mode in SE</a></p>
+</li>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-530" target="_blank">work on context control in SE</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Again, your feedback and ideas are most welcome to help us for these part specification.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ordering-event-observers"><a class="anchor" href="#ordering-event-observers"></a>Ordering event observers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One of the <a href="https://issues.jboss.org/browse/CDI-4" target="_blank">oldest requested feature</a> for CDI was resolved in this EDR : observer ordering.</p>
+</div>
+<div class="paragraph">
+<p>The feature was simply design by using <code>@Priority</code> annotation (from commons annotation) and will be used like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">void afterLogin(@Observes @Priority(APPLICATION) LoggedInEvent event) { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The use of <code>@Priority</code> was rather obvious since we already use this annotaion for interceptor, decorator or alternatives activation and ordering. The only issue here is that the annotation only targets types right now. We asked for a review of JSR-250 to add parameter as accepted target for <code>@Priority</code>.</p>
+</div>
+<div class="paragraph">
+<p>Check the <a href="https://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec.html#observer_ordering" target="_blank">section dealing with observer ordering</a> to have all the details.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="asynchronous-events"><a class="anchor" href="#asynchronous-events"></a>Asynchronous events</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Another important feature requested by many of you. Introducing Asynchronous event wasn&#8217;t an easy thing, because we needed to keep backward compatibilty with existing events. We also wanted to leverage new asynchronous API in Java 8 to provide the most up to date approach in the spec.</p>
+</div>
+<div class="paragraph">
+<p>The solution we choose was to introduce <code>@ObservesAsync</code> and add methods <code>fireAsync()</code> in the <code>Event</code> interface. So the exisitng observer (defined with <code>@Observes</code>) will stay synhcronous and new observer defined by <code>@ObservesAsync</code> will be called asynchronously if the event was triggered with <code>fireAsync()</code> (and won&#8217;t be called from a classical <code>fire()</code>).</p>
+</div>
+<div class="paragraph">
+<p>So asynchronous event usage will look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Inject Event&lt;LoggedInEvent&gt; loggedInEvent;
+
+public void login() {
+    ...
+    loggedInEvent.fireAsync( new LoggedInEvent(user) );
+}
+
+...
+
+public void asyncAfterLogin(@ObservesAsync LoggedInEvent event) { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The best is to re-read <a href="https://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec.html#events" target="_blank">all the event chapter</a> in the spec to get the details.</p>
+</div>
+<div class="sect2">
+<h3 id="why-this-double-activation-is-needed"><a class="anchor" href="#why-this-double-activation-is-needed"></a>Why this double activation is needed?</h3>
+<div class="paragraph">
+<p>For the producer (<code>fire()</code>) side it’s rather obvious : we cannot magically change all synchronous event call to async. We need an handle on the work in progress (so a new method signature with <code>CompletionStage</code>), the payload mutation mechanism would break as all transactional events. So there’s no debate on <code>fireAsync()</code>.</p>
+</div>
+<div class="paragraph">
+<p>On the observer side, the reason is for backward compatibility. CDI events are a great way to cross boundaries of our own code and activate unknown code at runtime in another module of the app (i.e. another jar) that we don’t own. This other code can be a framework, a code developed by an other team in a big project or a legacy jar that we don’t want to touch.</p>
+</div>
+<div class="paragraph">
+<p>Imagine the following use cases (all code running on CDI 2)</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>I’m compiling in CDI 1.x and one of the Jar (framework for instance) already migrated to CDI 2.0 firing async event where it use to fire sync events. Without activation on the observer side, I have all the chance to see my observer break. And if I decide to upgrade to CDI 2.0 I must have a way to activate / deactivate async call on given observers</p>
+</li>
+<li>
+<p>I’m compiling in CDI 2.0 but use <code>jar1</code> in CDI 1.0 and <code>jar2</code> in CDI 2.0 coming from other teams. <code>jar2</code> and <code>jar1</code> are old related pieces of code communicating the event. The guys in <code>jar2</code> had time to migrate to CDI 2.0 and switch most fire() to fireAsync(). Observer in jar1 will be called asynchronously if the default is to have async activated for all observers.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These example looks like corner cases but the side effect will be that no framework developers will switch to fireAsync() for the sake of defensive programming. So async event would have a serious adoption problem withotu this double activation.
+More than that, as we are designing a Java EE specification we must be committed to backward compatibility and cannot change behavior of old code, like it would do if we chose to not have activation on observer side.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="other-change-corrections-and-clarifications"><a class="anchor" href="#other-change-corrections-and-clarifications"></a>Other change, corrections and clarifications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can check the <a href="https://issues.jboss.org/secure/ReleaseNote.jspa?projectId=12311062&amp;version=12327364" target="_blank">release notes</a> of this early draft to discover the more minor changes we also introduced in the spec.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementation-and-tck"><a class="anchor" href="#implementation-and-tck"></a>Implementation and TCK</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TCK team and JBoss Weld team are currently working hard to provide a Reference Implementation for this draft. You&#8217;ll be notified as soon as there&#8217;ll be released.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="we-need-you"><a class="anchor" href="#we-need-you"></a>We need you</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To go on on this Early draft, we really need your feedback. The review period will be launch in the coming days by the JCP and will run for 90 days. You can give your feedback in many way:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>By commenting this post</p>
+</li>
+<li>
+<p>On the <a href="https://lists.jboss.org/mailman/listinfo/cdi-dev" target="_blank">mailing list</a></p>
+</li>
+<li>
+<p>On our <a href="https://issues.jboss.org" target="_blank">Jira platform</a></p>
+</li>
+<li>
+<p>or, if it&#8217;s rather short on <a href="https://twitter.com/cdispec" target="_blank">Twitter</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Thank you for helping us making CDI one of the best programming model for Java and Java EE.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2015/07/03/CDI-2_0-EDR1-released/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/release/">release</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/">Previous: CDI 2.0 - A glimpse at the future </a></li><li class="next"><a href="/news/2015/09/29/Second-F2F-meeting/">Next: CDI 2.0 Second Face to face meeting feedback </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/"> Previous</a></li><li class="next"><a href="/news/2015/09/29/Second-F2F-meeting/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2015/07/03/CDI-2_0-EDR1-released/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

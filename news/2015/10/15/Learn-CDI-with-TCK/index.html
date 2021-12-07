@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Learn CDI TCK (Technology Compatibility Kit), spec with TCK assertions, testing"><title>Learn CDI spec with our TCK | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/09/29/Second-F2F-meeting/">Previous: CDI 2.0 Second Face to face meeting feedback </a></li><li class="next"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/">Next: Meet CDI at Java One 2015 </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/09/29/Second-F2F-meeting/"> Previous</a></li><li class="next"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/"> Next</a></li></ul><h1><a href="/news/2015/10/15/Learn-CDI-with-TCK/">Learn CDI spec with our TCK</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Oct 15, 2015</span> |   <a href="http://www.cdi-spec.org/news/2015/10/15/Learn-CDI-with-TCK/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>Beyond being one of the few open source TCK around, CDI TCK is one of the easiest to get started with.</p>
+</div>
+<div class="paragraph">
+<p>Now that we have released a new version of spec doc embedding TCK test, it&#8217;s easier than ever.</p>
+</div>
+<div class="paragraph">
+<p>Learn what we did and how to use it.</p>
+</div>
+<div class="sect1">
+<h2 id="cdi-tck-for-the-dummies"><a class="anchor" href="#cdi-tck-for-the-dummies"></a>CDI TCK for the dummies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TCK stands for Technology Compatibility Kit.
+It&#8217;s one of the 3 part a JSR expert group has to release (2 others being the spec and the Reference Implementation).</p>
+</div>
+<div class="paragraph">
+<p>A TCK is a collection of tests that actively define the spec.
+It&#8217;s the tool that is used to determine if an implementation is a CDI implementation or not.
+So this piece of code is the most important and the hardest to develop and maintain.
+Ok, RI could seem more important, but it&#8217;s under the spotlight and is nothing without the TCK.</p>
+</div>
+<div class="paragraph">
+<p>To make short, TCK is the code that makes CDI a specification and thus a standard.</p>
+</div>
+<div class="paragraph">
+<p>The great guy behind our TCK is <a href="https://github.com/tremes" target="_blank"><strong>Tomas Remes</strong></a> and he doing an awesome job pointing holes or unclear statements in spec text or refactoring all the TCK after CDI split in 2.0-EDR1.</p>
+</div>
+<div class="paragraph">
+<p>If you want to learn more about the TCK I suggest that you check <a href="/cditck" target="_blank">our dedicated page</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tck-is-more-than-what-it-seems"><a class="anchor" href="#tck-is-more-than-what-it-seems"></a>TCK is more than what it seems</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The TCK role is not restricted to the specification mold, it can also be a great way to learn the spec by code.
+To crown that, thanks to <a href="http://arquillian.org" target="_blank">Arquillian</a>, CDI TCK is very easy to understand and very expressive.</p>
+</div>
+<div class="paragraph">
+<p>But jumping from specification to test can be a bit complicated and this exercise can discourage many of our user.</p>
+</div>
+<div class="paragraph">
+<p>That&#8217;s why, a few months ago, we started to think about a solution to create links from the spec text to the TCK.</p>
+</div>
+<div class="paragraph">
+<p>It seemed quite doable since the reverse link has always existed: each since TCK tests have meta data about the spec section it refers.</p>
+</div>
+<div class="paragraph">
+<p>So, Tomas made the required upgrade to the TCK and developed a script to add tests to the spec.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="meet-spec-doc-with-tck-assertion"><a class="anchor" href="#meet-spec-doc-with-tck-assertion"></a>Meet Spec doc with TCK assertion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Thanks to this work we are able to release a <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-with-assertions.html" target="_blank">special edition of CDI 1.2 specification document including TCK assertion and link to their matching test class on Github</a>.
+The same is done for the <a href="http://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec-with-assertions.html">CDI 2.0 work in progress specification</a>.</p>
+</div>
+<div class="paragraph">
+<p>Don&#8217;t worry the original specifications docs stay unchanged, we only released a new flavor for them on our <a href="/download">download page</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="assertion-link-by-example"><a class="anchor" href="#assertion-link-by-example"></a>Assertion link by example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Due to normalization constraint (rules duplication avoidance) we have on the spec, some statement could seem confusing when reading them.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s take, for instance, the first statement of section <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-with-assertions.html#unproxyable" target="_blank">3.15 Unproxyable bean types</a>:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>The container uses proxies to provide certain functionality. Certain legal bean types cannot be proxied by the container:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>classes which don’t have a non-private constructor with no parameters,</p>
+</li>
+</ul>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Yeah a triple negation&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>You could take the next minute to figure out the exact meaning of the sentence or you could click on the "Show TCK assertions" link and check the two tests related to this section to see the cases where this rules make the deployment fails.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="learn-test-and-challenge"><a class="anchor" href="#learn-test-and-challenge"></a>Learn, test and challenge</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you have this nice tool in your hand, TCK will be your CDI Lab, and perhaps, you&#8217;ll come back with corner use cases not covered or new challenges for the TCK.</p>
+</div>
+<div class="paragraph">
+<p>Go and learn!</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2015/10/15/Learn-CDI-with-TCK/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2015/10/15/Learn-CDI-with-TCK/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/TCK/">TCK</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/09/29/Second-F2F-meeting/">Previous: CDI 2.0 Second Face to face meeting feedback </a></li><li class="next"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/">Next: Meet CDI at Java One 2015 </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/09/29/Second-F2F-meeting/"> Previous</a></li><li class="next"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2015/10/15/Learn-CDI-with-TCK/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

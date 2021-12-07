@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description"><title>CDI EG meeting 12/09/2013 notes on CDI 1.2 MR | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2013/12/02/EG-meeting/">Previous: CDI EG meeting 12/02/2013 notes on CDI 1.2 MR </a></li><li class="next"><a href="/news/2013/12/16/CDI-1-2-issues-list/">Next: Conclusion of EG preparation on CDI 1.2 </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2013/12/02/EG-meeting/"> Previous</a></li><li class="next"><a href="/news/2013/12/16/CDI-1-2-issues-list/"> Next</a></li></ul><h1><a href="/news/2013/12/09/EG-meeting/">CDI EG meeting 12/09/2013 notes on CDI 1.2 MR</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Dec 09, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/12/09/EG-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>The following people assisted this meeting :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pete Muir (pm)</p>
+</li>
+<li>
+<p>Jozef Hartinger (jh)</p>
+</li>
+<li>
+<p>Martin Kouba (mk)</p>
+</li>
+<li>
+<p>JJ Snyder (jj)</p>
+</li>
+<li>
+<p>Antoine Sabot-Durand (asd)</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="proposed-agenda"><a class="anchor" href="#proposed-agenda"></a>Proposed Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following agenda was proposed</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Issues discussion : 6 issues where proposed</p>
+</li>
+<li>
+<p>Back on CDI-377 (automatic JSR-330 annotation processing problematic)</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="issues-discussion"><a class="anchor" href="#issues-discussion"></a>Issues discussion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The discussion around the proposed ticket was quite straight forward. The result is in the table below</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 50%;">
+<col style="width: 8.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jira</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Decision</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-380" target="_blank">CDI-380</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify SessionScoped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We should be less descriptive and like for CDI-381 add a general statement telling that other spec/extensions can change the behavior of built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-372" target="_blank">CDI-372</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clarify behavior of implicit bean archive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The notion of Bean Archive is introduce in Chapter 12, we should do an introduction before</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-320" target="_blank">CDI-320</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify whether ProcessAnnotatedType should be fired for annotations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">According to pm it shouldn&#8217;t and we should clarify this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-318" target="_blank">CDI-318</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@WithAnnotations types can appear on any supertype</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mainly Javadoc correction on @WithAnnotation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-280" target="_blank">CDI-280</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">behavior of CDI bean @Specializes session bean is undefined</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">could benefit some clarification</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-220" target="_blank">CDI-220</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify interceptors are not associated with the result of a producer method/field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="back-on-cdi-377-automatic-jsr-330-annotation-processing-problematic"><a class="anchor" href="#back-on-cdi-377-automatic-jsr-330-annotation-processing-problematic"></a>Back on CDI-377 (automatic JSR-330 annotation processing problematic)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This issue will be fixed in implementation and the sepc will mention something about recommendation to provide default exclusion list for most framework.
+We still have to discuss if we introduce a jar exclusion mechanism in the spec or this will be based on existing package exclusion.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We finished to deal with the list of Jira tickets we planned to introduce or not in MR. As we have a little more time it was decided to re-open the list for some more on next meeting</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2013/12/09/EG-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/12/09/EG-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2013/12/02/EG-meeting/">Previous: CDI EG meeting 12/02/2013 notes on CDI 1.2 MR </a></li><li class="next"><a href="/news/2013/12/16/CDI-1-2-issues-list/">Next: Conclusion of EG preparation on CDI 1.2 </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2013/12/02/EG-meeting/"> Previous</a></li><li class="next"><a href="/news/2013/12/16/CDI-1-2-issues-list/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2013/12/09/EG-meeting/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

@@ -1,0 +1,917 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Latest news about CDI"><title>Latest news about CDI | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><div class="posts"><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2020/09/15/CDI_Lite_extension/">Build Compatible Extensions Proposal</a></h1><div class="meta"><strong>Posted by  <span class="authors">Ladislav Thon</span> on  <span class="date">Sep 15, 2020</span> |   <a href="http://www.cdi-spec.org/news/2020/09/15/CDI_Lite_extension/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>A few months back we shared our vision for CDI lite.
+In short, the goal with CDI lite is to make the spec lighter, cloud-friendlier and allow for build-time implementations which are now on the rise.</p>
+</div>
+<div class="paragraph">
+<p>When we started thinking about a “lite” variant of CDI, amenable to build-time processing, we understood that an alternative to Portable Extensions is necessary. Subsequent discussion on the MicroProfile mailing list confirmed that.</p>
+</div>
+<div class="paragraph">
+<p>We explored several variants of how the API might look like. This blog post shows one that, we believe, has the most potential. We call it <em>Build Compatible Extensions</em>, but the name, as everything else described here, is up for debate.</p>
+</div>
+<div class="paragraph">
+<p>For our explorations of the API design space, we mostly constrained ourselves to one particularly common use case: annotation transformations. Many things that Portable Extensions allow can be achieved simply by adding an annotation here or removing an annotation there. We know that other transformations are necessary, but the API for annotation transformation is the most developed proposal we have. The other ones are significantly more rough, so bear with us please and submit feedback!
+You can do that in form of a GitHub issue against the <a href="https://github.com/eclipse-ee4j/cdi/issues">CDI repository</a> and add the <code>lite-extension-api</code> label to your issue.</p>
+</div>
+<div class="paragraph">
+<p>Before we start, we’d also like to note that in this text, we assume the reader (that is, you!) is familiar with CDI and preferably also Portable Extensions, as we expect some knowledge and don’t explain everything. We also make references to Portable Extensions on several occasions.</p>
+</div>
+<div class="sect1">
+<h2 id="extensions"><a class="anchor" href="#extensions"></a>Extensions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In our proposal, Build Compatible Extensions are simply methods annotated with an <em>extension annotation</em>. Extension annotations correspond to phases in which extensions are processed. There are 4 phases:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>@Discovery</strong>: adding classes to application, registering custom contexts</p>
+</li>
+<li>
+<p><strong>@Enhancement</strong>: transforming annotations</p>
+</li>
+<li>
+<p><strong>@Synthesis</strong>: registering synthetic beans and observers</p>
+</li>
+<li>
+<p><strong>@Validation</strong>: performing custom validation</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>There are some constraints we put on these methods (such as: they must be <code>public</code>), but they should be pretty obvious and shouldn’t be limiting anyone. The container automatically finds extensions and invokes them when time is right.
+When exactly are the extensions invoked can’t be defined in too much detail, because we want implementations to be able to invoke them at build time (e.g. during application compilation) or runtime (e.g. during application deployment). It certainly happens before the application starts. Extensions in earlier phases are guaranteed to run before extensions in later phases.</p>
+</div>
+<div class="paragraph">
+<p>Extensions can declare an arbitrary number of parameters, all of which are supplied by the container. There’s a set of predefined types of parameters for each phase, and all implementations would have to support that. We’re also thinking of designing an SPI that would allow anyone to contribute support for other types of parameters.
+A class can declare multiple extension methods, in which case they are all invoked on a single instance of the class. If you need to control order of extension invocations, there’s an annotation <strong><code>@ExtensionPriority</code></strong> just for that.
+This is a lot of text already, so let’s take a look at an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public class MyExtension {
+    @Enhancement
+    public void doSomething() {
+        System.out.println("This is an extension, yay!");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This doesn’t really do anything, just prints a message whenever the extension is executed. Let’s create something more interesting. Say, moving a qualifier annotation from one class to another. Let’s assume that we have these classes in our application.</p>
+</div>
+<div class="sect2">
+<h3 id="a-qualifier-annotation"><a class="anchor" href="#a-qualifier-annotation"></a>A qualifier annotation:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Qualifier
+@Retention(RUNTIME)
+@interface MyQualifier {
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-service-interface"><a class="anchor" href="#a-service-interface"></a>A service interface:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">interface MyService {
+    String hello();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="two-implementations-one-with-qualifier-and-the-other-unqualified"><a class="anchor" href="#two-implementations-one-with-qualifier-and-the-other-unqualified"></a>Two implementations, one with qualifier and the other unqualified:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Singleton
+@MyQualifier
+class MyFooService implements MyService {
+	    @Override
+	    public String hello() {
+	    	    return "foo";
+	    }
+}
+
+@Singleton
+class MyBarService implements MyService {
+    @Override
+	    public String hello() {
+	    	    return "bar";
+	    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-class-that-uses-the-service"><a class="anchor" href="#a-class-that-uses-the-service"></a>A class that uses the service</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@Singleton
+class MyServiceUser {
+	    @Inject
+	    @MyQualifier
+	    MyService myService;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, it’s pretty clear that when the CDI container instantiates the <code>MyServiceUser</code> class, it will inject a <code>MyFooService</code> into the <code>myService</code> field.
+With a simple Build Compatible Extension, we can “transfer” the qualifier annotation from <code>MyFooService</code> to <code>MyBarService</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">class MyExtension {
+    @Enhancement
+    public void configure(ClassConfig&lt;MyFooService&gt; foo,
+                          ClassConfig&lt;MyBarService&gt; bar) {
+        foo.removeAnnotation(it -&gt; it.name()
+            .equals(MyQualifier.class.getName()));
+        bar.addAnnotation(MyQualifier.class);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I’m sure you understand the extension pretty well already: with this extension present in the application, the CDI container will consider the <code>MyFooService</code> <em>not</em> annotated <code>@MyQualifier</code>, and at the same time, it will consider the <code>MyBarService</code> annotated <code>@MyQualifier</code>. In the end, <code>MyServiceUser.myService</code> will no longer hold a <code>MyFooService</code>; it will hold a <code>MyBarService</code> instead.  We have successfully “moved” an annotation from one class to another, thereby altering how the CDI container behaves.</p>
+</div>
+<div class="paragraph">
+<p>This is a very simple example, but using the exact same API, one can achieve many things. For example, if the CDI container doesn&#8217;t treat all classes as beans (in CDI Lite, this isn’t required), all it takes to create a bean out of a class is just adding a bean defining annotation:
+<code>myClass.addAnnotation(Singleton.class);</code>
+To “veto” a class, again, just add an annotation:
+<code>myClass.addAnnotation(Vetoed.class);</code>
+Etc. etc. etc.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="extension-parameters"><a class="anchor" href="#extension-parameters"></a>Extension parameters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By now, you should have a general idea of how extensions look like. If you want to know the gory details, read on – but be warned, this is going to be long. You might want to skip directly to the conclusion at the end.
+Still here? Good! As we said above, an extension can declare an arbitrary number of parameters. The parameters are where extensions become interesting, so let’s describe in detail which parameters can extensions declare.</p>
+</div>
+<div class="sect2">
+<h3 id="code-discovery-code"><a class="anchor" href="#code-discovery-code"></a><code>@Discovery</code></h3>
+<div class="paragraph">
+<p>Just two parameters are possible: <code>AppArchiveBuilder</code> to register custom classes so that the CDI container treats them as part of the application, and <code>Contexts</code> to register custom contexts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-enhancement-code"><a class="anchor" href="#code-enhancement-code"></a><code>@Enhancement</code></h3>
+<div class="paragraph">
+<p>As mentioned above, we have focused mostly on this phase. Therefore, we have a pretty elaborate API which allows inspecting and modifying the application’s annotations.</p>
+</div>
+<div class="sect3">
+<h4 id="inspecting-code"><a class="anchor" href="#inspecting-code"></a>Inspecting code</h4>
+<div class="paragraph">
+<p>You can look at all the classes, methods and fields in an application, and make decisions based on your findings. For that, an extension can declare parameters of these types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ClassInfo&lt;MyService&gt;</code>: to look at one particular class</p>
+</li>
+<li>
+<p><code>Collection&lt;ClassInfo&lt;? extends MyService&gt;&gt;</code>: to look at all subclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;ClassInfo&lt;? super MyService&gt;&gt;</code>: to look at all superclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;ClassInfo&lt;?&gt;&gt;</code>: to look at all classes</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;MyService&gt;&gt;</code>: to look at all methods declared on one class</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;? extends MyService&gt;&gt;</code>: to look at all methods declared on all subclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;? super MyService&gt;&gt;</code>: to look at all methods declared on all superclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;MethodInfo&lt;?&gt;&gt;</code>: to look at all methods declared on all classes</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;MyService&gt;&gt;</code>: to look at all fields declared on one class</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;? extends MyService&gt;&gt;</code>: to look at all fields declared on all subclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;? super MyService&gt;&gt;</code>: to look at all fields declared on all superclasses</p>
+</li>
+<li>
+<p><code>Collection&lt;FieldInfo&lt;?&gt;&gt;</code>: to look at all fields declared on all classes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Such parameters can also be annotated <code>@WithAnnotations</code>, in which case, only those classes/methods/fields annotated with given annotations will be provided.
+The <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code> types give you visibility into all interesting details about given declarations. You can drill down to method parameters, their types, annotations, and so on.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="the-new-metamodel"><a class="anchor" href="#the-new-metamodel"></a>The new metamodel</h4>
+<div class="paragraph">
+<p>Actually, let’s take a small detour to explain these <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code> types, because they totally deserve it.
+You will note that they are actually very similar to the Java Reflection API. However, they do not rely on the Reflection API in any way, unlike the types in Portable Extensions. This is an important goal of the entire CDI Lite effort: make it possible to implement CDI completely at build time. To that end, we designed a completely new metamodel for Java classes, which can be implemented solely on top of Java bytecode.
+The type hierarchy looks like this: at the top, there’s an <code>AnnotationTarget</code>. That’s basically anything that can be annotated. In Java, this means <em>declarations</em>, such as classes or methods, and <em>types</em>, such as a type of a method parameter. The <code>AnnotationTarget</code> lets you look at its annotations using these 4 methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">boolean hasAnnotation(Class&lt;? extends Annotation&gt; annotationType);
+AnnotationInfo annotation(Class&lt;? extends Annotation&gt; annotationType);
+Collection&lt;AnnotationInfo&gt; repeatableAnnotation(
+        Class&lt;? extends Annotation&gt; annotationType);
+Collection&lt;AnnotationInfo&gt; annotations();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method <code>hasAnnotation(...)</code> returns whether a given annotation target (such as a class) has an annotation of given type. The <code>annotation(...)</code> method returns information about an annotation of a given type present on a given target (we’ll see more about <code>AnnotationInfo</code> soon). The <code>repeatableAnnotation(...)</code> method returns all annotations of a given repeatable annotation type, and finally the <code>annotations()</code> method returns all annotations present on a given target.
+Let’s stop for a short example. Let’s say we have a <code>ClassInfo</code> for the <code>MyServiceUser</code> class, which we’ve seen in the previous example. We can do all kinds of interesting things with it, but here, let’s just check if the class has a <code>@Singleton</code> annotation, and if so, print all annotations on all fields annotated <code>@Inject</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">ClassInfo&lt;MyServiceUser&gt; clazz = ...;
+if (clazz.hasAnnotation(Singleton.class)) { // we know this is true
+    for (FieldInfo&lt;MyServiceUser&gt; field : clazz.fields()) {
+        if (field.hasAnnotation(Inject.class)) {
+            field.annotations().forEach(System.out::println);
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You might have noticed that the <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code> types have a type parameter. This is only useful when declaring an extension parameter – there, it expresses a query (such as: give me all fields declared on all subclasses of <code>MyService</code>). In all other cases, it can be pretty much ignored.
+Short tour through the <code>AnnotationInfo</code> type: you can access the <code>target()</code> of the annotation, as well as the annotation <code>declaration()</code>, and you can see the annotation attributes using the <code>hasAttribute(String)</code> and <code>attribute(String)</code> methods. Given that an attribute named <code>value</code> is particularly common, there’s also <code>hasValue()</code> and <code>value()</code>. And finally, there’s <code>attributes()</code> to access all annotation attributes at once. Annotation attributes are represented by the <code>AnnotationAttribute</code> interface, which has a <code>name()</code> and a <code>value()</code>. The attribute value is represented by <code>AnnotationAttributeValue</code>, which allows figuring out the actual type of the value, as well as obtaining its representation as an ordinary Java type.
+As mentioned above, there are two kinds of <code>AnnotationTarget`s: declarations and types. Therefore, we have `DeclarationInfo</code> as the top-level type for representing Java declarations, and <code>Type</code> as the top-level type for representing Java types. To distinguish between them, the <code>AnnotationTarget</code> interface has 4 methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">boolean isDeclaration();
+boolean isType();
+DeclarationInfo asDeclaration();
+Type asType();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>boolean</code>-returning methods return whether a given annotation target is a declaration or a type, and the remaining two methods cast to the corresponding type (or throw an exception). You can find similar methods on <code>DeclarationInfo</code> and <code>Type</code>, for various kinds of declarations and types (for example, <code>DeclarationInfo</code> has <code>isClass()</code>, <code>asClass()</code> and others).
+We represent 4 kinds of Java declarations in the new metamodel: classes, methods (including constructors), method parameters, and fields. We’re thinking about if it’s worth adding a representation for packages, given that they can also be annotated (using <code>package-info.java</code>). Any opinion here is welcome!
+Classes are represented by <code>ClassInfo</code>, which gives access to the <code>name()</code>, <code>superClass()</code>, all implemented <code>superInterfaces()</code>, all <code>typeParameters()</code>, and most importantly, all <code>constructors()</code>, <code>methods()</code> and <code>fields()</code>.
+Constructors and methods are represented by <code>MethodInfo</code>, which gives access to the <code>name()</code>, <code>parameters()</code>, <code>returnType()</code> and also <code>typeParameters()</code>.
+Method parameters are represented by <code>ParameterInfo</code>, which gives access to the <code>name()</code>, if it’s present (remember that parameter names don’t have to be present in bytecode!), and the <code>type()</code>.
+Finally, fields are represented by <code>FieldInfo</code>, which gives access to <code>name()</code> and <code>type()</code>.
+As you’ve surely noticed, we can often get hold of a type of something (method return type, field type, etc.). That’s a second kind of <code>AnnotationTarget</code>. As we’ve mentioned, the top-level representation of types is the <code>Type</code> interface, and there are 7 kinds of types: <code>VoidType</code>, <code>PrimitiveType</code>, <code>ClassType</code>, <code>ArrayType</code>, <code>ParameterizedType</code>, <code>TypeVariable</code> and <code>WildcardType</code>. We won’t go into details about these, as the text is already getting rather long.
+Instead, let’s get back to extension parameters!</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="modifying-code"><a class="anchor" href="#modifying-code"></a>Modifying code</h4>
+<div class="paragraph">
+<p>Not only can you look at classes, methods and fields in your extension, you can also modify them. These modifications include adding and removing annotations, and are only considered by the CDI container. That is, the rest of the application will <em>not</em> see these modifications!
+For each parameter type mentioned above, such as <code>ClassInfo&lt;MyService&gt;</code> or <code>Collection&lt;MethodInfo&lt;? extends MyService&gt;&gt;</code>, you can also declare a parameter of the corresponding <code>*Config</code> type: <code>ClassConfig&lt;MyService&gt;</code>, <code>Collection&lt;MethodConfig&lt;? extends MyService&gt;&gt;</code> etc.
+Again you can use <code>@WithAnnotations</code> to narrow down the set of provided objects. Also, <code>ClassConfig</code> is actually a subtype of <code>ClassInfo</code>, so if you need to check a class before you configure it, having a <code>ClassConfig</code> is enough. <code>MethodConfig</code> and <code>FieldConfig</code> are similar.
+The annotation configuration methods provided by these types are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">void addAnnotation(Class&lt;? extends Annotation&gt; clazz,
+                   AnnotationAttribute... attributes);
+void addAnnotation(ClassInfo&lt;?&gt; clazz,
+                   AnnotationAttribute... attributes);
+void addAnnotation(AnnotationInfo annotation);
+void addAnnotation(Annotation annotation);
+void removeAnnotation(Predicate&lt;AnnotationInfo&gt; predicate);
+void removeAllAnnotations();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While technically, we could do with just 2 methods, one for adding and one for removing annotations, we decided to have 6 of them to give extension implementations more flexibility. For example, you can use `AnnotationLiteral`s when adding an annotation, similarly to Portable Extensions, but you don’t have to.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="other-types"><a class="anchor" href="#other-types"></a>Other types</h4>
+<div class="paragraph">
+<p>While it’s possible to declare a parameter of type <code>Collection&lt;ClassInfo&lt;?&gt;&gt;</code>, it’s very likely that you don’t want to do this. It’s a sign that you need to do a more elaborate processing, for which the simple declarative API is not powerful enough. Luckily, we have an imperative entrypoint as well: <code>AppArchive</code>. With this, you can programmatically construct queries to find classes, methods and fields. If you also want to configure the classes, methods or fields, you can use <code>AppArchiveConfig</code>, which extends <code>AppArchive</code>. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public class MyExtension {
+    @Enhancement
+    public void configure(AppArchiveConfig app) {
+        app.classes()
+            .subtypeOf(MyService.class)
+            .configure()
+            .stream()
+            .filter(it -&gt; !it.hasAnnotation(MyAnnotation.class))
+            .forEach(it -&gt; it.addAnnotation(MyAnnotation.class));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Again, you can search for classes, methods and fields, based on where they are declared or what annotations they have. For classes, <code>AppArchive</code> gives you access to a collection of <code>ClassInfo</code> and <code>AppArchiveConfig</code> gives you access to a collection of <code>ClassConfig</code>. Similarly for methods and fields.
+Above, we have seen a simple way of adding annotations. There are more elaborate ways for advanced use cases, for which you need to create instances of <code>AnnotationAttribute</code> or <code>AnnotationAttributeValue</code>. In such a case, an extension can declare a parameter of type <code>Annotations</code>, which is essentially a factory for these types.
+Similarly, you can declare a parameter of type <code>Types</code>, which serves as a factory for instances of <code>Type</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="synthesis"><a class="anchor" href="#synthesis"></a>@Synthesis</h3>
+<div class="paragraph">
+<p>The most important parameter type you can declare for extensions in this phase is <code>SyntheticComponents</code>. It allows you to register synthetic beans and observers. Note that this API has one significant unsolved problem: how to define the construction and destruction function for synthetic beans, or the observer function for synthetic observers. This needs to work at build time, so we’re entering the realm of bytecode generation and similar fun topics. We have some ideas here, and we’ll work on adding them to the API proposal.
+You can also declare all the parameters that give you access to <code>ClassInfo</code>, <code>MethodInfo</code> and <code>FieldInfo</code>, as described above, including <code>AppArchive</code>. What’s more interesting, you can also inspect existing beans and observers in the application. This is very similar to inspecting classes, methods and fields, so let’s take it quickly.
+You can declare a parameter of type <code>Collection&lt;BeanInfo&lt;? super MyService&gt;&gt;</code> to obtain information about all beans in the application that have <code>MyService</code> or any of its supertypes as one of the bean types. (Note that this example is not very useful, as <code>Object</code> is one of the supertypes of <code>MyService</code>, and all beans typically have <code>Object</code> as one of their types.) Similarly, you can declare a parameter of type <code>Collection&lt;ObserverInfo&lt;? extends MyEvent&gt;&gt;</code> to obtain information about all observers in the application that observe <code>MyEvent</code> or any of its subtypes. All the other combinations are of course also possible, and if that is not enough, there’s <code>AppDeployment</code>, which gives you more powerful querying features, similarly to <code>AppArchive</code>. You can find beans based on their scope, types, qualifiers, or the declaring class. Similarly with observers, you can filter on the observed type, qualifiers, or the declaring class.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="validation"><a class="anchor" href="#validation"></a>@Validation</h3>
+<div class="paragraph">
+<p>The most important parameter type you can declare for extensions in this phase is <code>Errors</code>. It allows you to add custom validation errors.
+What can you validate? Pretty much anything. You can get access to classes, methods and fields, just like in the <code>@Enhancement</code> phase, and you can also get access to beans and observers, just like in the <code>@Synthesis</code> phase. This includes both the <code>Collection&lt;SomethingInfo&lt;...&gt;&gt;</code> approach, and <code>AppArchive</code> / <code>AppDeployment</code> way.
+Error messages can be simple <code>String`s, optionally accompanied by a `DeclarationInfo</code>, <code>BeanInfo</code> or <code>ObserverInfo</code>, or arbitrary `Exception`s.
+In case a validation error is added, the container will prevent the application from successfully deploying (or even building, in case of build time implementations).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have just finished a deep dive into our current Build Compatible Extensions API proposal.</p>
+</div>
+<div class="paragraph">
+<p>Together with the API proposal, we also developed a proof-of-concept implementation in Quarkus, so that we know this API can be implemented, and that it is indeed build-time compatible. This proof of concept focuses solely on the <code>@Enhancement</code> phase, but that should be enough for now.  It&#8217;s also worth noting that there is nothing Quarkus specific about the API. We believe (and our goal) is that any CDI-Lite implementation could adopt it using a variety of implementation strategies.</p>
+</div>
+<div class="paragraph">
+<p>We’re publishing the Quarkus fork in the form of a GitHub repository so that you can also experiment with it. Please bear in mind that the POC implementation is very rough and definitely is not production ready. It should be enough to evaluate the API proposal, though. Here’s how you can get your hands on it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-console" data-lang="console">git clone https://github.com/Ladicek/quarkus-fork.git
+cd quarkus-fork
+git checkout experiment-cdi-lite-ext
+./mvnw -Dquickly</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wait a few minutes or more, depending on how many Quarkus dependencies you already have in your local Maven repository. When the build finishes, you can add a dependency on <code>io.quarkus.arc:cdi-lite-ext-api:999-SNAPSHOT</code> to your project and play. Don’t forget to also bump other Quarkus dependencies, as well as the Quarkus Maven plugin, to <code>999-SNAPSHOT</code>!
+As mentioned before, we are very keen on hearing your feedback. Please file issues in the <a href="https://github.com/eclipse-ee4j/cdi/issues">CDI GitHub repository</a> with label <code>lite-extension-api</code>. Let’s work together on making these new Build Compatible Extensions a reality!</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2020/09/15/CDI_Lite_extension/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2020/09/15/CDI_Lite_extension/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Proposal/">Proposal</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2020/03/09/CDI_for_the_future/">CDI for the future</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Mar 09, 2020</span> |   <a href="http://www.cdi-spec.org/news/2020/03/09/CDI_for_the_future/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="imageblock" style="float: right">
+<div class="content">
+<img src="/images/inside_quark_web.jpg" alt="inside quark web" width="285">
+</div>
+</div>
+<div class="paragraph">
+<p>A few months  ago, CDI turned 10! Yes, CDI 1.0 was released 10 years ago and is today one of the most successful specifications in Java EE and now Jakarta EE. Providing a very efficient programming model and elegant means to integrate with 3rd party technology it rapidly became the Java EE cornerstone. As other specifications were adopting its programming model, CDI brought a unified way to write Java EE code and made the platform more consistent than before. So when MicroProfile was launched nearly four years ago, it was obvious that CDI should be part of the core platform along with JAX-RS and JSON-P. Today, MicroProfile programming model relies deeply on CDI and the platform success is partly due to the consistency CDI brings to developer experience.</p>
+</div>
+<div class="paragraph">
+<p>Yet, CDI was designed more than 10 years ago at a time when monolithic applications were deployed as ears and wars sharing a highly dynamic yet monolithic application server. Things have changed, where containers are immutable, obviating the need for hot redeploy and dynamic discovery, and aspects that we used to rely on traditional application servers for, such as availability and redundancy are now handled using cloud orchestration with kubernetes. We also have seen a shift from monolithic apps to a greater emphasis on decoupling and resilience through microservices.  These factors have given rise to the “single app stack”, where the framework and the application are fused as one.  With traditional application servers,  applications had to be dynamic <strong>because</strong> they needed to differentiate their needs on shared application server infrastructure, where configuration and resources applied equally to all applications. With single application stacks, applications can express their needs more statically because they are scoped to a single application.</p>
+</div>
+<div class="paragraph">
+<p>In addition, today&#8217;s deployments require increasing efficiency to achieve cost reduction, whether deploying to cloud providers or in-house virtualized data centers. A single application server instance  is often replaced by a dozen microservice “single-app stack”  instances, with double or triple that amount to achieve redundancy. CDI, as it is today, is not suited for this cloud ready approach. Some of its features imply a rather heavy resource consumption (both boot-time and memory usage) in its implementations.<br>
+This blog post covers some of my CDI vision for the future to make the specification relevant for the next 10 years.</p>
+</div>
+<div class="sect1">
+<h2 id="how-to-make-cdi-cloud-ready"><a class="anchor" href="#how-to-make-cdi-cloud-ready"></a>How to make CDI cloud ready?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If we want to make CDI a cloud ready specification we have to look into all of its requirements that impact memory, cpu, and more broadly performance. As part of that we should revisit which capabilities and features are still required, since as mentioned above application architecture and deployment environments have changed significantly over the years. Although, that alone is not enough, we need to ensure CDI is flexible and adaptable enough to allow for innovative implementation approaches, such as build-time injection wiring.</p>
+</div>
+<div class="paragraph">
+<p>Of course, It should be possible to implement runtime-based approaches in a more efficient manner, and in many ways these goals are complimentary.  One example of this is overly aggressive bean discovery and thus the extensive type scanning required by CDI during initialization.  While bean discovery allows seamless integration in that 3rd party non-CDI classes can be discovered as bean, storing state and generating events on classes which were never intended to be a bean is very costly. That’s the reason why, when we introduced CDI for Java SE in CDI 2.0, we provided a way to disable <a href="https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#se_container_initializer">bean discovery</a> and let the developers explicitly declare classes that should become beans or allow the creation of synthetic beans before launching the container.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="eclipse-microprofile-challenges"><a class="anchor" href="#eclipse-microprofile-challenges"></a>Eclipse MicroProfile Challenges</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The CDI spec was originally written with Jakarta EE integration in mind, and as such, it assumes the full platform is available and thus the spec and the TCKs require JSF, EL, and EJB. This is not the best fit for MicroProfile, since it targets microservice usage patterns. Under MicroProfile not even Servlet is required, let alone EJB, EL, and JSF. Likewise, MicroProfile can’t be based on CDI SE, since SE does not include JAX-RS integration, which is essential for REST based microservices.</p>
+</div>
+<div class="paragraph">
+<p>To solve this problem, the MicroProfile specifications effectively depend on a subset of the CDI spec, explicitly noting the above API elements are to be excluded. This is awkward and has led to confusion about how one achieves compliance.</p>
+</div>
+<div class="paragraph">
+<p>Ultimately, the problem is that the CDI spec couples too many elements together. We need greater flexibility to allow for as many different platforms and environments to adopt and build off the standard.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introducing-cdi-lite"><a class="anchor" href="#introducing-cdi-lite"></a>Introducing CDI Lite</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you followed the CDI 2.0 expert group work a few years back, this title should ring a bell. CDI Lite was in the air back then, since we did expect some future need of added flexibility, but due to a lack of time and clear target we postponed its addition to the spec.</p>
+</div>
+<div class="paragraph">
+<p>With the CDI programming model being core to MicroProfile, it seems obvious that its use cases should be considered as a first-class usage of CDI. Further, we should enable CDI composition into any other  platform, such as future Jakarta EE profiles, or combining it with other frameworks on top of plain old Java as a contribution to future innovations within the Java ecosystem.</p>
+</div>
+<div class="paragraph">
+<p>So what should CDI Lite’s goal be? In my opinion we should define it as: “the core subset of CDI features that enables the greatest number of CDI implementations, CDI usage within the Java ecosystem, and opens the door to innovation, notably build-time injection approaches.”</p>
+</div>
+<div class="paragraph">
+<p>Not only would this improve the existing CDI ecosystem, it opens the door to many other interesting use cases such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Transcompilation.</strong> It becomes possible to compile Java based injection into other language environments, such as Javascript. This is currently possible with Dagger and Kodein for Kotlin but not CDI</p>
+</li>
+<li>
+<p><strong>Mobile platform support.</strong> By enabling build time injection, it also becomes possible for an implementer to target mobile platforms such as Android.</p>
+</li>
+<li>
+<p><strong>Native Compilation.</strong> By enabling build-time Java, the door is also opened to generating optimal native compiled images utilizing static compilers such as the GraalVM project.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="how-to-add-cdi-lite-to-the-spec"><a class="anchor" href="#how-to-add-cdi-lite-to-the-spec"></a>How to add CDI lite to the spec?</h3>
+<div class="paragraph">
+<p>Today, thanks to CDI 2.0 work, the spec is split into 3 parts: core, CDI for SE and CDI for EE.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/images/cdi2-layers.png" alt="cdi2 layers">
+</div>
+<div class="title">Figure 1. Current CDI spec layering</div>
+</div>
+<div class="paragraph">
+<p>Users and implementers are already familiar with the notion of different “flavors” for CDI.  Adding CDI Lite implies some work but the spec is already well organized to support such a change. Roughly, CDI lite should be defined as the core subset of which core, EE and SE extend. Further the EE spec integrations themselves can be defined in such a way so that each framework’s integration is optional, allowing any combination such as a standalone JAX-RS implementation with CDI support. Additionally this would enable future additional Jakarta EE profiles beyond just web and full.<br>
+This evolution would split Core CDI in CDI Lite and “Heavy CDI” as shown below. The CDI lite part could benefit CDI for Se as other platforms like MicroProfile.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/images/cdi3-layers.png" alt="cdi3 layers">
+</div>
+<div class="title">Figure 2. Spliting CDI Core in <em>lite</em> and <em>full</em></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cdi-lite-scope"><a class="anchor" href="#cdi-lite-scope"></a>CDI Lite Scope</h3>
+<div class="paragraph">
+<p>The essential fundamental core of CDI is the programming model exposed to users which enables uniform annotation driven injection and further supports contextual state driven injection. Just the annotations defined in JSR-330 are not enough, there is also the need for a number of other common patterns and usages to make the framework complete.</p>
+</div>
+<div class="paragraph">
+<p>Support popular CDI features like:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Beans (class, producers and synthetic beans)</p>
+</li>
+<li>
+<p>CDI DI (typesafe resolution, qualifiers, dynamic lookup)</p>
+</li>
+<li>
+<p>Most built-in scopes (singleton, application, request, and dependent)</p>
+</li>
+<li>
+<p>Contextual instances and their lifecycle</p>
+</li>
+<li>
+<p>Interceptors</p>
+</li>
+<li>
+<p>Events</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Other features may be added but may not have reached broad adoption like decorators, transactional events or specialization, so additional discussion would be needed.. Ideally we would utilize the opportunity to reduce technical debt, since each increases code complexity, and some of these underused capabilities are a major source of bug reports:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Decorators have 67 issues in the RI alone</p>
+</li>
+<li>
+<p>Specialization has 28 RI issues and 6 open spec issues</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="outside-cdi-lite-scope"><a class="anchor" href="#outside-cdi-lite-scope"></a>Outside CDI Lite Scope</h3>
+<div class="paragraph">
+<p>A number of features are only relevant to particular framework integrations. For example SessionScope is only relevant if the runtime environment implements Servlet (HttpSession), and ConversationScope is incomplete without EL and JSF. These technologies are not needed in a microservice scenario, as is the case in MicroProfile, and so should not be required.</p>
+</div>
+<div class="paragraph">
+<p>Another capability that should be excluded from CDI Lite is portable extensions, but still part of CDI Full. Portable extensions run in opposition to the goals described above, since they are inherently a runtime-only contract which mandates a very specific container initialization lifecycle. As an example, portable extensions are often stateful, but they are not serializable, and any state they have can be passed into other beans or as part of lifecycle events that are required to occur. Further they are allowed to manipulate almost anything pertaining to a bean at just about every phase of the CDI lifecycle. These factors effectively preclude any implementation that aims to pregenerate wiring at build time. Yet extension implementations rarely need such an open-ended do-anything-you-want API.</p>
+</div>
+<div class="paragraph">
+<p>Instead,  the CDI-Lite could address these concerns through purpose-built SPIs, such as  introducing a new explicit way to register annotated types and beans. It’s already partly done in CDI for SE in which users can programmatically add synthetic beans without portable extensions.</p>
+</div>
+<div class="paragraph">
+<p>All of the elements outside of the CDI-Lite scope would still be a part of the full specification, as the intention is not to affect existing implementations, only to open the door to new approaches and new implementations.</p>
+</div>
+<div class="paragraph">
+<p>In the end, we would end up with a much more flexible standard that benefits everyone and carries over the same powerful programming model to new use-cases while bringing  improved efficiency to modern cloud deployment scenarios. <br>
+CDI Llite introduction wouldn’t be the pretext to deprecate existing features but to make the framework more modular and ready for all todays use cases and make it ready for future evolution.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you may guess this spec evolution idea will require a lot of analysis and discussion. Should the Jakarta Contexts and Dependency Injection Project agree to go this way, we could imagine starting work on this new CDI version, but as usual, feedback from the community is very important to us. So feel free to share your thoughts in the comments of this post.</p>
+</div>
+<div class="paragraph">
+<p>Thanks for helping us keep the CDI programming model around for the next 10 years!</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2020/03/09/CDI_for_the_future/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2020/03/09/CDI_for_the_future/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Proposal/">Proposal</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2017/05/15/CDI_2_is_released/">CDI 2.0 is released</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">May 15, 2017</span> |   <a href="http://www.cdi-spec.org/news/2017/05/15/CDI_2_is_released/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>Our <a href="https://www.jcp.org/en/jsr/detail?id=365" target="_blank">JCP Expert Group</a> is pleased to announce the release of Contexts and Dependency Injection for Java 2.0.</p>
+</div>
+<div class="paragraph">
+<p>Specification, reference implementation (<strong>JBoss Weld 3.0.0.Final</strong>) and TCK can be downloaded <a href="http://www.cdi-spec.org/download/" target="_blank">here</a>.</p>
+</div>
+<div class="sect1">
+<h2 id="what-is-cdi"><a class="anchor" href="#what-is-cdi"></a>What is CDI?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CDI is one of the major Java EE specification.</p>
+</div>
+<div class="paragraph">
+<p>It was introduced with Java EE 6 in 2009, updated  for Java EE 7 and now with version 2.0 it is ready for Java EE 8 as well for Java SE or other platform like <a href="http://microprofile.io" target="_blank">Micropofile</a>.</p>
+</div>
+<div class="paragraph">
+<p>CDI defines a powerful set of complementary services that help improve the structure of application code.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A well-defined lifecycle for stateful objects bound to lifecycle contexts, where the set of contexts is extensible</p>
+</li>
+<li>
+<p>A sophisticated, typesafe dependency injection mechanism, including the ability to select dependencies at either development or deployment time, without verbose configuration</p>
+</li>
+<li>
+<p>Support for Java EE modularity and the Java EE component architecture?the modular structure of a Java EE application is taken into account when resolving dependencies between Java EE components</p>
+</li>
+<li>
+<p>Integration with the Unified Expression Language (EL), allowing any contextual object to be used directly within a JSF or JSP page</p>
+</li>
+<li>
+<p>The ability to decorate injected objects</p>
+</li>
+<li>
+<p>The ability to associate interceptors to objects via typesafe interceptor bindings</p>
+</li>
+<li>
+<p>An event notification model</p>
+</li>
+<li>
+<p>A web conversation context in addition to the three standard web contexts defined by the Java Servlets specification</p>
+</li>
+<li>
+<p>An SPI allowing portable extensions to integrate cleanly with the container</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="major-features-included-in-cdi-2-0"><a class="anchor" href="#major-features-included-in-cdi-2-0"></a>Major features included in CDI 2.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This CDI 2.0 includes important changes for the platform.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The spec was split into <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#doc_organisation">3 parts</a> to add the support for Java SE.</p>
+</li>
+<li>
+<p>API to <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#se_bootstrap">boot CDI in Java SE</a>.</p>
+</li>
+<li>
+<p>Observers (i.e. events) <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#observer_ordering">ordering</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#firing_events_asynchronously">Asynchronous event</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#configurators">Configurators</a> for major SPI elements</p>
+</li>
+<li>
+<p>Possibility to <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#process_observer_method">configure or veto observer methods</a>.</p>
+</li>
+<li>
+<p>Add <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#built_in_annotation_literals">built-in annotation literals</a></p>
+</li>
+<li>
+<p>Make possible to <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#interception_factory">apply interceptor on producers</a>.</p>
+</li>
+<li>
+<p>Alignment on Java 8 features (streams, lambdas, repeating qualifiers)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A lot of other small feature will be delivered. Refer to the coming release notes to check them all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="start-using-cdi-2-0-today-with-weld-3-0"><a class="anchor" href="#start-using-cdi-2-0-today-with-weld-3-0"></a>Start using CDI 2.0 today with Weld 3.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To develop your CDI 2.0 code just add cdi-api 2.0 your pom.xml.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;javax.enterprise&lt;/groupId&gt;
+    &lt;artifactId&gt;cdi-api&lt;/artifactId&gt;
+    &lt;version&gt;2.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then run your code on Java SE or on WildFly </p>
+</div>
+<div class="sect2">
+<h3 id="running-on-java-se-with-weld-se"><a class="anchor" href="#running-on-java-se-with-weld-se"></a>Running on Java SE with Weld SE</h3>
+<div class="paragraph">
+<p>You can then run your code on Java SE thanks to Weld SE, just add this dependency to your project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.weld.se&lt;/groupId&gt;
+    &lt;artifactId&gt;weld-se-shaded&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0.Final&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then, bootstrap the CDI container in your code like this</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public static void main(String... args) {
+    try(SeContainer container = SeContainerInitializer.newInstance().initialize()) {
+        // start the container, retrieve a bean and do work with it
+        MyBean myBean = container.select(MyBean.class).get();
+        myBean.doWork();
+    }
+    // shuts down automatically after the try with resources block.
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-on-java-ee-by-patching-wildfly"><a class="anchor" href="#running-on-java-ee-by-patching-wildfly"></a>Running on Java EE by patching WildFly</h3>
+<div class="paragraph">
+<p>We also provide a <a href="http://download.jboss.org/weld/3.0.0.Final/">patch for WildFly 10.1.0</a> to update Weld and thus CDI version on JBoss WildFly.</p>
+</div>
+<div class="paragraph">
+<p>To do so just download and unzip <a href="http://wildfly.org/downloads/">WildFly 10.1.0.Final</a>, then download the patch (don&#8217;t unzip it), go to the <code>&lt;WILDFLY_HOME&gt;/bin</code>  directory and patch the server with the following command:</p>
+</div>
+<div class="paragraph">
+<p><code>./jboss-cli.sh --command="patch apply &lt;PATH_TO_PATCH&gt;/wildfly-10.1.0.Final-weld-3.0.0.Final-patch.zip"</code></p>
+</div>
+<div class="paragraph">
+<p>you should obtain the following result in the console:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-json" data-lang="json">{
+    "outcome" : "success",
+    "result" : {}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your WildFly server is now patched to use CDI 2.0 and Weld 3.0.0.Final.</p>
+</div>
+<div class="paragraph">
+<p>GlassFish 5.0 with CDI 2.0 support should be release in the coming weeks.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stay-tuned"><a class="anchor" href="#stay-tuned"></a>Stay tuned</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We&#8217;ll provide more article on CDI 2.0 new features so stay tuned by following <a href="https://twitter.com/cdispec">@cdispec</a> twitter account.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2017/05/15/CDI_2_is_released/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2017/05/15/CDI_2_is_released/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Release/">Release</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2017/02/01/CDI_2_is_in_public_review/">CDI 2.0 is in public review</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Feb 01, 2017</span> |   <a href="http://www.cdi-spec.org/news/2017/02/01/CDI_2_is_in_public_review/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>CDI 2.0 is now in public review status, you can now grab the <a href="https://jcp.org/aboutJava/communityprocess/pr/jsr365/index.html" target="_blank">PRD of the spec</a> ot download the <a href="https://jcp.org/aboutJava/communityprocess/pr/jsr365/index.html" target="_blank">Javadoc</a>.</p>
+</div>
+<div class="sect1">
+<h2 id="major-features-included-in-cdi-2-0"><a class="anchor" href="#major-features-included-in-cdi-2-0"></a>Major features included in CDI 2.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This CDI 2.0 includes important changes for the platform.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The spec was split into <a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#doc_organisation" target="_blank">3 parts</a> to add the support for Java SE.</p>
+</li>
+<li>
+<p>API to <a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#se_bootstrap" target="_blank">boot CDI in Java SE</a>.</p>
+</li>
+<li>
+<p>Observers (i.e. events) <a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#observer_ordering" target="_blank">ordering</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#firing_events_asynchronously" target="_blank">Asynchronous event</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#configurators" target="_blank">Configurators</a> for major SPI elements</p>
+</li>
+<li>
+<p>Possibility to <a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#process_observer_method" target="_blank">configure or veto observer methods</a>.</p>
+</li>
+<li>
+<p>Add <a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#built_in_annotation_literals" target="_blank">built-in annotation literals</a></p>
+</li>
+<li>
+<p>Make possible to <a href="http://docs.jboss.org/cdi/spec/2.0-PRD/cdi-spec.html#interception_factory" target="_blank">apply interceptor on producers</a>.</p>
+</li>
+<li>
+<p>Alignment on Java 8 features (streams, lambdas, repeating qualifiers)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A lot of other small feature will be delivered. Refer to the coming release notes to check them all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ri-is-also-available"><a class="anchor" href="#ri-is-also-available"></a>RI is also available</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We also provide a pre-release for the RI and API, thus You can start testing CDI 2.0 with Weld 3.0 CR1 that you can download <a href="http://download.jboss.org/weld/3.0.0.CR1/" target="_blank">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>To develop your CDI 2.0 code just switch cdi-api in your pom.xml to this version:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">&lt;dependency&gt;
+    &lt;groupId&gt;javax.enterprise&lt;/groupId&gt;
+    &lt;artifactId&gt;cdi-api&lt;/artifactId&gt;
+    &lt;version&gt;2.0-PFD&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We also provide a <a href="http://download.jboss.org/weld/3.0.0.CR1/" target="_blank">patch for WildFly 10.1.0</a> to help users evaluate CDI 2.0 under a Java EE application server.</p>
+</div>
+<div class="paragraph">
+<p>To do so just download and unzip <a href="http://wildfly.org/downloads/" target="_blank">WildFly 10.1.0.Final</a>, then download the patch (no need to unzip it), go to the <code>&lt;WILDFLY_HOME&gt;/bin</code> directory and patch the server with the following command:</p>
+</div>
+<div class="paragraph">
+<p><code>./jboss-cli.sh --command="patch apply &lt;PATH_TO_PATCH&gt;/wildfly-10.1.0.Final-weld-3.0.0.CR1-patch.zip"</code></p>
+</div>
+<div class="paragraph">
+<p>you should obtain the following result in the console:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">{
+    "outcome" : "success",
+    "result" : {}
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your WildFly server is now patched to use CDI 2.0 and Weld 3.0 CR1.</p>
+</div>
+<div class="paragraph">
+<p>Happy testing!</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2017/02/01/CDI_2_is_in_public_review/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2017/02/01/CDI_2_is_in_public_review/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Release/">Release</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2017/01/05/CDI_2_Beta_1_is_available/">CDI 2.0 Beta 1 is available</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Jan 05, 2017</span> |   <a href="http://www.cdi-spec.org/news/2017/01/05/CDI_2_Beta_1_is_available/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>After more than 2 years of work CDI 2.0 is around the corner. Its feature list is now complete and Beta for RI (Weld 3.0 Beta1) is available for download.
+This post lists what&#8217;s included and give you some insight on the final release and what comes next</p>
+</div>
+<div class="sect1">
+<h2 id="give-it-a-try"><a class="anchor" href="#give-it-a-try"></a>Give it a try</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First, you may want to start testing the RI and discover the new API, all the resources are listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can browse the spec document in <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html" target="_blank">html</a> or <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.pdf">pdf</a></p>
+</li>
+<li>
+<p>If you prefer Javadoc you can read it <a href="http://docs.jboss.org/cdi/api/2.0.Beta1">here</a></p>
+</li>
+<li>
+<p>CDI 2.0 Beta API is available on <a href="http://search.maven.org/#artifactdetails|javax.enterprise|cdi-api|2.0.Beta1|jar" target="_blank">Maven Central</a>. You can also download the jar <a href="http://search.maven.org/remotecontent?filepath=javax/enterprise/cdi-api/2.0.Beta1/cdi-api-2.0.Beta1.jar">here</a></p>
+</li>
+<li>
+<p>Last but not least, the reference implementation (Weld 3.0 Beta 1) is downloadable <a href="http://download.jboss.org/weld/3.0.0.Beta1/" target="_blank">here</a> and can be also be used from <a href="http://search.maven.org/#artifactdetails|org.jboss.weld|weld-core-impl|3.0.0.Beta1|jar" target="_blank">Maven</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="major-features-included-in-cdi-2-0"><a class="anchor" href="#major-features-included-in-cdi-2-0"></a>Major features included in CDI 2.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This CDI 2.0 includes important changes for the platform.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The spec was split into <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#doc_organisation" target="_blank">3 parts</a> to add the support for Java SE.</p>
+</li>
+<li>
+<p>API to <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#se_bootstrap" target="_blank">boot CDI in Java SE</a>.</p>
+</li>
+<li>
+<p>Observers (i.e. events) <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#observer_ordering" target="_blank">ordering</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#firing_events_asynchronously" target="_blank">Asynchronous event</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#configurators" target="_blank">Configurators</a> for major SPI elements</p>
+</li>
+<li>
+<p>Possibility to <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#process_observer_method" target="_blank">configure or veto observer methods</a>.</p>
+</li>
+<li>
+<p>Add <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#built_in_annotation_literals" target="_blank">built-in annotation literals</a></p>
+</li>
+<li>
+<p>Make possible to <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#interception_factory" target="_blank">apply interceptor on producers</a>.</p>
+</li>
+<li>
+<p>Alignment on Java 8 features (streams, lambdas, repeating qualifiers)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A lot of other small feature will be delivered. Refer to the coming release notes to check them all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="release-agenda"><a class="anchor" href="#release-agenda"></a>Release agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If everything stays on track we should send the PFD (proposed final draft) with TCK and RI to the JCP soon.</p>
+</div>
+<div class="paragraph">
+<p>If the JCP ballot is green, CDI 2.0 final could be released before end of February.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-s-next"><a class="anchor" href="#what-s-next"></a>What&#8217;s next</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Our release plan for CDI 2.0 has always been to deliver it before Java EE 8 to let other spec grab our new features and make the best out of them.</p>
+</div>
+<div class="paragraph">
+<p>We are still considering to start working on CDI 2.1 to clarify or add the few features needed for Java EE 8 and beyond.</p>
+</div>
+<div class="paragraph">
+<p>Stay tuned.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2017/01/05/CDI_2_Beta_1_is_available/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2017/01/05/CDI_2_Beta_1_is_available/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Release/">Release</a></span></div></div></div></article></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="visible-xs"><ul class="pager"><li class="previous disabled"><a href="#"> Previous</a></li><li class="disabled"><a href="#">1 of 5 </a></li><li class="next"><a href="/news/page/2/"> Next</a></li></ul></div><div class="hidden-xs"><ul class="pager"><li class="disabled"><a href="#"> First</a></li><li class="disabled"><a href="#"> Previous</a></li><li class="active"><a href="#">1 of 5 </a></li><li><a href="http://www.cdi-spec.org/news/page/2/">2 </a></li><li><a href="http://www.cdi-spec.org/news/page/3/">3 </a></li><li class="disabled"><a href="#"> ...</a></li><li><a href="/news/page/2/"> Next</a></li><li><a href="http://www.cdi-spec.org/news/page/5/"> Last</a></li></ul></div></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

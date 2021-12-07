@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Face to face meeting in Paris"><title>CDI 2.0 Second Face to face meeting feedback | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/">Previous: CDI 2.0 Early Draft Review 1 released </a></li><li class="next"><a href="/news/2015/10/15/Learn-CDI-with-TCK/">Next: Learn CDI spec with our TCK </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/"> Previous</a></li><li class="next"><a href="/news/2015/10/15/Learn-CDI-with-TCK/"> Next</a></li></ul><h1><a href="/news/2015/09/29/Second-F2F-meeting/">CDI 2.0 Second Face to face meeting feedback</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Sep 29, 2015</span> |   <a href="http://www.cdi-spec.org/news/2015/09/29/Second-F2F-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>Last week we had our second CDI 2.0 Face to Face meeting in Paris (France).
+This is a summary of the point discussed and leads we&#8217;d like to follow.
+Of course each point we&#8217;ll lead to a proposal later and discussed on the mailing list.</p>
+</div>
+<div class="sect1">
+<h2 id="roadmap"><a class="anchor" href="#roadmap"></a>Roadmap</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CDI 2.0 is still planned for 1st half 2016.
+We&#8217;ll focus on new feature and SE support for this release.</p>
+</div>
+<div class="paragraph">
+<p>CDI 2.1 should start after 2.0 release and focus Java EE 8 specific enhancement.
+We&#8217;ll probably focus a bit more on modularity since Java 9 will be around the corner giving us a better visibility of how anticipate its new module approach.
+Content of 2.1 will be defined in the coming weeks</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cdi-se-review"><a class="anchor" href="#cdi-se-review"></a>CDI SE review</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CDI bootstrap on Java SE is one of the feature released in our first early draft.
+The Java SE support needed extra work to be complete and we wanted to review the boot api included to see how it could be enhanced.</p>
+</div>
+<div class="sect2">
+<h3 id="bootstrap-api"><a class="anchor" href="#bootstrap-api"></a>bootstrap API</h3>
+<div class="paragraph">
+<p>We&#8217;d like to review the proposed bootstrap API to make it a bit richer and have the boot process in a specific class.
+The idea is to get inspiration from the new Weld Se bootstrap with a builder pattern (see <a href="https://github.com/weld/core/blob/master/environments/se/core/src/main/java/org/jboss/weld/environment/se/Weld.java"><code>Weld</code></a> and <a href="https://github.com/weld/core/blob/master/environments/se/core/src/main/java/org/jboss/weld/environment/se/WeldContainer.java"><code>WeldContainer</code></a> classes) and the possibility to explicitly choose the implementation if multiple impl should be in classpath.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="context-control"><a class="anchor" href="#context-control"></a>Context control</h3>
+<div class="paragraph">
+<p>This feature seemed a bit risky to specify. We&#8217;d preferred an approach based on existing built-in scope: RequestScoped and an interceptor activating it for a given invocation and unactivating it just after . something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">@WithinRequest
+public void doSomethigWithRequestScopedBeans() {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This could give users the possibility to start and stop a context without explicitly adding these methods in the SPI
+We also discussed the possibility to have a Conversation-like context activated thru a built-in scope.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bean-discovery-mode"><a class="anchor" href="#bean-discovery-mode"></a>Bean discovery mode</h3>
+<div class="paragraph">
+<p>The new bootstrap api should prevent us to specify a new bean discovery mode since the builder api will contains a mean to deactivate bean discovery and create a synthetic bean archive by adding class and packages of beans.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="async-event-review"><a class="anchor" href="#async-event-review"></a>Async event review</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There was discussion about exceptions handling and the issues raised from mixing sync and async observers. So the leads we&#8217;d like to follow are the following</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stop calling sync observer from fireAsync() (fire() is for @Observes and fireAsync() is for @ObservesAsync)</p>
+</li>
+<li>
+<p>Remove <code>FireAsyncException</code> in favor of <code>CompletionException</code> since an exception during async events pipeline execution is noting more than that.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To sum it up:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 70%;">
+<caption class="title">Table 1. async and sync events rules</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Event method</th>
+<th class="tableblock halign-left valign-top"><code>@Observes</code> notified</th>
+<th class="tableblock halign-left valign-top"><code>@ObservesAsync</code> notified</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fire()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes, in the same thread</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fireAsync()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes, in a different thread</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cdi-lite"><a class="anchor" href="#cdi-lite"></a>CDI Lite</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you know, CDI lite is one of the expected features for CDI 2.0.
+Yet, adding it with the SE / EE split for 2.0 could bring a lot of glitches and could reveal itself a catastrophe without speaking of specific impl and TCK for it.</p>
+</div>
+<div class="paragraph">
+<p>That&#8217;s why we choose to add it in the annexe of the spec as a proposal for a next CDI version.
+Implementation will be allowed to create their CDI lite version based on this subset of CDI features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JSR 330 with CDI type resolution rules</p>
+</li>
+<li>
+<p>CDI qualifiers usage</p>
+</li>
+<li>
+<p>Producers and disposers</p>
+</li>
+<li>
+<p>Programmatic lookup</p>
+</li>
+<li>
+<p><code>@Singleton</code> and <code>@Dependent</code> pseudo-scopes support</p>
+</li>
+<li>
+<p>SE bootstrap</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We choose not to include events and spi to keep the impl lite.
+Of course this could be change during our discussion.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="aop-on-producer-and-custom-beans"><a class="anchor" href="#aop-on-producer-and-custom-beans"></a>AOP on producer and custom beans</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The goal was to propose a solution to apply Interceptors and Decorators on produced beans or custom beans.
+For producers we also have the problem of applying interceptor binding only on some method and not on the whole class.
+We looked for a solution that could be used in both case and that was more an "advanced users" approach than an out of box one.</p>
+</div>
+<div class="paragraph">
+<p>The idea is to provide a class or a built-in bean to help produced bean instances using AnnotatedType to allow override of annotation on instance class.
+This suppose the addition of <code>AnnotatedTypeBuilder</code> to the SPI to ease the use of building a synthetic <code>AnnotatedType</code>.
+This would follow the same idea than the <code>Unmanaged</code> class which provide a way to inject bean in a non bean (non managed) class.</p>
+</div>
+<div class="paragraph">
+<p>That would give something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public class MyAdvancedProducerBean {
+
+    public BeanInstanceBuilder&lt;MyClass&gt; bib = new BeanInstanceBuilder&lt;&gt;();
+
+    @Produces
+    @RequestScoped
+    public MyClass produceTransactionalMyClass() {
+
+        AnnotatedTypeBuilder&lt;MyClass&gt; atb = new AnnotatedTypeBuilder&lt;&gt;()
+           .readFrom(MyClass.class)
+           .addToMethod(MyClass.class.getMethod("performInTransaction")
+            , new TransactionalLiteral());
+
+        return bib.readFromType(atb.build())
+            .build(); //instance of the bean with requested interceptors / decorators
+    }
+
+    public void disposeMyClass (@Disposes Myclass td) {
+
+        bib.dispose(td);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A similar mechanism could be used in the <code>create()</code> method of custom beans.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Of course, all these points will be described in more detail in coming proposal documents.
+You&#8217;ll only find here general ideas of what we like to propose.</p>
+</div>
+<div class="paragraph">
+<p>We also worked on other points in Jira for clarification or fix.
+This will go to the mailing list.</p>
+</div>
+<div class="paragraph">
+<p>This post will be updated with new information or clarification if needed.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2015/09/29/Second-F2F-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2015/09/29/Second-F2F-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/">Previous: CDI 2.0 Early Draft Review 1 released </a></li><li class="next"><a href="/news/2015/10/15/Learn-CDI-with-TCK/">Next: Learn CDI spec with our TCK </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/"> Previous</a></li><li class="next"><a href="/news/2015/10/15/Learn-CDI-with-TCK/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2015/09/29/Second-F2F-meeting/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

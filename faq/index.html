@@ -1,0 +1,727 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Frequently Asked Questions"><title>Frequently Asked Questions | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="panel-group" id="faq_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion0">I just learned about CDI. Where should I start?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion0">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>The best way to start is our <a href="http://docs.jboss.org/cdi/learn/userguide/CDI-user-guide.html">user guide</a>. You&#8217;ll also find a lot of resources on our <a href="/learn/">learning CDI page</a>. And when, ready, you really should check the CDI spec itself. See <a href="/download">CDI download page</a> for current CDI spec releases.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion1">Where should I put my beans.xml file?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion1">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>The bean archive descriptor beans.xml should be located at META-INF/beans.xml or WEB-INF/beans.xml.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion2">Where is the XSD for beans.xml located?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion2">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>You can find the XSD for beans.xml at the following location:</p>
+        </div>
+        <div class="paragraph">
+        <p>CDI 1.0: <a href="http://java.sun.com/xml/ns/javaee/beans_1_0.xsd" class="bare">http://java.sun.com/xml/ns/javaee/beans_1_0.xsd</a></p>
+        </div>
+        <div class="paragraph">
+        <p>CDI 1.1: <a href="http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd" class="bare">http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion3">What is beans.xml and why do I need it?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion3">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div id="preamble">
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>The beans.xml file is known as the bean archive descriptor. This answer addresses the purpose of this file and why it is needed.</p>
+        </div>
+        </div>
+        </div>
+        <div class="sect1">
+        <h2 id="_the_minimal_bean_descriptor">The minimal bean descriptor</h2>
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>First, it&#8217;s important to understand that the XML bean descriptor in CDI (META-INF/beans.xml or WEB-INF/beans.xml) is not there to define beans in XML, like in other popular bean containers. Rather, you use this file to enable CDI services for the current bean archive that are difficult to define consistently in Java or which you don&#8217;t want to define in Java (e.g., to accomodate testing).</p>
+        </div>
+        <div class="paragraph">
+        <p>For example, in CDI, XML is used to enable interceptors (which are disabled by default) and define interceptor ordering. So the bean descriptor <em>complements</em> the metadata that is provided in the Java language syntax. (You may still want to define beans in XML for other reasons, but that is the concern of an extension).</p>
+        </div>
+        <div class="paragraph">
+        <p>Let&#8217;s first ask why the beans.xml is required, then look at what services it is used used to enable.</p>
+        </div>
+        </div>
+        </div>
+        <div class="sect1">
+        <h2 id="_why_is_beans_xml_required">Why is beans.xml required?</h2>
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>You may be wondering, if beans are not described using XML, why do we need beans.xml at all? In particular, why do you need it if you don&#8217;t have anything that you would need the bean descriptor to enable (alternatives, interceptors or decorators)?</p>
+        </div>
+        <div class="paragraph">
+        <p>There are two things about CDI that we need to keep in mind:</p>
+        </div>
+        <div class="ulist">
+        <ul>
+        <li>
+        <p>CDI does not require any special declaration on a Java class to enable it to be injected - that&#8217;s right, no annotation or XML declaration at all!</p>
+        </li>
+        <li>
+        <p>CDI does not define any special kind of module - CDI beans can be deployed in a library jar, EJB jar, war, rar, or JVM classpath directory.</p>
+        </li>
+        </ul>
+        </div>
+        <div class="paragraph">
+        <p>The CDI specification calls the process of identifying beans in modules <em>bean discovery</em>.</p>
+        </div>
+        <div class="paragraph">
+        <p>So there are potentially a lot of classes in the classpath which might be beans! We don&#8217;t want to force the container to scan every one of those classes at startup and build its internal metamodel for each of them. This really could make bean discovery very slow.</p>
+        </div>
+        <div class="paragraph">
+        <p>But there&#8217;s another reason we need to give the user some control over which classes are available for injection. We don&#8217;t want every class in the classpath to potentially match an injection point, including classes that were never intended to be injected into things. This would force the developer to have to use qualifiers much more often to disambiguate injection points.</p>
+        </div>
+        <div class="paragraph">
+        <p>So we have two choices. We could have the developer:</p>
+        </div>
+        <div class="ulist">
+        <ul>
+        <li>
+        <p>explicitly exclude modules which do not contain beans, or</p>
+        </li>
+        <li>
+        <p>explicitly declare modules which do contain beans.</p>
+        </li>
+        </ul>
+        </div>
+        <div class="paragraph">
+        <p>Hopefully you agree that the second option is a much better way to go. In following this approach, CDI has the notion of a bean archive. A bean archive is just a module that has a file named beans.xml in the META-INF directory. The container looks for beans in bean archives. It ignores other modules.</p>
+        </div>
+        <div class="paragraph">
+        <p>Now, you might be wondering if we&#8217;ve got the granularity wrong here. Why should module be the right criteria to use for including/excluding a class? Why not consider:</p>
+        </div>
+        <div class="ulist">
+        <ul>
+        <li>
+        <p>a class-level annotation,</p>
+        </li>
+        <li>
+        <p>the package,</p>
+        </li>
+        <li>
+        <p>some type it implements or extends, or</p>
+        </li>
+        <li>
+        <p>some naming convention?</p>
+        </li>
+        </ul>
+        </div>
+        <div class="paragraph">
+        <p>We&#8217;ve got the first option covered. Annotate a bean <code>@Alternative</code>, or with an alternative stereotype, and it will be considered disabled by CDI, as long as you don&#8217;t explicitly enable it in beans.xml. That&#8217;s not quite the same thing as excluding the class from scanning altogether, but it&#8217;s close. (One difference is that a portable extension with still get a <code>ProcessAnnotatedType</code> event for that class).</p>
+        </div>
+        <div class="paragraph">
+        <p>A future version of CDI might allow you to declare excluded packages in beans.xml. Excluding a bean by type or naming convention isn&#8217;t really that appealing. In the world of CDI, we use stereotypes for identifying architectural roles. We don&#8217;t use marker interfaces or naming conventions. Names really shouldn&#8217;t affect functionality as it is too fragile.</p>
+        </div>
+        <div class="paragraph">
+        <p>Enough theory, what elements are available in beans.xml?</p>
+        </div>
+        </div>
+        </div>
+        <div class="sect1">
+        <h2 id="_bean_descriptor_schema">Bean descriptor schema?</h2>
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>If you don&#8217;t need to activate any interceptors, decorators or alternatives (you just have plain beans that you need to use in an archive), the beans.xml file can be <em>empty</em>. If you do have one of these requirements, then you need to start popularing the descriptor.</p>
+        </div>
+        <div class="paragraph">
+        <p>The root element of a beans.xml file is <code>beans</code>, with the following <a href="http://anonsvn.jboss.org/repos/weld/api/trunk/cdi/src/main/resources/beans.xsd">schema</a>:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#x000A;&lt;beans xmlns="http://java.sun.com/xml/ns/javaee"&#x000A;   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&#x000A;   xsi:schemaLocation="&#x000A;      http://java.sun.com/xml/ns/javaee&#x000A;      http://java.sun.com/xml/ns/javaee/beans_1_0.xsd"&gt;&#x000A;&lt;/beans&gt;</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>The <code>beans</code> element can have one or more of each of the following children:</p>
+        </div>
+        <div class="ulist">
+        <ul>
+        <li>
+        <p><code>interceptors</code></p>
+        </li>
+        <li>
+        <p><code>decorators</code></p>
+        </li>
+        <li>
+        <p><code>alternatives</code></p>
+        </li>
+        </ul>
+        </div>
+        <div class="paragraph">
+        <p>Let&#8217;s look at each element in detail.</p>
+        </div>
+        <div class="sect2">
+        <h3 id="__interceptors">&lt;interceptors&gt;</h3>
+        <div class="paragraph">
+        <p>By default, a bean archive has no enabled interceptors bound via interceptor bindings. An interceptor must be explicitly enabled by listing the fully qualified class name in a child <code>&lt;class&gt;</code> element of <code>&lt;interceptors&gt;</code>.</p>
+        </div>
+        <div class="paragraph">
+        <p>There may be zero or more interceptor class elements. The order of the class declarations determines the interceptor ordering. Interceptors which occur earlier in the list are called first. The same class may not be listed twice. And of course, the class must exist and it must be an interceptor class.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;interceptors&gt;&#x000A;   &lt;class&gt;com.acme.intercept.SecurityInterceptor&lt;/class&gt;&#x000A;   &lt;class&gt;com.acme.intercept.TransactionInterceptor&lt;/class&gt;&#x000A;&lt;/interceptors&gt;</code></pre>
+        </div>
+        </div>
+        <div class="sect3">
+        <h4 id="__decorators">&lt;decorators&gt;</h4>
+        <div class="paragraph">
+        <p>By default, a bean archive has no enabled decorators. A decorator must be explicitly enabled by listing the fully qualified class name in a child <code>&lt;class&gt;</code> element of <code>&lt;decorators&gt;</code>.</p>
+        </div>
+        <div class="paragraph">
+        <p>There may be zero or more decorator class elements. The order of the class declarations determines the decorator ordering. Decorators which occur earlier in the list are called first. The same class may not be listed twice. And of course, the class must exist and it must be an decorator class.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;decorators&gt;&#x000A;   &lt;class&gt;com.acme.decorate.BigAccountDecorator&lt;/class&gt;&#x000A;   &lt;class&gt;com.acme.decorate.SpecialGiftDecorator&lt;/class&gt;&#x000A;&lt;/decorators&gt;</code></pre>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="sect2">
+        <h3 id="__alternatives">&lt;alternatives&gt;</h3>
+        <div class="paragraph">
+        <p>An alternative is a bean that must be explicitly declared in the beans.xml file if it should be available for lookup, injection or EL resolution. By default, a bean archive has no active alternatives. An alternative must be explicitly declared using the fully qualified bean class name or stereotype class name in either a child <code>&lt;class&gt;</code> or <code>&lt;stereotype&gt;</code> element of <code>&lt;alternatives&gt;</code>, respectively.</p>
+        </div>
+        <div class="paragraph">
+        <p>An alternative is selected for the bean archive if either: the alternative is a managed bean or session bean and the bean class of the bean is listed, or the alternative is a producer method, field or resource, and the bean class that declares the method or field is listed, or any <code>@Alternative</code> stereotype of the alternative is listed.</p>
+        </div>
+        <div class="paragraph">
+        <p>There may be zero or more alternative bean class elements. The same class may not be listed twice. And of course, the class must exist and it must be an alternative bean class.</p>
+        </div>
+        <div class="paragraph">
+        <p>There may also be zero or more <code>@Alternative</code> stereotype elements. The same stereotype may not be listed twice. And of course, the stereotype class must exist and it must be an stereotype annotation.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;stereotypes&gt;&#x000A;   &lt;class&gt;com.acme.business.MockPaymentProcessor&lt;/class&gt;&#x000A;   &lt;stereotype&gt;com.acme.stereotype.Mock&lt;/stereotype&gt;&#x000A;&lt;/stereotypes&gt;</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>And that&#8217;s it! A very simple schema, used only to activate and order CDI services.</p>
+        </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion4">Where can I find the JavaDoc for all of Java EE?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion4">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>You can find the aggregated JavaDoc for the whole Java EE 6 platform <a href="http://java.sun.com/javaee/6/docs/api/">here</a>. Java EE 7 is not available yet.</p>
+        </div>
+        <div class="paragraph">
+        <p>After encountering CDI for the first time, developers often ask why <code>@Inject</code> is in a different Java package and a different JAR file that CDI annotations like <code>@Produces</code>. The reason is somewhat political, but more a reflection of the fact that the Java EE 6 platform is an aggregation of multiple specifications. <code>@Inject</code> is defined in the JSR-330 specification, whereas <code>@Produces</code> is defined in the JSR-299 specification.</p>
+        </div>
+        <div class="paragraph">
+        <p>If you get the platform API JAR, then everything is in the same JAR file ;) But they are in different Java packages as a logical separation between specs. That&#8217;s just the way it is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion5">Should I use javax.faces.bean.Request/Session/ApplicationScoped or javax.enterprise.context.Request/Session/ApplicationScoped?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion5">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>Both annotation groups originate from different APIs, and have been specified (more or less) independently. While the JSF scope annotations have a clear focus on the JSF view technology, CDI requires scope annotations that are present, no matter if JSF is deployed or not (CDI can be used without JSF). So CDI had no choice but defining it&#8217;s own scopes. Unfortunately, Java EE 6 did not align this very well.</p>
+        </div>
+        <div class="paragraph">
+        <p><strong>You should always use scopes from <code>javax.enterprise.context</code> when using CDI</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion6">What is the purpose of the @Model annotation?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion6">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>The <code>@Model</code> annotation does to things:</p>
+        </div>
+        <div class="ulist">
+        <ul>
+        <li>
+        <p>it makes the bean request-scoped (instead of dependent, the default)</p>
+        </li>
+        <li>
+        <p>it gives the bean an EL name</p>
+        </li>
+        </ul>
+        </div>
+        <div class="paragraph">
+        <p>Creating a request-scoped and named bean is typically accomplished by apply the annotations <code>@RequestScoped</code> and <code>@Named</code> to the class, respectively. Since the combination of these annotations is so common in web applications, the built-in stereotype annotation <code>@Model</code> is provided by CDI as a shorthand.</p>
+        </div>
+        <div class="paragraph">
+        <p>Here&#8217;s an example:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">@Model&#x000A;public class SampleBean {&#x000A;   private String value;&#x000A;   public String getValue() { return value; }&#x000A;   public String setValue(String value) { this.value = value; }&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>This bean can now be bound to an input field in a JSF view:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;h:inputText value="\#{sampleBean.value}"/&gt;</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>If you need to access a bean directly by EL name in a JSF page, you probably need to give it a scope other than <code>@Dependent</code>. Otherwise, any value that gets set to the bean by a JSF input will be lost immediately. That&#8217;s why CDI features the <code>@Model</code> stereotype; it lets you give a bean a name, and set its scope to <code>@RequestScoped</code> in one stroke. If you need to access a bean that really has to have the scope <code>@Dependent</code> from a JSF page, inject it into a different bean, and expose it to EL via a getter method.</p>
+        </div>
+        <div class="paragraph">
+        <p>A stereotype is an annotation that aggregates other annotations. <code>@Model</code> is one of the built-in stereotype in CDI and is defined as follows:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">@Named&#x000A;@RequestScoped&#x000A;@Stereotype&#x000A;@Target({TYPE, METHOD})&#x000A;@Retention(RUNTIME)&#x000A;public @interface Model {}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>The <code>@Model</code> stereotype annotation is expected to be used frequently in web applications.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion7">Why is the constructor invoked twice when a normal scoped bean is created?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion7">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>For every normal-scoped bean there is a proxy, and you are seeing the instantiation of two objects: one is the actual bean instance, the other one is the proxy. Both likely invoke the default constructor.</p>
+        </div>
+        <div class="paragraph">
+        <p>It&#8217;s generally considered a bad idea to do initialization in class construction code. Instead, when using managed beans (objects managed by the Java EE container) you should perform initialization in a <code>@PostConstruct</code> or <code>@Inject</code> annotated method.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">@SessionScoped&#x000A;public class SampleBean {&#x000A;   private Map x;&#x000A;&#x000A;   @PostConstruct&#x000A;   protected void init() {&#x000A;      x = new ConcurrentHashMap();&#x000A;   }&#x000A;}</code></pre>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion8">Why does my normal scoped bean not get instantiated immediately?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion8">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>A CDI implementation may choose to lazily instantiate a normal scoped bean. If you inject a shorter-lived bean into a longer-lived bean (e.g. session scoped into application scoped) then there is no obvious bean to instantiate at this point - depending on the active session for the thread a different bean instance will be injected.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion9">When are interceptors and decorators applied?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion9">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>Interceptors and decorators are applied for <em>business method invocations</em>. For a detailed overview of what a business method invocation is, it&#8217;s best to consult the JSR-299 specification, more specifically section <a href="http://docs.jboss.com/cdi/spec/1.0/html/lifecycle.html#bizmethod">7.2</a>.</p>
+        </div>
+        <div class="ulist">
+        <ul>
+        <li>
+        <p>Initializer methods are not intercepted, so an <code>@Inject</code> method will not be intercepted or decorated while the bean is initialized</p>
+        </li>
+        <li>
+        <p>Lifecycle invocations are interceptor calls themselves - so a <code>@PostConstruct</code>/<code>@PreDestroy</code>-annotated method will not be intercepted or decorated by an <code>@AroundInvoke</code> method when invoked by the container.</p>
+        </li>
+        <li>
+        <p>initializers and lifecycle interceptor methods defined on a bean may be intercepted if they are invoked directly by other beans in the application.</p>
+        </li>
+        <li>
+        <p>Other CDI methods such as producers, disposers and observers are intercepted all the time.</p>
+        </li>
+        </ul>
+        </div>
+        <div class="paragraph">
+        <p>Remember that only references provided by the container are intercepted or decorated. This is important when considering self-invocations (calls to <code>this</code>) - these calls are not business method invocations and will not be intercepted and decorated.</p>
+        </div>
+        <div class="paragraph">
+        <p>To illustrate this concept, assuming that <code>@InterceptMe</code> is an interceptor binding:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">class SelfInvokingClass {&#x000A;&#x000A;   @InterceptMe&#x000A;   public void methodA() {}&#x000A;&#x000A;   @InterceptMe&#x000A;   public void methodB() {&#x000A;      this.methodA()&#x000A;   }&#x000A;&#x000A;}&#x000A;&#x000A;class InvokerClass {&#x000A;&#x000A;   @Inject SelfInvokingClass dependency;&#x000A;&#x000A;   public void callMethodA() {&#x000A;     dependency.methodA();&#x000A;   }&#x000A;&#x000A;   public void callMethodB() {&#x000A;     dependency.methodB();&#x000A;   }&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>When calling <code>InvokerClass.callMethodA()</code>, <code>methodA()</code> will be intercepted.</p>
+        </div>
+        <div class="paragraph">
+        <p>When calling <code>InvokerClass.callMethodB()</code>, <code>methodB()</code> will be intercepted, but <code>methodA()</code> (invoked from within <code>methodB()</code>) won&#8217;t be.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion10">How do a resolve an AmbiguousResolutionException between a producer method and a raw type?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion10">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div id="preamble">
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>From reading the spec, you should know that Contexts and Dependency Injection (CDI) creates a bean for every class in a classpath with a beans.xml file. In the absence of any producer methods, you can inject an instance of class B into class A using the following annotated field:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public class A {&#x000A;    @Inject B b;&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>In this case, both A and B are dependent-scoped beans, but that&#8217;s not important for this discussion.</p>
+        </div>
+        <div class="paragraph">
+        <p>When the injection is processed, an instance of B is instantiated by the container using the default constructor, or the constructor annotated with <code>@Inject</code>, and assigned to the field named b in an instance of class A.</p>
+        </div>
+        <div class="paragraph">
+        <p>But what if you instead wanted to use a producer method to create the instance of B. You might add the following producer class:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public class BProducer {&#x000A;    public @Produces B createB() {&#x000A;        B b = new B();&#x000A;        // ...or get an instance some other way&#x000A;        return b;&#x000A;    }&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>The producer method could also be on the B class itself:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public class B {&#x000A;   public @Produces B createB() {&#x000A;      B b = new B();&#x000A;      // ...or get an instance some other way&#x000A;      return b;&#x000A;   }&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>If you attempt to run the code with this producer method in place, you will get an <code>AmbiguousResolutionException</code> when the container boots. Why?</p>
+        </div>
+        <div class="paragraph">
+        <p>The problem is that you now have two ways to create an instance of B that is not otherwise qualified with any qualifiers. Should the container use B&#8217;s constructor or the producer method? The point is, the container is not going to guess. You have to be explicit.</p>
+        </div>
+        </div>
+        </div>
+        <div class="sect1">
+        <h2 id="_solution_1_qualifiers">Solution 1: Qualifiers</h2>
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>The quickest, easiest, and preferred way to be explicit is to assign a qualifier to the producer. By doing so, you are being more specific about which one you want the container to use.</p>
+        </div>
+        <div class="paragraph">
+        <p>Of course, you first need to create a binding type. Let&#8217;s call it <code>@Preferred</code>.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">@Target({ TYPE, METHOD, PARAMETER, FIELD })&#x000A;@Retention(RUNTIME)&#x000A;@Documented&#x000A;@Qualifier&#x000A;@interface Preferred {}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>Now use this qualifier type to qualify the instance of B produced by the <code>@Produces</code> method:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public class BProducer {&#x000A;    public @Produces @Preferred B createB() {&#x000A;        B b = new B();&#x000A;        // ...&#x000A;        return b;&#x000A;    }&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>Now instead of using <code>@Inject</code> to inject the instance of B, you use <code>@Inject @Preferred</code> at the injection point. (<code>@Inject</code> would now inject the instance created using B&#8217;s constructor).</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public class A {&#x000A;    @Inject @Preferred B b;&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>The drawback of this approach is that you have to be explicit and sometimes, you don&#8217;t want to be explicit. You just want one approach to win over the other without having to further qualify it. That&#8217;s the function of alternatives.</p>
+        </div>
+        </div>
+        </div>
+        <div class="sect1">
+        <h2 id="_solution_2_alternatives">Solution 2: Alternatives</h2>
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>An alternative is used to settle a bean resolution ambiguity. Putting the binding types aside for a moment, there is an ambiguity between B&#8217;s constructor and the producer method. It&#8217;s possible to flag the producer as an alternative and then activate that alternative in a beans.xml file.</p>
+        </div>
+        <div class="paragraph">
+        <p>Begin by adding the <code>@Alternative</code> annotation (formally <code>@Policy</code>) to the class containing the producer method.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public @Alternative class BProducer {&#x000A;    public @Produces B createB() {&#x000A;        B b = new B();&#x000A;        // ...&#x000A;        return b;&#x000A;    }&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>Activate this alternative in a beans.xml file. The body of the <code>&lt;alternative&gt;</code> element is the fully-qualified class name of a class with the <code>@Alternative</code> annotation.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;beans&gt;&#x000A;  &lt;alternatives&gt;&#x000A;     &lt;alternative&gt;BProducer&lt;/alternative&gt;&#x000A;  &lt;/alternatives&gt;&#x000A;&lt;/beans&gt;</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>With that configuration in place, you can once again use the <code>@Inject</code> annotation alone to inject the instance of B.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public class A {&#x000A;    @Inject B b;&#x000A;}</code></pre>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="sect1">
+        <h2 id="_wrap_up">Wrap-up</h2>
+        <div class="sectionbody">
+        <div class="paragraph">
+        <p>A key benefit of CDI is that nothing is left to chance. The <code>AmbiguousResolutionException</code> is an indicator that you have not given good instructions by way of metadata to the execution engine. You can use either binding types or alternatives to exact about which bean should be selected at an injection point.</p>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion11">How do I use the conversation scope with JSF 2?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion11">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>Seam established the concept of conversations, which then CDI adopted. In parallel, JSF 2.0 was specified as JSR 314, with a long discussion whether conversation scope was worthwhile or not. Finally it was agreed on a compromise (Flash- and View-Scope), but a Conversation scope was not specified.</p>
+        </div>
+        <div class="paragraph">
+        <p><strong>You must use CDI if you want conversations with JSF 2</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion12">Why is @Vetoed a best practice for persistent (JPA) entities?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion12">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.1
+        </div>
+        <div class="paragraph">
+        <p>Adding the @Vetoed annotation to all persistent entities is considered a best practice in most cases. The purpose of this annotation is to prevent the BeanManager from managing an entity as a CDI Bean.</p>
+        </div>
+        <div class="paragraph">
+        <p>When an entity is annotated @Vetoed no injections will take place. The reasoning behind this is to prevent the BeanManager to perform operations that may cause the JPA provider to break.</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">@Entity&#x000A;@Vetoed&#x000A;public class Foo {&#x000A;   /* This will not be respected by the BeanManager */&#x000A;   @Inject&#x000A;   private Logger log;&#x000A;&#x000A;   /* This annotation is managed by the EnityManager and not the BeanManager */&#x000A;   @Column&#x000A;   private String bar;&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>All JPA persistent entities should be marked with @Vetoed as this will prevent the CDI attempting to manage the lifecycle of the object, and makes it very clear that the object is not managed by CDI. You should do the same for MappedSuperclass, Embedded etc.</p>
+        </div>
+        <div class="paragraph">
+        <p>You can also annotate a package-info.java to veto all beans in the package.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion13">Is there an OSGi bundle for CDI API?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion13">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>Yes, an OSGi version of the CDI 1.0 API is available from the Apache specs project <a href="http://search.maven.org/#artifactdetails%7Corg.apache.geronimo.specs%7Cgeronimo-jcdi_1.0_spec%7C1.0%7Cbundle">org.apache.geronimo.specs:geronimo-jcdi_1.0_spec:1.0</a></p>
+        </div>
+        <div class="paragraph">
+        <p>For CDI 1.1 use the <a href="http://search.maven.org/#artifactdetails%7Cjavax.enterprise%7Ccdi-api%7C1.1-20130918%7Cjar">javax.enterprise:cdi-api:1.1-20130918 artifact</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion14">Can I share information between observers in a CDI extension?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion14">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>In other words, 'is the instance of my extension contextual and what is its scope?'</p>
+        </div>
+        <div class="quoteblock">
+        <blockquote>
+        <div class="paragraph">
+        <p>The container instantiates a single instance of each extension at the beginning of the application initialization process and maintains a reference to it until the application shuts down. The container delivers event notifications to this instance by calling its observer methods.</p>
+        </div>
+        </blockquote>
+        <div class="attribution">
+        &#8212; CDI Expert Group<br>
+        <cite>Section 11.5 CDI Specification</cite>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>Speaking in code, the following assertion will be true (because there is always at least one bean):</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public class TestExtension implements Extension {&#x000A;    private List&lt;Bean&gt; beans = new ArrayList&lt;Bean&gt;();&#x000A;&#x000A;    public void onProcessBean(@Observes ProcessBean e) {&#x000A;        beans.add(e.getBean());&#x000A;    }&#x000A;&#x000A;    public void afterBeanDiscovery(@Observes AfterBeanDiscovery e) {&#x000A;        assert beans.size() &gt; 0;&#x000A;    }&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>The possibilities of what you can do with extensions are limitless.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-parent="#faq_accordion" data-toggle="collapse" href="#accordion15">Why is there no active transaction in my SFSB transactional observer?</a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="accordion15">
+      <div class="panel-body">
+        <div class="alert alert-success pull-right">
+          Since CDI 1.0
+        </div>
+        <div class="paragraph">
+        <p>Sometimes it&#8217;s useful to have an AFTER_SUCCESS transactional observer. For example you could update a list when an entity is persisted. However, if you use:</p>
+        </div>
+        <div class="listingblock">
+        <div class="content">
+        <pre class="highlight"><code class="language-java" data-lang="java">public void userAdded(@Observes(during=TransactionPhase.AFTER_SUCCESS) @Added User user)&#x000A;{&#x000A;  // access a persistence context and refresh the user list&#x000A;}</code></pre>
+        </div>
+        </div>
+        <div class="paragraph">
+        <p>in a stateful session bean, you will get ''transaction is not active''. You need to use REQUEIRES_NEW by adding @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW) to the bean or the to the method.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

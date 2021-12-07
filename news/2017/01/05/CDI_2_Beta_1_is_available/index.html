@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="CDI 2.0 release information"><title>CDI 2.0 Beta 1 is available | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/">Previous: Meet CDI at Java One 2015 </a></li><li class="next"><a href="/news/2017/02/01/CDI_2_is_in_public_review/">Next: CDI 2.0 is in public review </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/"> Previous</a></li><li class="next"><a href="/news/2017/02/01/CDI_2_is_in_public_review/"> Next</a></li></ul><h1><a href="/news/2017/01/05/CDI_2_Beta_1_is_available/">CDI 2.0 Beta 1 is available</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Jan 05, 2017</span> |   <a href="http://www.cdi-spec.org/news/2017/01/05/CDI_2_Beta_1_is_available/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>After more than 2 years of work CDI 2.0 is around the corner. Its feature list is now complete and Beta for RI (Weld 3.0 Beta1) is available for download.
+This post lists what&#8217;s included and give you some insight on the final release and what comes next</p>
+</div>
+<div class="sect1">
+<h2 id="give-it-a-try"><a class="anchor" href="#give-it-a-try"></a>Give it a try</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First, you may want to start testing the RI and discover the new API, all the resources are listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can browse the spec document in <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html" target="_blank">html</a> or <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.pdf">pdf</a></p>
+</li>
+<li>
+<p>If you prefer Javadoc you can read it <a href="http://docs.jboss.org/cdi/api/2.0.Beta1">here</a></p>
+</li>
+<li>
+<p>CDI 2.0 Beta API is available on <a href="http://search.maven.org/#artifactdetails|javax.enterprise|cdi-api|2.0.Beta1|jar" target="_blank">Maven Central</a>. You can also download the jar <a href="http://search.maven.org/remotecontent?filepath=javax/enterprise/cdi-api/2.0.Beta1/cdi-api-2.0.Beta1.jar">here</a></p>
+</li>
+<li>
+<p>Last but not least, the reference implementation (Weld 3.0 Beta 1) is downloadable <a href="http://download.jboss.org/weld/3.0.0.Beta1/" target="_blank">here</a> and can be also be used from <a href="http://search.maven.org/#artifactdetails|org.jboss.weld|weld-core-impl|3.0.0.Beta1|jar" target="_blank">Maven</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="major-features-included-in-cdi-2-0"><a class="anchor" href="#major-features-included-in-cdi-2-0"></a>Major features included in CDI 2.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This CDI 2.0 includes important changes for the platform.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The spec was split into <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#doc_organisation" target="_blank">3 parts</a> to add the support for Java SE.</p>
+</li>
+<li>
+<p>API to <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#se_bootstrap" target="_blank">boot CDI in Java SE</a>.</p>
+</li>
+<li>
+<p>Observers (i.e. events) <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#observer_ordering" target="_blank">ordering</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#firing_events_asynchronously" target="_blank">Asynchronous event</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#configurators" target="_blank">Configurators</a> for major SPI elements</p>
+</li>
+<li>
+<p>Possibility to <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#process_observer_method" target="_blank">configure or veto observer methods</a>.</p>
+</li>
+<li>
+<p>Add <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#built_in_annotation_literals" target="_blank">built-in annotation literals</a></p>
+</li>
+<li>
+<p>Make possible to <a href="http://docs.jboss.org/cdi/spec/2.0.Beta1/cdi-spec.html#interception_factory" target="_blank">apply interceptor on producers</a>.</p>
+</li>
+<li>
+<p>Alignment on Java 8 features (streams, lambdas, repeating qualifiers)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A lot of other small feature will be delivered. Refer to the coming release notes to check them all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="release-agenda"><a class="anchor" href="#release-agenda"></a>Release agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If everything stays on track we should send the PFD (proposed final draft) with TCK and RI to the JCP soon.</p>
+</div>
+<div class="paragraph">
+<p>If the JCP ballot is green, CDI 2.0 final could be released before end of February.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-s-next"><a class="anchor" href="#what-s-next"></a>What&#8217;s next</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Our release plan for CDI 2.0 has always been to deliver it before Java EE 8 to let other spec grab our new features and make the best out of them.</p>
+</div>
+<div class="paragraph">
+<p>We are still considering to start working on CDI 2.1 to clarify or add the few features needed for Java EE 8 and beyond.</p>
+</div>
+<div class="paragraph">
+<p>Stay tuned.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2017/01/05/CDI_2_Beta_1_is_available/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2017/01/05/CDI_2_Beta_1_is_available/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Release/">Release</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/">Previous: Meet CDI at Java One 2015 </a></li><li class="next"><a href="/news/2017/02/01/CDI_2_is_in_public_review/">Next: CDI 2.0 is in public review </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2015/10/23/Meet-CDI-at-java-one-2015/"> Previous</a></li><li class="next"><a href="/news/2017/02/01/CDI_2_is_in_public_review/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2017/01/05/CDI_2_Beta_1_is_available/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

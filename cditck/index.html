@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Basic information about CDI TCK (Technology Compatibility Kit)"><title>Basic information about CDI TCK (Technology Compatibility Kit) | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="sect1">
+<h2 id="cdi-tck"><a class="anchor" href="#cdi-tck"></a>CDI TCK</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Our <a href="https://en.wikipedia.org/wiki/Technology_Compatibility_Kit" target="_blank">TCK</a> is open as well and contributions are more than welcome. Important information:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Source code at <a href="https://github.com/eclipse-ee4j/cdi" target="_blank">GitHub</a></p>
+</li>
+<li>
+<p>Issue tracker in <a href="https://github.com/eclipse-ee4j/cdi/issues" target="_blank">GitHub Issues</a></p>
+</li>
+<li>
+<p>Distribution bundles are available at <a href="https://download.eclipse.org/jakartaee/cdi/" target="_blank">download.eclipse.org/jakartaee/cdi</a></p>
+</li>
+<li>
+<p>Mailing list: <a href="mailto:cdi-dev@eclipse.org">cdi-dev@eclipse.org</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can check the connection between specification and TCK by looking at <a href="https://docs.jboss.org/cdi/spec/2.0.EDR1/cdi-spec-with-assertions.html">specification with TCK assertions</a> where each chapter starts with a list of TCK assertions with links to TCK tests for given chapter.</p>
+</div>
+<div class="paragraph">
+<p>Documentation is found in the doc directory of the TCK distribution zip.</p>
+</div>
+<div class="sect2">
+<h3 id="how-to-execute-your-updated-or-new-tck-test"><a class="anchor" href="#how-to-execute-your-updated-or-new-tck-test"></a>How to execute your updated or new TCK test</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Build TCK with your update by running:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>mvn clean install</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Get the jboss-tck-runner. Either you can use the one available in CDI TCK distribution bundle or you can use the same one from <a href="https://github.com/weld/core" target="_blank">Weld source code repository</a></p>
+</li>
+<li>
+<p>From jboss-tck-runner execute following command and provide your TCK version (also be aware of Weld version you are running):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>mvn clean test -Dtest=&lt;your_test_name&gt; -Dcdi.tck.version=&lt;cdi_tck_version&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Execution in previous step is run at Arquillian Weld embedded container. If you need to execute by using real container then please check documentation link above.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/cditck/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+</div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

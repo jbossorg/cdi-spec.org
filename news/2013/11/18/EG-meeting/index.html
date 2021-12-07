@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description"><title>CDI EG meeting 11/18/2013 notes on CDI 1.1.1 MR | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2013/04/10/1/">Previous: CDI 1.1 Final Draft submitted to JCP </a></li><li class="next"><a href="/news/2013/11/25/EG-meeting/">Next: CDI EG meeting 11/25/2013 notes on CDI 1.1.1 MR </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2013/04/10/1/"> Previous</a></li><li class="next"><a href="/news/2013/11/25/EG-meeting/"> Next</a></li></ul><h1><a href="/news/2013/11/18/EG-meeting/">CDI EG meeting 11/18/2013 notes on CDI 1.1.1 MR</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Nov 18, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/11/18/EG-meeting/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>The goal of this 1st meeting was to organize the MR launching, and start discussing its content
+The following people assisted this meeting :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pete Muir (pm)</p>
+</li>
+<li>
+<p>Mark Struberg (ms)</p>
+</li>
+<li>
+<p>Jozef Hartinger (jh)</p>
+</li>
+<li>
+<p>Joseph Bergmark (jb)</p>
+</li>
+<li>
+<p>Arne Limburg (al)</p>
+</li>
+<li>
+<p>Antoine Sabot-Durand (asd)</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="proposed-agenda"><a class="anchor" href="#proposed-agenda"></a>Proposed Agenda</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following agenda was proposed by <strong>asd</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>MR proposed roadmap</p>
+</li>
+<li>
+<p>Content of the proposed list</p>
+</li>
+<li>
+<p>Try to have a 1st decision on big tickets (tickets with great impact on implementation or spec)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CDI-377 : automatic JSR-330 annotation processing problematic</p>
+</li>
+<li>
+<p>CDI-370 : Expand @RequestScoped and @SessionScoped to account for WebSocket</p>
+</li>
+<li>
+<p>others</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proposed-roadmap"><a class="anchor" href="#proposed-roadmap"></a>Proposed Roadmap</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As we should run the MR in 60 days and that we cannot change its content after its start we proposed the following roadmap</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>16th Dec - list of issues complete</p>
+</li>
+<li>
+<p>6th Jan - Maintenance review starts</p>
+</li>
+<li>
+<p>7th March - Maintenance review ends</p>
+</li>
+<li>
+<p>21st March - Maintenance ballot ends</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This roadmap integrates the holidays constraints as well. It&#8217;ll be confirmed after the meeting <strong>pm</strong> and <strong>asd</strong> will have with the Java EE spec leads/Oracle on 11/26</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="content-of-the-proposed-list"><a class="anchor" href="#content-of-the-proposed-list"></a>Content of the proposed list</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>asd</strong> stressed on the fact that the long proposed list won&#8217;t probably fit in the MR but that would be nice to provide them a status.
+We decided to deal the most important ticket first.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="list-of-tickets"><a class="anchor" href="#list-of-tickets"></a>list of tickets</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-377-cdi-377-automatic-jsr-330-annotation-processing-problematic-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-377-cdi-377-automatic-jsr-330-annotation-processing-problematic-a"></a><a href="https://issues.jboss.org/browse/CDI-377">CDI-377 : automatic JSR-330 annotation processing problematic</a></h3>
+<div class="paragraph">
+<p>All the participant agreed that this ticket could be quite tricky. 2 scenario for solving it</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Having an umbrella scanning mechanism : beyond CDI and off course the MR.<strong>pm</strong> took note of escalate this need to the JCP</p>
+</li>
+<li>
+<p>in the meantime could investigate an exclusion in beans.xml. this solution is to be explored and if we have an agreement we could provide a fix in MR scope</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="a-href-https-issues-jboss-org-browse-cdi-370-cdi-370-expand-requestscoped-and-sessionscoped-to-account-for-websocket-a"><a class="anchor" href="#a-href-https-issues-jboss-org-browse-cdi-370-cdi-370-expand-requestscoped-and-sessionscoped-to-account-for-websocket-a"></a><a href="https://issues.jboss.org/browse/CDI-370">CDI-370 : Expand @RequestScoped and @SessionScoped to account for WebSocket</a></h3>
+<div class="paragraph">
+<p>A tricky issue as well. No one in the EG has a sufficient knowloedge of websocket sepc to statute ont in so <strong>pm</strong> propose to ask help to <strong>Matthias Wessendorf</strong></p>
+</div>
+<div class="paragraph">
+<p>Other tickets related to <code>@RequestScoped</code> clarification</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-379">CDI-379 Clarify life cycle of RequestScoped</a></p>
+</li>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-381">CDI-381 and other request scope related ticket</a></p>
+</li>
+<li>
+<p><a href="https://issues.jboss.org/browse/CDI-406">CDI-406 Make stereotypes bean defining annotations</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2013/11/18/EG-meeting/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/11/18/EG-meeting/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/meeting/">meeting</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2013/04/10/1/">Previous: CDI 1.1 Final Draft submitted to JCP </a></li><li class="next"><a href="/news/2013/11/25/EG-meeting/">Next: CDI EG meeting 11/25/2013 notes on CDI 1.1.1 MR </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2013/04/10/1/"> Previous</a></li><li class="next"><a href="/news/2013/11/25/EG-meeting/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2013/11/18/EG-meeting/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

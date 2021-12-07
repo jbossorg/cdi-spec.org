@@ -1,0 +1,432 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Latest news about CDI"><title>Latest news about CDI | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><div class="posts"><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2014/10/06/CDI-20_working_method/">Working method for CDI 2.0</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Oct 06, 2014</span> |   <a href="http://www.cdi-spec.org/news/2014/10/06/CDI-20_working_method/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>Work on CDI 2.0 started at the beginning of september. As you may guess, specifying and releasing this new major version is a big challenge.</p>
+</div>
+<div class="paragraph">
+<p>To put all chance on our side we are looking for a strong commitment from the community (as explained in our <a href="/news/2014/08/26/CDI-20_needs_you/">previous post</a>). That&#8217;s why the way we&#8217;ll be organised is very important.
+Thus, when we started thinking about our working method we came up with the following requirements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Keep the big picture of the spec in mind while working on all detail of each new / modified features</p>
+</li>
+<li>
+<p>Have the right balance between "ideal specification" and the "specification only driven by implementation" approaches</p>
+</li>
+<li>
+<p>Be able to welcome new contributors (even casual ones) without loosing them in spec history or advanced technical details at the beginning</p>
+</li>
+<li>
+<p>Give visibility to third party (other JSR or future implementor) of the spec without forcing them to follow our ML, IRC, JIRA</p>
+</li>
+<li>
+<p>Get feedback from the community easily while designing the spec</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To satisfy these points we came to the idea of creating different workshop on big CDI topics (existing and new). To begin we identified these workshops:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parts (modularity) : how we can make CDI more modular by extracting sub part in the spec to allow it to grow without becoming bloated</p>
+</li>
+<li>
+<p>Java SE support :  how CDI should work in Java SE and what SPI should we add or standardise to ease its integration in home brewed stacks</p>
+</li>
+<li>
+<p>Events enhancement : bringing asynchronicity or ordering to events. Can it be extended to all Java EE</p>
+</li>
+<li>
+<p>Interceptor &amp; Decorator : AOP support on produced or custom bean. Work with interceptor spec to add AOP on inner call</p>
+</li>
+<li>
+<p>SPI enhancement for integration : give access to all metadata produced by the container, give control of CDI from outside code, support Bean addition / modification @ Runtime</p>
+</li>
+<li>
+<p>Contexts enhancement : go beyond the the thread-bound request-response model used by context today to support new application architecture</p>
+</li>
+<li>
+<p>Java 8 enhancement : see how new features in java 8 (type annotation, annotation repetition, lambdas, streams, default methods, type inference…) could enhance CDI in existing and new features.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To ease this big picture approach we also adopted this following step to deal with each workshop:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Blueprint draft : the workgroup lead propose a draft document describing his global idea of how the future should work</p>
+</li>
+<li>
+<p>Draft discussion The draft is commented, amended, enhanced by the group which can react to the doc by proposing new ideas. and When people feel ready by the EG</p>
+</li>
+<li>
+<p>Detailled task / requirement: after the discussion, each adopted concept are translated in on or more tickets in our Jira to follow their realisation to start more detailled discussion</p>
+</li>
+<li>
+<p>Spec and TCK enhancement: each task is translated to the new specification document and translated to the TCK</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Of course these steps are more guidelines than a strong workflow, it&#8217;s a way to ease contribution not constraint it. It will probably evolve with time.</p>
+</div>
+<div class="paragraph">
+<p>On our <a href="/">home page</a> you&#8217;ll find the list of each workshop and their current status and links (working doc, Jira EPICS, etc&#8230;&#8203;). Please feel free to check these links and give your feedback and don&#8217;t heistate to contribute with your idea on this documents.</p>
+</div></div><div class="footer"><a href="/news/2014/10/06/CDI-20_working_method/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2014/10/06/CDI-20_working_method/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/method/">method</a><a class="tag" href="/news/tags/EG/">EG</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2014/08/26/CDI-20_needs_you/">CDI 2.0 needs you</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Aug 26, 2014</span> |   <a href="http://www.cdi-spec.org/news/2014/08/26/CDI-20_needs_you/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p><span class="image" style="float: left"><img src="/images/UncleDuke.png" alt="Uncle Duke" width="150"></span> The work on CDI 2.0 specification is about to start in the coming weeks. We have a lot of ambitious features on the table as you can check in our previous <a href="/news/2014/07/28/what-s-in-CDI-20-jsr-proposal/" target="_blank">article</a>, but we also have only 18 months to specify and implement them. Without community help, we probably won&#8217;t be able to do all the change we are planning, so your contribution is precious to us. In this post I&#8217;ll explain the multiple ways you can be part of it, even if you only have a few hours a week to help us and/or are not a CDI, JCP or a Java expert. Let&#8217;s check the 3 main question most of you have regarding contribution and try to answer them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Why should I contribute?</p>
+</li>
+<li>
+<p>Is it possible for me to contribute?</p>
+</li>
+<li>
+<p>How do I start contributing?</p>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="why-should-i-contribute-to-cdi-2-0"><a class="anchor" href="#why-should-i-contribute-to-cdi-2-0"></a>Why should I contribute to CDI 2.0?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Contributing to a specification like CDI looks like any other Open Source contribution (by the way CDI specification and deliverable are under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License version 2</a>) yet it&#8217;s very different. The following points will detail these differences.</p>
+</div>
+<div class="sect2">
+<h3 id="working-on-architecture-and-concepts-first"><a class="anchor" href="#working-on-architecture-and-concepts-first"></a>Working on Architecture and concepts first</h3>
+<div class="paragraph">
+<p>The biggest difference between working on a standard OSS project and a specification is probably the fact that the first job is to write detailled documentation (the specification document).
+Regarding specification document, the content should be very accurate and respect a certain set of rules among them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>use an homogenous style in simple yet understandable english across the doc,</p>
+</li>
+<li>
+<p>as specification cannot be changed easily, the work must be very precise, consequences of a choice must be analysed deeply and ambiguities in definitions shouldn&#8217;t exist,</p>
+</li>
+<li>
+<p>stick to <a href="http://docs.oracle.com/javase/specs/jls/se8/html/index.html" target="_blank">Java language Specification</a> (JSL) rules and terms,</p>
+</li>
+<li>
+<p>avoid <a href="http://en.wikipedia.org/wiki/Denormalization">denormalization</a>: the specification should use cross references to point to an existing definition instead of duplicating it,</p>
+</li>
+<li>
+<p>avoid mentioning how features should be implemented while keeping in mind that specified features will have to be implemented at the end.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="participating-to-code-writing"><a class="anchor" href="#participating-to-code-writing"></a>Participating to code writing.</h3>
+<div class="paragraph">
+<p>Specification is useless without implementations. So after (and sometimes while) thinking, comes code writing. First the API, the code that all specifications will have to implement and then as a proof of concept of the specification we have to provide the RI (reference implementation) and TCK (Technology Compatibility Kit) which is mandatory for developing other implementations. So you can also be useful by contributing to <a href="http://weld.cdi-spec.org/">JBoss Weld</a> and the <a href="https://github.com/cdi-spec/cdi-tck">CDI TCK</a> which is the translation of the specification in a test suite. Off course these will ask more time and probably more skills for a contribution.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="contributing-to-the-future-of-java-ee-and-java-se"><a class="anchor" href="#contributing-to-the-future-of-java-ee-and-java-se"></a>Contributing to the future of Java EE and Java SE</h3>
+<div class="paragraph">
+<p>CDI 2.0 will be part of Java EE 8 but also targets Java SE. Therefore, we&#8217;d like to make CDI the Dependency Injection standard for Java. It already plays this role for Java EE. So contributing to the CDI 2.0 specification is a way to be part to the future of Java and Java applications architecture.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="being-at-the-source-of-a-lot-of-other-projects"><a class="anchor" href="#being-at-the-source-of-a-lot-of-other-projects"></a>Being at the source of a lot of other projects</h3>
+<div class="paragraph">
+<p>Working on CDI specification is also a way to indirectly work at (and thus, have impact on) other projects linked to it. The implementations (Apache OpenWebBeans and JBoss Weld) are off course the obvious ones, but today there are a lot of other open source frameworks or projects out there based on CDI. <a href="http://deltaspike.apache.org/" target="_blank">Apache Deltaspike</a>, <a href="http://www.vraptor.org/" target="_blank">VRaptor</a> or <a href="http://www.openbravo.com/" target="_blank">Openbravo</a> are some example of these (you can also consider most of JBoss Java frameworks which use CDI to be integrated).
+Working on CDI is a way to help these projects to become better or give you the knowledge to contribute to them in the future to help them getting the best of CDI 2.0 when it will be released.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="is-it-possible-for-me-to-contribute"><a class="anchor" href="#is-it-possible-for-me-to-contribute"></a>Is it possible for me to contribute?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most people disqualified themselves when it comes to contribute to a JSR. The 3 most frequent reason given are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the technical level,</p>
+</li>
+<li>
+<p>the lack of time or,</p>
+</li>
+<li>
+<p>the "paperwork" tied to such a contribution.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s review these "good" excuses that could make one thinks "contributing is not for me"</p>
+</div>
+<div class="sect2">
+<h3 id="technical-level"><a class="anchor" href="#technical-level"></a>Technical level</h3>
+<div class="paragraph">
+<p>Ok, if you are an absolute beginner in Java and CDI, it will be hard to help without making others loose their time. But as you&#8217;re reading these lines, you are probably not an absolute beginner ;). One of our goal on CDI 2.0 is to make the specification as easy as possible to read. So even if you are not a top notch Java specialist, your reading skill and feedback on badly written, ambiguous or hard to understand part will be very precious to the Expert Group.
+Regarding Java Level, CDI 2.0 will leverage a lot of new features coming with Java SE 8 on which most of the contributors will have very little experience. So, on this topic specialists will be the exception.
+To make short, the minimum level to contribute is to have a reasonable knowledge on Java (enough to know your unknown and where to look to learn), have already used CDI in development, have a good knowledge of its features (DI, Events, AOP, Extensions&#8230;&#8203;) and be able to read english.
+That makes a lot of people qualified to help.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="time"><a class="anchor" href="#time"></a>Time</h3>
+<div class="paragraph">
+<p>From the previous point you can understand that there is no minimum amount of time for contribution. For instance you can read a specification chapter and propose corrections or remarks on it, it will take you 2 or 3 hours on the 18 months of the specification. Now the best would be to provide a few hours a week. To help people that want to contribute and don&#8217;t have much time, we&#8217;ll try to provide a monthly synthesis of topics worked on the project to spare their time and avoid the "I&#8217;d like to do something but I don&#8217;t have time to dig thru all the mailing list and Jira message to figure out what to do". These reports will also be useful for the EG members to have a big picture vision of the work regulary.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="paper-work"><a class="anchor" href="#paper-work"></a>Paper work</h3>
+<div class="paragraph">
+<p>To be officially enrolled on a JCP Expert Group requires a little paper work. You&#8217;ll have to create an account on <a href="http://jcp.org" target="_blank">jcp.org</a> and sign the Java Specification Agreement (JSPA). You&#8217;ll probably have to ask you employeer an agreement to contribute. And then ask the spec lead to be part of the JSR. On the JSR side, we never refused a member in the EG in the past and plan to continue like that for the new JSR</p>
+</div>
+<div class="paragraph">
+<p>The good news is that we also accept non official contributions as any other Open Source project using ASL2. So if you don&#8217;t feel like signing JCP stuff, you can still participate to discussion on the Mailing list, the IRC channel or our JIRA site. You can even send pull request on the project. The only difference will be that you won&#8217;t be mentioned as a member of the expert group on the JCP website.</p>
+</div>
+<div class="paragraph">
+<p>So to make short. You can start contributing with no paper work. Stay anonymous during all the project or decide to officially join the EG at any time before the end of the JSR. The only limit would be if you start doing big contribution. In this case we&#8217;ll probably ask you to join EG to avoid any future IP issues.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="how-do-i-start-contributing"><a class="anchor" href="#how-do-i-start-contributing"></a>How do I start contributing?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The best place to start is probably the <a href="https://lists.jboss.org/mailman/listinfo/cdi-dev" target="_blank">Mailing List</a>, or if you want a more informal you can begin with the IRC channel(#cdi-dev on freenode). All the information regarding communication channel of the spec is detailled on the <a href="/contribute">contribute</a> page.</p>
+</div>
+<div class="paragraph">
+<p>You also should start reading the <a href="http://docs.jboss.org/cdi/spec/1.2/cdi-spec-1.2.pdf" target="_blank">existing specification</a> to become familiar with its content and its style.</p>
+</div>
+<div class="paragraph">
+<p>Finally, as the specification is written in asciidoc (with the excellent asciidoctor implementation), you should also start learning it. The best place is probably the <a href="http://asciidoctor.org/docs/user-manual/" target="_blank">Asciidoctor user manual</a>. As we&#8217;re using asciidoctor maven plugin to generate the doc you won&#8217;t have to install asciidoc toolchain, only Maven. You&#8217;ll also nedd a text editor with optionally plugins to help writing asciidoc. <a href="https://atom.io/">Atom editor</a> with asciidoc language and asciidoc preview plugins is a good solution, but there are plenty of others depending on your taste and current tools.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-s-next"><a class="anchor" href="#what-s-next"></a>What&#8217;s next?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We are currently preparing the organization of the work around the specification. The goal is to be as efficient as possible regarding contribution. The Mailing List is the best place to stay tuned. In the meantime you can do "homework" with the existing material.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We are trying to make CDI 2.0 a very open specification to give to the community the possibility to contribute easily to this great project. We are thrilled to count you onboard for any contribution (big or small) you&#8217;ll be able to do, making CDI 2.0 your specification.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2014/08/26/CDI-20_needs_you/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2014/08/26/CDI-20_needs_you/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/EG/">EG</a><a class="tag" href="/news/tags/community/">community</a><a class="tag" href="/news/tags/method/">method</a></span></div></div></div></article><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2013/12/16/CDI-1-2-issues-list/">Conclusion of EG preparation on CDI 1.2</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Dec 16, 2013</span> |   <a href="http://www.cdi-spec.org/news/2013/12/16/CDI-1-2-issues-list/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p><em>Updated on 01/07/2014</em></p>
+</div>
+<div class="paragraph">
+<p>We finished to deal with the list of 28 Jira we planned to introduce or not in MR. So 24 of them will be in MR and 4 won&#8217;t. The list is also accessible on <a href="http://s.shr.lc/1dL7BrF">Jira</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 50%;">
+<col style="width: 8.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Jira</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Decision</th>
+<th class="tableblock halign-left valign-top">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-413" target="_blank">CDI-413</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update outdated license</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-408" target="_blank">CDI-408</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bean-discovery-mode="annotated" and Producers/Observers in @Dependent beans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-410" target="_blank">CDI-410</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@RequestScoped Javadoc outdated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-388" target="_blank">CDI-388</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session bean specialization example is not valid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-376" target="_blank">CDI-376</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BeanManager#getProducerFactory return type differs between API and spec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-377" target="_blank">CDI-377</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">automatic JSR-330 annotation processing problematic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mention needed and perhaps a new feature</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-380" target="_blank">CDI-380</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify SessionScoped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We should be less descriptive and like for CDI-381 add a general statement telling that other spec/extensions can change the behavior of built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-372" target="_blank">CDI-372</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clarify behavior of implicit bean archive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The notion of Bean Archive is introduce in Chapter 12, we should do an introduction before</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-320" target="_blank">CDI-320</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify whether ProcessAnnotatedType should be fired for annotations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">According to pm it shouldn&#8217;t and we should clarify this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-318" target="_blank">CDI-318</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@WithAnnotations types can appear on any supertype</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mainly Javadoc correction on @WithAnnotation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-280" target="_blank">CDI-280</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">behavior of CDI bean @Specializes session bean is undefined</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">could benefit some clarification</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-220" target="_blank">CDI-220</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify interceptors are not associated with the result of a producer method/field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-405" target="_blank">CDI-405</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reword the description of @RequestScoped and @ApplicationScoped in section 2.4.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-401" target="_blank">CDI-401</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify the meaning of "bean class local view"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-398" target="_blank">CDI-398</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify that an array with a variable component type or parameterized component type containing wildcards is not a valid bean type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-392" target="_blank">CDI-392</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify when the operations of BeanManager can be called</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-386" target="_blank">CDI-386</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two examples in section 5.2.4 contradict the rules of the same section</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-382" target="_blank">CDI-382</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify interceptors are not associated with the result of a producer method/field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-381" target="_blank">CDI-381</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additional implementations of Request Context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we should add general statement telling that extension can change the behavior of built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-406" target="_blank">CDI-406</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make stereotypes bean defining annotations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-404" target="_blank">CDI-404</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adding bean-defining annotations for Interceptor while setting bean-discovery-mode="annotated"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-389" target="_blank">CDI-389</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Revert <a href="https://issues.jboss.org/browse/CDI-85" target="_blank">CDI-85</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we revert to CDI 1.0 behavior but we will have to propose something better in CDI 2.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-397" target="_blank">CDI-397</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify Section 6.6.3 regarding singletons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">we should go a little beyond and check all occurrences of "singleton" in the spec to clarify if it&#8217;s an singleton session bean or a singleton scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-411" target="_blank">CDI-411</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CDI conversation activation conflicts with the Servlet spec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Solution exist at different level. We should at least put a mention in the spec and o something at impl level</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-379" target="_blank">CDI-379</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify life cycle of RequestScoped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">each spec should detail how they stick to built-in scope</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-370" target="_blank">CDI-370</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expand @RequestScoped and @SessionScoped to account for WebSocket</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It&#8217;s the responsibility of Websocket spec. We should ensure they take the point before closing the ticket</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-377" target="_blank">CDI-77</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clarify what happens when the user creates a unbound recursive injection with Dependent scoped beans</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container doesn&#8217;t have to support this : the ticket should be closed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://issues.jboss.org/browse/CDI-395" target="_blank">CDI-395</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public fields in extensions should not be allowed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">out MR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">it can bring backwards compatibility problem to correct this issue. We should see if impls allows it today. If it&#8217;s not the case it could be safely added to the MR</p></td>
+</tr>
+</tbody>
+</table></div><div class="footer"><a href="/news/2013/12/16/CDI-1-2-issues-list/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2013/12/16/CDI-1-2-issues-list/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/EG/">EG</a><a class="tag" href="/news/tags/features/">features</a></span></div></div></div></article></div><div class="visible-xs"><ul class="pager"><li class="previous disabled"><a href="#"> Previous</a></li><li class="disabled"><a href="#">1 of 1 </a></li><li class="next disabled"><a href="#"> Next</a></li></ul></div><div class="hidden-xs"><ul class="pager"><li class="disabled"><a href="#"> First</a></li><li class="disabled"><a href="#"> Previous</a></li><li class="active"><a href="#">1 of 1 </a></li><li class="disabled"><a href="#"> Next</a></li><li class="disabled"><a href="#"> Last</a></li></ul></div></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

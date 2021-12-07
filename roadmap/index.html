@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>
+      Contexts and Dependency Injection
+    </title>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <link href='http://www.cdi-spec.org/stylesheets/styles.css' rel='stylesheet' type='text/css'>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+    <!--[if lt IE 9]>
+      <script src='//html5shim.googlecode.com/svn/trunk/html5.js' type='text/javascript'></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class='container-fluid'>
+      <div class='row-fluid'>
+        <div class='span2' style='min-height:1px;'>
+          <ul class='nav nav-tabs nav-stacked span2 visible-desktop' id='main_nav'>
+            <li>
+              <a href='http://www.cdi-spec.org'>
+                <i class='icon-home'></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/news/'>
+                <i class='icon-bullhorn'></i>
+                News
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/roadmap'>
+                <i class='icon-road'></i>
+                Road map
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/faq'>
+                <i class='icon-question-sign'></i>
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/contribute'>
+                <i class='icon-edit'></i>
+                Contribute
+              </a>
+            </li>
+            <li>
+              <a href='https://community.jboss.org/en/weld'>
+                <i class='icon-group'></i>
+                Forum
+              </a>
+            </li>
+            <li>
+              <a href='https://issues.jboss.org/browse/CDI'>
+                <i class='icon-tasks'></i>
+                Bug tracker
+              </a>
+            </li>
+          </ul>
+          <a class='hidden-desktop' href='#' id='toggle_menu'>
+            <i class='icon-exchange'></i>
+          </a>
+          <ul class='nav nav-tabs nav-stacked span2 hide hidden-desktop' id='mobile_menu'>
+            <li>
+              <a href='http://www.cdi-spec.org'>
+                <i class='icon-home'></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/news'>
+                <i class='icon-bullhorn'></i>
+                News
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/roadmap'>
+                <i class='icon-road'></i>
+                Road map
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/faq'>
+                <i class='icon-question-sign'></i>
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a href='http://www.cdi-spec.org/contribute'>
+                <i class='icon-edit'></i>
+                Contribute
+              </a>
+            </li>
+            <li>
+              <a href='https://community.jboss.org/en/weld'>
+                <i class='icon-group'></i>
+                Forum
+              </a>
+            </li>
+            <li>
+              <a href='https://issues.jboss.org/browse/CDI'>
+                <i class='icon-tasks'></i>
+                Bug tracker
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class='span10'>
+          <img height='334' src='http://www.cdi-spec.org/images/cdi_word_cloud_white.gif' width='834'>
+          <div class='row-fluid'>
+            <article>
+  <header>
+    <h1>
+      with-annotations
+      <a href='https://issues.jboss.org/issues/?jql=project%3DCDI+AND+labels%3Dwith-annotations' target='new'>
+        <span class='badge badge-info'>
+          Issues :
+          3
+        </span>
+      </a>
+    </h1>
+  </header>
+  <p><p>Adding <code>@WithAnnotations</code> to allow filtering of container lifecycle events</p></p>
+</article>
+<article>
+  <header>
+    <h1>
+      visibilitiy
+      <a href='https://issues.jboss.org/issues/?jql=project%3DCDI+AND+labels%3Dvisibilitiy' target='new'>
+        <span class='badge badge-info'>
+          Issues :
+          0
+        </span>
+      </a>
+    </h1>
+  </header>
+  <p><p>Bean visibility between modules, especially in EARs</p></p>
+</article>
+<article>
+  <header>
+    <h1>
+      application-scoped
+      <a href='https://issues.jboss.org/issues/?jql=project%3DCDI+AND+labels%3Dapplication-scoped' target='new'>
+        <span class='badge badge-info'>
+          Issues :
+          2
+        </span>
+      </a>
+    </h1>
+  </header>
+  <p><p>Whether <code>@ApplicationScoped</code> beans are shared between all modules in the EAR</p></p>
+</article>
+          </div>
+          <hr>
+          <footer></footer>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src='//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js' type='text/javascript'></script>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount','UA-37580744-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#toggle_menu').click(function(){
+        $("#mobile_menu").toggle();
+      }); 
+    });
+  </script>
+</html>

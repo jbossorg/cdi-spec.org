@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Latest news about CDI"><title>Latest news about CDI | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><div class="posts"><article class="post"><div class="panel panel-primary"><div class="panel-body"><h1><a href="/news/2014/07/28/what-s-in-CDI-20-jsr-proposal/">What's in CDI 2.0 JSR proposal?</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">Jul 28, 2014</span> |   <a href="http://www.cdi-spec.org/news/2014/07/28/what-s-in-CDI-20-jsr-proposal/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>A few days ago, we submitted the official proposal for CDI 2.0. This new version is focused on 2 main goal:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding Java SE support to CDI</p>
+</li>
+<li>
+<p>Add modularity to CDI to ease its integration with other specification or framework.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Off course a lot of feature and enhancement will come from this 2 goals and we&#8217;ll add a few more if possible. Let&#8217;s check what&#8217;s on the menu.</p>
+</div>
+<div class="sect1">
+<h2 id="a-new-name"><a class="anchor" href="#a-new-name"></a>A new name</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Not the most important part, but as we plan supporting Java SE, we slightly changed the name of the specification. Previously, the full name of CDI was: <strong>Contexts and Dependency Injection for Java EE</strong>. The proposed new name is: <strong>Contexts and Dependency Injection for Java</strong>. So to SE we go ;).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features-and-enhancement-proposed"><a class="anchor" href="#new-features-and-enhancement-proposed"></a>New features and enhancement proposed</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Beyond the two main points introduced above (or because of them), we have the following features in mind</p>
+</div>
+<div class="sect2">
+<h3 id="identify-the-java-ee-part-in-cdi"><a class="anchor" href="#identify-the-java-ee-part-in-cdi"></a>Identify the Java EE part in CDI</h3>
+<div class="paragraph">
+<p>We have a lot of work to prepare the Java SE support in CDI. The first will be to check what&#8217;s is pure CDI and what&#8217;s is link to Java EE.
+So for CDI 2.0, The specification and TCK require a significant overhaul to be split into two parts.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Part 1: The core CDI programming model (usable in EE and SE as well)</p>
+</li>
+<li>
+<p>Part 2: Java EE integrations for CDI (i.e. all the feature that won&#8217;t be available when working in Java SE).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Some of the splitting is straight forward (thre&#8217;s no EJB in Java SE), other could bring some discussion and extra work (do we want to support <code>@Transactional</code> in Java SE and how?).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="defining-a-portable-bootstrap-api-for-cdi"><a class="anchor" href="#defining-a-portable-bootstrap-api-for-cdi"></a>Defining a portable bootstrap API for CDI.</h3>
+<div class="paragraph">
+<p>Currently CDI does not define an API for bootstrap, instead relying on a Java EE deployment to start the container.
+To add support for Java SE, we really need such an API. Additionally, we would like to introduce a programmatic API for binding beans, allowing much greater flexibility for portably wiring a container.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhance-the-cdi-context-model"><a class="anchor" href="#enhance-the-cdi-context-model"></a>Enhance the CDI context model</h3>
+<div class="paragraph">
+<p>The context model in CDI is based around the thread-bound request-response model. This model is more prevalent in web applications than elsewhere, and, also is less pervasive than it once was. We would like to overhaul the context model to allow the application or container to portably push the active context to CDI when it requires the use of CDI. This change would be largely transparent to applications, and we might want to consider an API facade over it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="introduce-modularity-to-cdi"><a class="anchor" href="#introduce-modularity-to-cdi"></a>Introduce modularity to CDI.</h3>
+<div class="paragraph">
+<p>One of the most often given reason by other JSR or frameworks to limit their CDI adoption is the size of the specification. Too big, too many features.
+CDI is becoming an important component model in Java EE, and we think that learning from the experience of long running specifications of specifications (like EJB) is important. Before we starting adding features to CDI, we want to see if we can introduce “parts”, to avoid creating a spec that gives the impression of being big and heavy.
+There’s already some preparation work around this topic. For instance JAX-RS asked if it was possible to only have only the event part of CDI. Other discussion with the future java config specification are dealing with a "type discovery" part.
+One of the most asked module is a lightweight container, which takes the annotations specified by the @Inject specification, defines the behavior of the container (which @Inject failed to do), and adds a couple of popular features from CDI such as producer methods. This will allow much wider adoption of CDI in the Java world, and provide a great stepping stone between Java SE, a servlet container, OSGi and a full Java EE server.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-features"><a class="anchor" href="#other-features"></a>Other features</h3>
+<div class="paragraph">
+<p>Off course there&#8217;ll be other features introduced in CDI 2.0. They come from</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Standardization of existing extension like the ones created in <a href="http://deltaspike.apache.org/" target="_blank">Apache Deltaspike</a> project</p>
+</li>
+<li>
+<p>Request from our <a href="http://www.cdi-spec.org/news/2014/05/28/CDI-2_0-survey/" target="_blank">CDI 2.0 survey</a> which will close on july 31st</p>
+</li>
+<li>
+<p>Features coming from other Java EE 8 spec, like <code>@Transactional</code> was introduced in CDI 1.1 after it was extracted from EJB spec.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="next-step"><a class="anchor" href="#next-step"></a>Next Step</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The proposal is being discussed among JCP executive committee members and if everything goes well it should be accepted in the coming days. At this moment we&#8217;ll start forming the CDI 2.0 Expert Group and begin effective work around this specification.
+We hope deliver the final spec in Q4 2015 or Q1 2016. Stay tuned on this blog or on <a href="http://twitter.com/cdispec">@cdispec</a> to have fresh news regarding the spec and the coming expert group.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2014/07/28/what-s-in-CDI-20-jsr-proposal/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2014/07/28/what-s-in-CDI-20-jsr-proposal/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/JSR/">JSR</a><a class="tag" href="/news/tags/proposal/">proposal</a></span></div></div></div></article></div><div class="visible-xs"><ul class="pager"><li class="previous disabled"><a href="#"> Previous</a></li><li class="disabled"><a href="#">1 of 1 </a></li><li class="next disabled"><a href="#"> Next</a></li></ul></div><div class="hidden-xs"><ul class="pager"><li class="disabled"><a href="#"> First</a></li><li class="disabled"><a href="#"> Previous</a></li><li class="active"><a href="#">1 of 1 </a></li><li class="disabled"><a href="#"> Next</a></li><li class="disabled"><a href="#"> Last</a></li></ul></div></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

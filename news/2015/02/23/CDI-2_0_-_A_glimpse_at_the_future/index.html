@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description"><title>CDI 2.0 - A glimpse at the future | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/">Previous: CDI 2.0 first Face to face meeting feedback! </a></li><li class="next"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/">Next: CDI 2.0 Early Draft Review 1 released </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/"> Previous</a></li><li class="next"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/"> Next</a></li></ul><h1><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/">CDI 2.0 - A glimpse at the future</a></h1><div class="meta"><strong>Posted by  <span class="authors">Thorben Janssen</span> on  <span class="date">Feb 23, 2015</span> |   <a href="http://www.cdi-spec.org/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="sect1">
+<h2 id="introduction"><a class="anchor" href="#introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before we have a look at the changes in the upcoming CDI 2.0 specification, lets talk about where they come from. Did you know that they were provided by the community, so maybe by you?</p>
+</div>
+<div class="paragraph">
+<p>Before the work on <a href="https://www.jcp.org/en/jsr/detail?id=365" target="_blank">JSR 365</a> started, former expert group members, the expert group members of other specifications and the community were asked which changes they would like to see in CDI 2.0. 260 developers provided their feedback in the community survey. Based on these information, the 6 main topics were defined:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>modularity,</p>
+</li>
+<li>
+<p>enhancements of the event system,</p>
+</li>
+<li>
+<p>improvements for interceptors and decorators,</p>
+</li>
+<li>
+<p>CDI for Java SE,</p>
+</li>
+<li>
+<p>usage of Java 8 features and</p>
+</li>
+<li>
+<p>SPI and context enhancements.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The work on these topic is organized in 6 workshops, one for each main topic. This allows the members to focus their efforts and the group to work on several topics in parallel. The work of each workshop is tracked in a publicly available workshop document. You can find a reference to each document in the following paragraphs.</p>
+</div>
+<div class="paragraph">
+<p>The 3.0.0.Alpha releases of Weld, the CDI reference implementation, provide prototype implementations for the discussed features. The goal is to create an early proof of concept and to give the community a chance to try the new features and to provide feedback.<br>
+But please be aware, that these releases should not be used for production. They are only prototypes and the following releases are likely to contain incompatible changes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="main-topics-for-cdi-2-0"><a class="anchor" href="#main-topics-for-cdi-2-0"></a>Main Topics for CDI 2.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OK, enough banter for now. Lets have a more detailed look at the current status of work and some new features in the following subsection.</p>
+</div>
+<div class="sect2">
+<h3 id="modularity"><a class="anchor" href="#modularity"></a>Modularity</h3>
+<div class="paragraph">
+<p>One of the main topics for CDI 2.0 is modularization. In general, no one likes to consume a huge and heavy spec, if only a small part of it is required for the job. To make CDI easier to consume, the plan is to split the specification into different parts that provide different subsets of it. A project or JSR could then decide which parts it likes to use and define its dependencies accordingly.</p>
+</div>
+<div class="paragraph">
+<p>The work on this topic is still in a very early state and so far, there are just some ideas on how the specification shall be modularized. The documented suggestion of 5 different parts that depend on each other will most likely not be the final version.  <br>
+The new idea is to split the specification into 3 parts: CDI full with Java EE support, CDI full and CDI light. CDI full with Java EE support will provide the full feature set of the specification. CDI full and CDI light will only provide a subset of it. The Java EE support will be missing in both of them. Additionally, the support for Contexts and AOP will be missing in CDI light. We will have to see, if this will be the final version.</p>
+</div>
+<div class="paragraph">
+<p>These are the current ideas on how to create a modular CDI specification. If you like to get more details or follow future discussions on this topic, you can find the workshop document <a href="https://docs.google.com/document/d/1jzCuFQjtCSrnZGRAHjn0oknWvEaP3h0KizW1mHB4AZU/edit?usp=sharing" target="_blank">here</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancements-of-the-events-system"><a class="anchor" href="#enhancements-of-the-events-system"></a>Enhancements of the events system</h3>
+<div class="paragraph">
+<p>The enhancement of the existing event mechanics seems to be in heavy demand of the community and is one of the bigger topics for CDI 2.0. The main features requested by the community were to support asynchronous events and to get a better control about events and event observers. There are several ideas that are discussed at the moment and the latest Weld 3.0.0 Alpha releases provided prototype implementations for some of them.</p>
+</div>
+<div class="paragraph">
+<p>Lets have a look at two of the momentarily discussed features. And again, the work is still ongoing and everything can still change.</p>
+</div>
+<div class="sect3">
+<h4 id="ordering-of-events"><a class="anchor" href="#ordering-of-events"></a>Ordering of events</h4>
+<div class="paragraph">
+<p>One of the requested enhancements is an option to order the event observers. The currently agreed solution is to use an approach similar to the priority definition for interceptors. The @Priority annotation can be used to define the priority of an event observer. The observers will process the event in ascending order of their priority. A working prototype for this feature was released with Weld 3.0.0.Alpha1. You can find more information about it in the <a href="http://weld.cdi-spec.org/news/2014/10/02/weld-300Alpha1/" target="_blank">release announcement</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="asynchronous-events"><a class="anchor" href="#asynchronous-events"></a>Asynchronous events:</h4>
+<div class="paragraph">
+<p>Up to now, events in CDI were processed synchronously. There are some workarounds to trigger asynchronous processing, e.g. using asynchronous EJBs, but this was outside the CDI specification and shall be changed with CDI 2.0. <br>
+The Weld 3.0.0.Alpha3 release provides a working prototype, which adds the method fireAsync to the Event interface. The processing of an asynchronous event is similar to the processing of a synchronous one. The event object is mutable and thread-safe and the event observers will process the event in the defined order. You can read more about it in the <a href="http://weld.cdi-spec.org/news/2014/12/10/an-update-on-weld-3/">release announcement of Weld 3.0.0.Alpha3</a>.</p>
+</div>
+<div class="paragraph">
+<p>You can get an overview about all discussed changes and ideas in the <a href="https://docs.google.com/document/d/1lFtgLm6hY-uECdA1r0Sfimq6vkVYThoUZsevPUaSP0E/edit" target="_blank">workshop document</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="improvements-for-interceptors-and-decorators"><a class="anchor" href="#improvements-for-interceptors-and-decorators"></a>Improvements for interceptors and decorators</h3>
+<div class="paragraph">
+<p>There are several enhancements to interceptors and decorators in CDI that are planned for CDI 2.0. Some of them are to support AOP on custom or produced beans, to support AOP on inner calls and to improve the interceptor chaining. The work on these topics has not started yet. But there are some small enhancements that were already implemented with Weld 3.0.0.Alpha1. <br>
+As Jozef Hartinger described in his <a href="http://weld.cdi-spec.org/news/2014/10/02/weld-300Alpha1/" target="_blank">release announcement</a>, support for repeatable annotations was added for qualifiers and interceptor bindings. And the <em>javax.interceptor.InvocationContext</em> interface was extended to make it easier to access the interceptor binding in the interceptor.</p>
+</div>
+<div class="paragraph">
+<p>You will find more information about it in the <a href="https://drive.google.com/open?id=10iexiDfMT9tYaUPa2cGiw4P68VG_bryDIS0DKzP1ils&amp;authuser=0" target="_blank">workshop document</a> as soon as the work has started.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cdi-for-java-se"><a class="anchor" href="#cdi-for-java-se"></a>CDI for Java SE</h3>
+<div class="paragraph">
+<p>CDI requires an up and running CDI container to process its components. This is usually no problem in an Java EE environment because the application server is taking care of the CDI container. But this is different in an Java SE environment, where the container has to be booted by the application. The main problem is, that the specification does not define an API to boot the container. Therefore Weld and Open Web Beans provide its own proprietary APIs to do it and <a href="http://javaeesquad.blogspot.be/2014/12/cdi-for-java-se-already-standardised.html" target="_blank">Apache DeltaSpike offers an uniform API</a> on top of that. Beginning with CDI 2.0 the start of the container shall be defined in the standard.</p>
+</div>
+<div class="paragraph">
+<p>The work on this topic is still ongoing and there are several open questions that need to be answered in the upcoming discussions. You can read about  it in the <a href="https://drive.google.com/open?id=1LgsGT-AAlrF72Z5pW4xNQiVjUHGUME46ZmB-wwF35Yw&amp;authuser=0" target="_blank">workshop document</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="usage-of-java-8-features"><a class="anchor" href="#usage-of-java-8-features"></a>Usage of Java 8 features</h3>
+<div class="paragraph">
+<p>Java 8 was released in March 2014 and is therefore not used by the Java EE 7 specifications which were released in 2013. This will change with Java EE 8 and this means that CDI 2.0 can also make use of the new features. <br>
+The discussions about the influence of the new Java features on CDI are still in an early state, but there are several JEPs that seem to be applicable to improve the specification. Some of them, like the CompletionStage API and repeating annotations, are already used in the proposals for <a href="http://weld.cdi-spec.org/news/2014/12/10/an-update-on-weld-3/#_asynchronous_events" target="_blank">asynchronous events</a> and <a href="http://weld.cdi-spec.org/news/2014/10/02/weld-300Alpha1/#_repeatable_qualifiers_and_interceptor_bindings" target="_blank">repeatable interceptor bindings</a>. But the usage of the new Java 8 features will not be limited to the new CDI features, there will also be talks on how to improve the existing parts of the specification. <br>
+The current ideas can be found in this <a href="https://drive.google.com/open?id=1KUaxXIXJ_r-h5UJGIij6I4vrLS7uXkeeeZr2SaRipWQ&amp;authuser=0" target="_blank">document</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="spi-and-context-enhancements"><a class="anchor" href="#spi-and-context-enhancements"></a>SPI and context enhancements</h3>
+<div class="paragraph">
+<p>The work on SPI changes has also not started yet. Some goals of the CDI 2.0 specification will be to improve the access to all meta data created by CDI and to provide a way to add beans at runtime. The requested changes to provide a better control about contexts, especially to activate and deactivate them, will also require some SPI enhancements.<br>
+An additional huge topic will be the changes caused by the adoption of Java 8 and how to keep the SPI binary backward compatible.<br>
+The changes will be described in the <a href="https://drive.google.com/open?id=1aK3aIQG-W9D72Ti9fj0xLFNmqxQtYyy_vjc6QgN3Z2Y&amp;authuser=0" target="_blank">workshop document</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="schedule"><a class="anchor" href="#schedule"></a>Schedule</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As described in the previous paragraphs, the work on the CDI 2.0 specification is ongoing and there are lots of things that need further discussions. An early draft of the specification, which will contain the most stable new features, shall be completed in Q1 of 2015. The public review shall start in Q3 of 2015 and provide feedback for the final release. The final version of the CDI 2.0 specification shall be released in Q1 of 2016.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/cdi2/">cdi2</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/">Previous: CDI 2.0 first Face to face meeting feedback! </a></li><li class="next"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/">Next: CDI 2.0 Early Draft Review 1 released </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2014/10/20/CDI-2_0-first-face-to-face-meeting-feedback/"> Previous</a></li><li class="next"><a href="/news/2015/07/03/CDI-2_0-EDR1-released/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2015/02/23/CDI-2_0_-_A_glimpse_at_the_future/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>

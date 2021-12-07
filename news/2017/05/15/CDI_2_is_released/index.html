@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="CDI 2.0 is released"><title>CDI 2.0 is released | Contexts and Dependency Injection</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/stylesheets/asciidoctor.css"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"><link rel="stylesheet" href="/stylesheets/styles.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><!--[if lt IE 9]><script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script>hljs.initHighlightingOnLoad(); </script></head><body><div class="container"><div class="row"><div class="col-md-12"><div class="bannerhome"><div class="container"><div class="row"><div class="col-md-3"><a href="http://www.cdi-spec.org"><img src="/images/cdi_herologo.png" style="max-height: 100px;"></a></div><div class="col-md-9"><h1>Contexts & Dependency Injection for Java</h1></div></div></div></div><nav class="navbar navbar-default navbar-static-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button class="navbar-toggle collasped" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="http://www.cdi-spec.org"><i class="fa fa-home fa-fw"></i></a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="http://www.cdi-spec.org/download/"><i class="fa fa-download fa-fw"></i> Download </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-university fa-fw"></i> Learn <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/learn/"><i class="fa fa-graduation-cap fa-fw"></i> Learning resources </a></li><li><a href="http://www.cdi-spec.org/faq/"><i class="fa fa-question-circle fa-fw"></i> FAQ </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/ecosystem/"><i class="fa fa-plug fa-fw"></i> Ecosystem </a></li><li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Contribute <b class="caret"></b><ul class="dropdown-menu" role="menu"><li><a href="http://www.cdi-spec.org/contribute/"><i class="fa fa-edit fa-fw"></i> How to contribute </a></li><li><a href="https://github.com/eclipse-ee4j/cdi/issues" target="_BLANK"><i class="fa fa-tasks fa-fw"></i> Bug tracker </a></li></ul></a></li><li><a href="http://www.cdi-spec.org/cditck/"><i class="fa fa-tag fa-fw"></i> CDI TCK </a></li><li><a href="http://www.cdi-spec.org/news/"><i class="fa fa-bullhorn fa-fw"></i> Blog </a></li><li><a href="http://www.cdi-spec.org/mailinglist/"><i class="fa fa-envelope fa-fw"></i> Mailing List </a></li></ul></div></div></nav><script>var indexOfSharp = window.location.pathname.indexOf('#');
+var pathname = indexOfSharp > 0 ? window.location.pathname.substring(0, indexOfSharp) : window.location.pathname;
+var selector = "body > .container > .row > .col-md-12 > .navbar > .container-fluid > .navbar-collapse a[href='http://www.cdi-spec.org" + pathname + "']";
+$(selector).closest("li").addClass("active");</script></div></div><div class="row content-wrapper"><div class="col-md-12"><div class="row"><div class="col-md-12"><article class="post"><div class="panel panel-primary"><div class="panel-body"><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2017/02/01/CDI_2_is_in_public_review/">Previous: CDI 2.0 is in public review </a></li><li class="next"><a href="/news/2020/03/09/CDI_for_the_future/">Next: CDI for the future </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2017/02/01/CDI_2_is_in_public_review/"> Previous</a></li><li class="next"><a href="/news/2020/03/09/CDI_for_the_future/"> Next</a></li></ul><h1><a href="/news/2017/05/15/CDI_2_is_released/">CDI 2.0 is released</a></h1><div class="meta"><strong>Posted by  <span class="authors">Antoine Sabot-Durand</span> on  <span class="date">May 15, 2017</span> |   <a href="http://www.cdi-spec.org/news/2017/05/15/CDI_2_is_released/#disqus_thread">Comments</a> </strong></div><div class="content"><div class="paragraph">
+<p>Our <a href="https://www.jcp.org/en/jsr/detail?id=365" target="_blank">JCP Expert Group</a> is pleased to announce the release of Contexts and Dependency Injection for Java 2.0.</p>
+</div>
+<div class="paragraph">
+<p>Specification, reference implementation (<strong>JBoss Weld 3.0.0.Final</strong>) and TCK can be downloaded <a href="http://www.cdi-spec.org/download/" target="_blank">here</a>.</p>
+</div>
+<div class="sect1">
+<h2 id="what-is-cdi"><a class="anchor" href="#what-is-cdi"></a>What is CDI?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CDI is one of the major Java EE specification.</p>
+</div>
+<div class="paragraph">
+<p>It was introduced with Java EE 6 in 2009, updated  for Java EE 7 and now with version 2.0 it is ready for Java EE 8 as well for Java SE or other platform like <a href="http://microprofile.io" target="_blank">Micropofile</a>.</p>
+</div>
+<div class="paragraph">
+<p>CDI defines a powerful set of complementary services that help improve the structure of application code.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A well-defined lifecycle for stateful objects bound to lifecycle contexts, where the set of contexts is extensible</p>
+</li>
+<li>
+<p>A sophisticated, typesafe dependency injection mechanism, including the ability to select dependencies at either development or deployment time, without verbose configuration</p>
+</li>
+<li>
+<p>Support for Java EE modularity and the Java EE component architecture?the modular structure of a Java EE application is taken into account when resolving dependencies between Java EE components</p>
+</li>
+<li>
+<p>Integration with the Unified Expression Language (EL), allowing any contextual object to be used directly within a JSF or JSP page</p>
+</li>
+<li>
+<p>The ability to decorate injected objects</p>
+</li>
+<li>
+<p>The ability to associate interceptors to objects via typesafe interceptor bindings</p>
+</li>
+<li>
+<p>An event notification model</p>
+</li>
+<li>
+<p>A web conversation context in addition to the three standard web contexts defined by the Java Servlets specification</p>
+</li>
+<li>
+<p>An SPI allowing portable extensions to integrate cleanly with the container</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="major-features-included-in-cdi-2-0"><a class="anchor" href="#major-features-included-in-cdi-2-0"></a>Major features included in CDI 2.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This CDI 2.0 includes important changes for the platform.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The spec was split into <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#doc_organisation">3 parts</a> to add the support for Java SE.</p>
+</li>
+<li>
+<p>API to <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#se_bootstrap">boot CDI in Java SE</a>.</p>
+</li>
+<li>
+<p>Observers (i.e. events) <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#observer_ordering">ordering</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#firing_events_asynchronously">Asynchronous event</a>.</p>
+</li>
+<li>
+<p><a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#configurators">Configurators</a> for major SPI elements</p>
+</li>
+<li>
+<p>Possibility to <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#process_observer_method">configure or veto observer methods</a>.</p>
+</li>
+<li>
+<p>Add <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#built_in_annotation_literals">built-in annotation literals</a></p>
+</li>
+<li>
+<p>Make possible to <a href="http://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#interception_factory">apply interceptor on producers</a>.</p>
+</li>
+<li>
+<p>Alignment on Java 8 features (streams, lambdas, repeating qualifiers)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A lot of other small feature will be delivered. Refer to the coming release notes to check them all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="start-using-cdi-2-0-today-with-weld-3-0"><a class="anchor" href="#start-using-cdi-2-0-today-with-weld-3-0"></a>Start using CDI 2.0 today with Weld 3.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To develop your CDI 2.0 code just add cdi-api 2.0 your pom.xml.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;javax.enterprise&lt;/groupId&gt;
+    &lt;artifactId&gt;cdi-api&lt;/artifactId&gt;
+    &lt;version&gt;2.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then run your code on Java SE or on WildFly </p>
+</div>
+<div class="sect2">
+<h3 id="running-on-java-se-with-weld-se"><a class="anchor" href="#running-on-java-se-with-weld-se"></a>Running on Java SE with Weld SE</h3>
+<div class="paragraph">
+<p>You can then run your code on Java SE thanks to Weld SE, just add this dependency to your project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.jboss.weld.se&lt;/groupId&gt;
+    &lt;artifactId&gt;weld-se-shaded&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0.Final&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then, bootstrap the CDI container in your code like this</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-java" data-lang="java">public static void main(String... args) {
+    try(SeContainer container = SeContainerInitializer.newInstance().initialize()) {
+        // start the container, retrieve a bean and do work with it
+        MyBean myBean = container.select(MyBean.class).get();
+        myBean.doWork();
+    }
+    // shuts down automatically after the try with resources block.
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running-on-java-ee-by-patching-wildfly"><a class="anchor" href="#running-on-java-ee-by-patching-wildfly"></a>Running on Java EE by patching WildFly</h3>
+<div class="paragraph">
+<p>We also provide a <a href="http://download.jboss.org/weld/3.0.0.Final/">patch for WildFly 10.1.0</a> to update Weld and thus CDI version on JBoss WildFly.</p>
+</div>
+<div class="paragraph">
+<p>To do so just download and unzip <a href="http://wildfly.org/downloads/">WildFly 10.1.0.Final</a>, then download the patch (don&#8217;t unzip it), go to the <code>&lt;WILDFLY_HOME&gt;/bin</code>  directory and patch the server with the following command:</p>
+</div>
+<div class="paragraph">
+<p><code>./jboss-cli.sh --command="patch apply &lt;PATH_TO_PATCH&gt;/wildfly-10.1.0.Final-weld-3.0.0.Final-patch.zip"</code></p>
+</div>
+<div class="paragraph">
+<p>you should obtain the following result in the console:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-json" data-lang="json">{
+    "outcome" : "success",
+    "result" : {}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your WildFly server is now patched to use CDI 2.0 and Weld 3.0.0.Final.</p>
+</div>
+<div class="paragraph">
+<p>GlassFish 5.0 with CDI 2.0 support should be release in the coming weeks.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stay-tuned"><a class="anchor" href="#stay-tuned"></a>Stay tuned</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We&#8217;ll provide more article on CDI 2.0 new features so stay tuned by following <a href="https://twitter.com/cdispec">@cdispec</a> twitter account.</p>
+</div>
+</div>
+</div></div><div class="footer"><a href="/news/2017/05/15/CDI_2_is_released/"> Permalink</a> <a href="http://www.cdi-spec.org/news/2017/05/15/CDI_2_is_released/#disqus_thread">Comments</a> <span class="tags"><i class="icon-tags"></i>Tags :<a class="tag" href="/news/tags/Release/">Release</a></span></div><ul class="pager visible-md-block visible-lg-block"><li class="previous"><a href="/news/2017/02/01/CDI_2_is_in_public_review/">Previous: CDI 2.0 is in public review </a></li><li class="next"><a href="/news/2020/03/09/CDI_for_the_future/">Next: CDI for the future </a></li></ul><ul class="pager visible-sm-block visible-xs-block"><li class="previous"><a href="/news/2017/02/01/CDI_2_is_in_public_review/"> Previous</a></li><li class="next"><a href="/news/2020/03/09/CDI_for_the_future/"> Next</a></li></ul>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            (function () {
+              var s = document.createElement('script'); s.async = true;
+              s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+              (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+            </script>
+          <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_shortname = 'cdispec';
+            var disqus_url = "http://www.cdi-spec.org/news/2017/05/15/CDI_2_is_released/";
+            var disqus_developer = null;
+            var disqus_identifier = null;
+            (function() {
+              var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=cdispec">comments powered by Disqus.</a></noscript>
+          </div></div></div></article></div></div></div></div></div><hr><footer></footer><script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount','UA-37580744-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body></html>
